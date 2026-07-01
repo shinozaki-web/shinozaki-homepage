@@ -91,6 +91,27 @@
     .nav-links{display:none;}
     section{padding:56px 0;}
   }
+
+  /* curriculum modal */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:100;align-items:center;justify-content:center;padding:16px;}
+  .modal-overlay.open{display:flex;}
+  .modal-box{background:#fff;border-radius:20px;max-width:680px;width:100%;max-height:90vh;overflow-y:auto;padding:32px 28px;}
+  .modal-close{float:right;background:none;border:none;font-size:22px;cursor:pointer;color:var(--ink-soft);line-height:1;}
+  .modal-box h3{font-family:'Zen Maru Gothic',sans-serif;font-size:20px;margin:0 0 20px;}
+  .block-label{display:inline-block;font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em;padding:3px 10px;border-radius:20px;margin-bottom:10px;}
+  .block-a{background:#FFF3E0;color:#C1531B;}
+  .block-b{background:#E8F5E9;color:#2E7D32;}
+  .block-c{background:#EDE7F6;color:#512DA8;}
+  .lesson-row{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid var(--border);}
+  .lesson-row:last-child{border-bottom:none;}
+  .lesson-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;flex-shrink:0;}
+  .num-a{background:#FFF3E0;color:#C1531B;}
+  .num-b{background:#E8F5E9;color:#2E7D32;}
+  .num-c{background:#EDE7F6;color:#512DA8;}
+  .lesson-info strong{display:block;font-size:14px;margin-bottom:2px;}
+  .lesson-info span{font-size:12px;color:var(--ink-soft);}
+  .block-section{margin-bottom:24px;}
+  @media(max-width:720px){.modal-box{padding:24px 16px;}}
 </style>
 </head>
 <body>
@@ -200,15 +221,15 @@
         <a href="#contact" class="btn btn-secondary">このアプリについて相談する</a>
       </div>
       <div class="card">
-        <h3>門司港AI教室 カリキュラムアプリ</h3>
-        <p class="desc">小学生〜中学生向けのAI・プログラミング教育カリキュラムをWebアプリ化。クラスコード方式で進捗管理ができ、先生用ダッシュボードも搭載。北九州市の子どもたちへの地域密着型AI教育を支えるために自社開発しました。</p>
+        <h3>門司港AI教室 カリキュラム</h3>
+        <p class="desc">小学4年生〜中学生向け、全14回のAI・プログラミング教育カリキュラム。「体感させる」をコンセプトに、実際にAIを動かしながら学ぶ授業設計をWebアプリとして自社開発しました。</p>
         <ul>
-          <li>全14回のカリキュラムをブラウザで完結</li>
+          <li>3ブロック・全14回構成（小4〜中3対応）</li>
           <li>バッジ収集で達成感を演出（北九州ゆるキャラモチーフ）</li>
           <li>先生用ダッシュボードで全生徒の進捗を一覧管理</li>
           <li>ログイン不要・クラスコード方式で運用</li>
         </ul>
-        <a href="https://shinozaki-web.github.io/ai-classroom/" class="btn btn-secondary" target="_blank" rel="noopener">アプリを見る</a>
+        <button class="btn btn-secondary" onclick="document.getElementById('curriculumModal').classList.add('open')" style="width:100%;text-align:center;cursor:pointer;">全14回のカリキュラムを見る</button>
       </div>
     </div>
   </div>
@@ -270,6 +291,84 @@
 
   </div>
 </footer>
+
+
+<div class="modal-overlay" id="curriculumModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('curriculumModal').classList.remove('open')" aria-label="閉じる">✕</button>
+    <h3>全14回カリキュラム</h3>
+
+    <div class="block-section">
+      <span class="block-label block-a">ブロック① AIと仲良くなる｜第1〜4回</span>
+      <div class="lesson-row">
+        <div class="lesson-num num-a">1</div>
+        <div class="lesson-info"><strong>AIってなんだろう？Claudeと話してみよう</strong><span>AIの基本を知り、実際にclaude.aiで会話する体験</span></div>
+      </div>
+      <div class="lesson-row">
+        <div class="lesson-num num-a">2</div>
+        <div class="lesson-info"><strong>聞き方を変えると変わる</strong><span>プロンプトの工夫でAIの答えがどう変わるかを体感する</span></div>
+      </div>
+      <div class="lesson-row">
+        <div class="lesson-num num-a">3</div>
+        <div class="lesson-info"><strong>役割を与えてみよう</strong><span>AIにキャラクターや立場を与えて会話が変わる面白さを学ぶ</span></div>
+      </div>
+      <div class="lesson-row">
+        <div class="lesson-num num-a">4</div>
+        <div class="lesson-info"><strong>AIに教えてあげよう</strong><span>情報を与えるとAIの回答がどう変わるか。コンテキストの概念を体験</span></div>
+      </div>
+    </div>
+
+    <div class="block-section">
+      <span class="block-label block-b">ブロック② AIと一緒に作る｜第5〜10回</span>
+      <div class="lesson-row">
+        <div class="lesson-num num-b">5</div>
+        <div class="lesson-info"><strong>詩・クイズを作ろう</strong><span>AIと一緒に詩やクイズを制作。アウトプットの面白さを体験</span></div>
+      </div>
+      <div class="lesson-row">
+        <div class="lesson-num num-b">6</div>
+        <div class="lesson-info"><strong>地域を調べよう</strong><span>門司港・北九州の地域課題をAIと一緒に調査・整理する</span></div>
+      </div>
+      <div class="lesson-row">
+        <div class="lesson-num num-b">7</div>
+        <div class="lesson-info"><strong>AIと発表資料を作る</strong><span>構成→文章→デザイン案まで、AIを使って発表スライドを完成させる</span></div>
+      </div>
+      <div class="lesson-row">
+        <div class="lesson-num num-b">8</div>
+        <div class="lesson-info"><strong>自由制作①</strong><span>テーマを自分で決めて、AIと一緒に作品を制作する</span></div>
+      </div>
+      <div class="lesson-row">
+        <div class="lesson-num num-b">9</div>
+        <div class="lesson-info"><strong>自由制作②</strong><span>前回の続き。完成に向けてAIとの対話を深める</span></div>
+      </div>
+      <div class="lesson-row">
+        <div class="lesson-num num-b">10</div>
+        <div class="lesson-info"><strong>作品発表・ふりかえり</strong><span>作品を発表し合い、AIをどう使ったかを言語化する</span></div>
+      </div>
+    </div>
+
+    <div class="block-section">
+      <span class="block-label block-c">ブロック③ AIを問い直す｜第11〜14回</span>
+      <div class="lesson-row">
+        <div class="lesson-num num-c">11</div>
+        <div class="lesson-info"><strong>AIはウソをつく？</strong><span>ハルシネーションとは何か。AIの回答を自分で検証する力を育てる</span></div>
+      </div>
+      <div class="lesson-row">
+        <div class="lesson-num num-c">12</div>
+        <div class="lesson-info"><strong>著作権とAIの倫理</strong><span>AI生成物の著作権・なりすまし・偏りなど、社会的な問いを考える</span></div>
+      </div>
+      <div class="lesson-row">
+        <div class="lesson-num num-c">13</div>
+        <div class="lesson-info"><strong>地域課題をAIで解決しよう</strong><span>北九州市の課題をテーマに、AIを使った解決策を考えて提案する</span></div>
+      </div>
+      <div class="lesson-row">
+        <div class="lesson-num num-c">14</div>
+        <div class="lesson-info"><strong>チャレンジ発表会</strong><span>全員が発表。中学生はここからさらに深掘りのチャレンジミッションへ</span></div>
+      </div>
+    </div>
+
+    <p style="font-size:12px;color:var(--ink-soft);text-align:center;margin-top:8px;">体験会のお申し込みは教室ページからどうぞ</p>
+  </div>
+</div>
 
 </body>
 </html>
