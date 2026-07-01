@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>篠崎友寿｜門司港のイタリアン経営者によるAI導入支援・アプリ開発</title>
+<meta name="description" content="門司港でイタリアン「BONGO」を経営する篠崎友寿の個人サイト。中小企業向けの完全オーダーメイドAI導入支援、課題解決アプリ開発、子ども向けAI教室を紹介。北九州近郊は無料訪問対応。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFFFFF;
+    --cream-deep:#F6F5F2;
+    --ink:#2B2724;
+    --ink-soft:#5C564E;
+    --terracotta:#C1531B;
+    --terracotta-deep:#9A4015;
+    --mustard:#D9A441;
+    --olive:#6B7A56;
+    --border:rgba(43,39,36,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:auto;}
+  @media (prefers-reduced-motion: no-preference){ html{scroll-behavior:smooth;} }
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Noto Sans JP',sans-serif;line-height:1.8;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  h1,h2,h3{font-family:'Zen Maru Gothic',sans-serif;font-weight:500;margin:0;}
+  a{color:inherit;text-decoration:none;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--terracotta-deep);outline-offset:3px;border-radius:4px;}
+  .eyebrow{display:block;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--terracotta-deep);letter-spacing:0.02em;margin-bottom:12px;}
+  .btn{display:inline-block;padding:14px 28px;border-radius:8px;font-weight:500;font-size:15px;}
+  @media (prefers-reduced-motion: no-preference){ .btn{transition:transform .15s ease;} .btn:hover{transform:translateY(-1px);} }
+  .btn-primary{background:var(--terracotta-deep);color:#fff;}
+  .btn-secondary{background:transparent;color:var(--ink);border:1.5px solid var(--ink);}
+  .tag{font-size:12px;background:var(--cream-deep);border:1px solid var(--border);border-radius:20px;padding:4px 14px;color:var(--ink-soft);}
+  nav{position:sticky;top:0;z-index:10;background:rgba(247,241,232,0.92);border-bottom:1px solid var(--border);}
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:60px;}
+  .nav-name{font-family:'Zen Maru Gothic',sans-serif;font-weight:500;font-size:15px;}
+  .nav-links{display:flex;gap:20px;font-size:13px;color:var(--ink-soft);}
+  .nav-links a:hover{color:var(--terracotta-deep);}
+  section{padding:80px 0;}
+  section.deep{background:var(--cream-deep);}
+  .hero{padding-top:64px;text-align:center;}
+  .avatar{width:96px;height:96px;border-radius:50%;margin:0 auto 24px;background:var(--cream-deep);border:1px solid var(--border);}
+  .hero h1{font-size:clamp(26px,4.5vw,38px);line-height:1.45;margin-bottom:16px;}
+  .hero p.sub{max-width:480px;margin:0 auto 20px;color:var(--ink-soft);font-size:15px;}
+  .tags{display:flex;justify-content:center;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
+  .cta-caption{font-size:12px;color:var(--ink-soft);margin-top:10px;}
+  .socials{display:flex;justify-content:center;gap:14px;margin-top:32px;}
+  .socials a{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--ink-soft);}
+  .trust-note{text-align:center;font-size:14px;color:var(--ink-soft);margin:0;}
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px;}
+  .trust-item{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;box-shadow:0 1px 3px rgba(43,39,36,0.06);}
+  .trust-item strong{display:block;font-size:13px;margin-bottom:4px;}
+  .trust-item span{font-size:11px;color:var(--ink-soft);}
+  .section-head h2{font-size:24px;margin-bottom:8px;}
+  .section-head p{color:var(--ink-soft);font-size:14px;margin:0;}
+  .pillar-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:32px;}
+  .card{background:#fff;border-radius:16px;padding:28px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(43,39,36,0.06);}
+  .card.featured{border:2px solid var(--terracotta);}
+  .card h3{font-size:17px;margin-bottom:6px;}
+  .price-line{margin:0 0 12px;}
+  .price{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:500;color:var(--terracotta-deep);}
+  .price-note{font-size:11px;color:var(--ink-soft);margin-left:6px;}
+  .card p.desc{font-size:13px;color:var(--ink-soft);margin-bottom:16px;}
+  .card ul{list-style:none;padding:0;margin:0 0 20px;font-size:13px;color:var(--ink-soft);}
+  .card li{margin-bottom:6px;padding-left:16px;position:relative;}
+  .card li::before{content:"・";position:absolute;left:0;}
+  .card .btn{width:100%;text-align:center;}
+  .sub-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:32px;}
+  .sub-card{background:#fff;border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 1px 3px rgba(43,39,36,0.06);}
+  .sub-photo{height:140px;background:var(--cream-deep);border-bottom:1px solid var(--border);}
+  .sub-body{padding:18px;}
+  .sub-body h3{font-size:15px;margin-bottom:4px;}
+  .sub-body p{font-size:13px;color:var(--ink-soft);margin:0 0 10px;}
+  .sub-body .link{font-size:13px;color:var(--olive);font-weight:500;}
+  .story{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:start;}
+  .story-photo{height:200px;border-radius:16px;background:var(--cream-deep);border:1px solid var(--border);}
+  .story h2{font-size:22px;margin-bottom:16px;}
+  .story p{font-size:14px;color:var(--ink-soft);margin-bottom:14px;}
+  .closing{text-align:center;background:var(--ink);color:var(--cream);border-radius:24px;padding:56px 32px;}
+  .closing h2{color:var(--cream);font-size:24px;margin-bottom:14px;}
+  .closing p{color:#D8D2C8;font-size:14px;margin-bottom:28px;}
+  .closing .btn-primary{background:var(--mustard);color:var(--ink);}
+  footer{padding:32px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--ink-soft);}
+  footer .socials{margin:0;}
+  footer .socials a{width:28px;height:28px;font-size:10px;}
+  @media (max-width:720px){
+    .trust-grid{grid-template-columns:repeat(2,1fr);}
+    .pillar-grid,.sub-grid{grid-template-columns:1fr;}
+    .story{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    section{padding:56px 0;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="nav-name">篠崎友寿</span>
+    <div class="nav-links">
+      <a href="#about">事業紹介</a>
+      <a href="#ai-support">AI導入支援</a>
+      <a href="#app-dev">アプリ開発</a>
+      <a href="#school">教室</a>
+      <a href="#contact">お問い合わせ</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="about">
+  <div class="wrap">
+    <span class="eyebrow"># 自己紹介</span>
+    <div class="avatar"></div>
+    <h1>厨房で覚えたのは、AIの使い方でした。</h1>
+    <p class="sub">門司港でイタリアン「BONGO」を経営しながら、AI導入支援とアプリ開発、子ども向けのAI教室をしています。机上の理論ではなく、自分の店で実際に使ってみたことだけをお伝えします。</p>
+    <div class="tags">
+      <span class="tag">BONGO経営</span>
+      <span class="tag">AI教室講師</span>
+      <span class="tag">AI導入支援</span>
+    </div>
+    <a href="#contact" class="btn btn-primary">AI導入の無料相談はこちら</a>
+    <p class="cta-caption">北九州近郊は無料で訪問、遠方はオンラインで対応します</p>
+  </div>
+</section>
+
+<section class="deep">
+  <div class="wrap">
+    <p class="trust-note">机上の知識ではなく、自分の店で試したことだけをお伝えしています。</p>
+    <div class="trust-grid">
+      <div class="trust-item"><strong>中小機構認定</strong><span>中小企業アドバイザー</span></div>
+      <div class="trust-item"><strong>自社開発SaaS</strong><span>genba-note等を運営</span></div>
+      <div class="trust-item"><strong>YouTube</strong><span>登録者約25,000人</span></div>
+      <div class="trust-item"><strong>SNS自動化</strong><span>自店BONGOで実証済み</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="ai-support">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"># AI導入支援</span>
+      <h2>AI導入支援は、2つの形でご提供しています</h2>
+      <p>御社の課題に合わせて、伴走支援とアプリ開発、それぞれ単体でも、組み合わせてもご依頼いただけます。</p>
+    </div>
+    <div class="pillar-grid">
+      <div class="card featured">
+        <h3>完全オーダーメイドAI導入支援</h3>
+        <p class="price-line"><span class="price">90万円〜</span><span class="price-note">（税別・3ヶ月）</span></p>
+        <p class="desc">テンプレ通りの提案ではなく、御社の課題解決に直結する計画を、実行まで一緒に進めます。</p>
+        <ul>
+          <li>3ヶ月の伴走で、計画から実施までワンストップ</li>
+          <li>社内に最大3名、AIを使える人材を育てます</li>
+          <li>北九州近郊は無料で訪問、遠方はオンラインで対応</li>
+          <li>Claude Codeなどを使った業務自動化も含みます</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">無料相談を申し込む</a>
+      </div>
+      <div class="card" id="app-dev">
+        <h3>アプリ開発</h3>
+        <p class="price-line"><span class="price" style="color:var(--ink-soft);">50万円〜</span><span class="price-note">（税別）</span></p>
+        <p class="desc">御社の業務課題を解決する専用アプリを、要件整理から構築までオーダーメイドで作ります。</p>
+        <ul>
+          <li>genba-note（建設業向け管理SaaS）等の自社開発実績</li>
+          <li>予約管理・在庫管理など、業務に合わせて個別構築</li>
+          <li>AI導入支援と同時にご依頼の場合は+30万円〜</li>
+        </ul>
+        <a href="#contact" class="btn btn-secondary">アプリ開発のご相談</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="deep">
+  <div class="wrap">
+    <span class="eyebrow"># その他の事業</span>
+    <div class="sub-grid">
+      <div class="sub-card">
+        <div class="sub-photo"></div>
+        <div class="sub-body">
+          <h3>門司港のイタリアン「BONGO」</h3>
+          <p>篠崎が経営する、門司港のイタリアンレストランです。日々の調理や仕入れの様子は、InstagramとYouTubeで発信しています。</p>
+          <a href="#" class="link">Instagramを見る →</a>
+        </div>
+      </div>
+      <div class="sub-card" id="school">
+        <div class="sub-photo"></div>
+        <div class="sub-body">
+          <h3>門司港プログラミング教室</h3>
+          <p>小学生向けに、AIとプログラミングを教えています。&ldquo;体感させる&rdquo;ことを大事にした、北九州の子どもたちのための教室です。</p>
+          <a href="#" class="link">教室の詳細を見る →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow"># ストーリー</span>
+    <div class="story">
+      <div class="story-photo"></div>
+      <div>
+        <h2>なぜ料理人がAIをやっているのか</h2>
+        <p>飲食店の経営は、決して楽ではありません。仕入れ、仕込み、接客、SNS発信——一人でやることは多く、時間はいつも足りませんでした。</p>
+        <p>そんな中で出会ったのがAIでした。経営の効率化に使ってみたら、想像以上に「使える道具」だったんです。特別な知識がなくても、日々の業務に組み込めば、確実に時間と余力が生まれる。</p>
+        <p>この感覚を、他の経営者にも、子どもたちにも伝えたい。それが、AI導入支援とAI教室を始めた理由です。肩書きは料理人ですが、現場でAIを使い続けてきたからこそ伝えられることがあると思っています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="closing">
+      <span class="eyebrow" style="color:var(--mustard);"># お問い合わせ</span>
+      <h2>AIを&ldquo;現代の文房具&rdquo;にしませんか</h2>
+      <p>まずは無料相談から。北九州近郊は無料で訪問、遠方はオンラインで対応します。</p>
+      <a href="mailto:contact@example.com" class="btn btn-primary">無料相談を申し込む</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>LAM COMPANY ／ 門司港, 北九州</span>
+  </div>
+</footer>
+
+</body>
+</html>
