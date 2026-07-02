@@ -276,12 +276,24 @@ async function runDemo() {
     });
     const data = await res.json();
     if (!res.ok || data.error) throw new Error(data.error || 'error');
-    // タイピング風に表示
-    const words = data.result.split('');
-    for (let i = 0; i < words.length; i++) {
-      textEl.textContent += words[i];
-      if (i % 3 === 0) await new Promise(r => setTimeout(r, 10));
+    // マークダウンを簡易HTMLに変換してタイピング風に表示
+    function mdToHtml(text) {
+      return text
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/^- (.+)$/gm, '・$1')
+        .replace(/^# (.+)$/gm, '<strong>$1</strong>')
+        .replace(/\n/g, '<br>');
     }
+    const chars = data.result.split('');
+    let buf = '';
+    for (let i = 0; i < chars.length; i++) {
+      buf += chars[i];
+      if (i % 3 === 0) {
+        textEl.innerHTML = mdToHtml(buf);
+        await new Promise(r => setTimeout(r, 10));
+      }
+    }
+    textEl.innerHTML = mdToHtml(buf);
     cta.style.display = 'block';
   } catch(e) {
     textEl.textContent = '申し訳ありません、エラーが発生しました。時間をおいてお試しください。';
