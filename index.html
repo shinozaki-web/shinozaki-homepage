@@ -261,12 +261,12 @@ async function runDemo() {
   if (!input || input.length < 5) { alert('課題を入力してください（5文字以上）'); return; }
   const btn = document.getElementById('demoBtn');
   const result = document.getElementById('demoResult');
-  const text = document.getElementById('demoText');
+  const textEl = document.getElementById('demoText');
   const cta = document.getElementById('demoCta');
   btn.disabled = true;
-  btn.textContent = '考え中...';
+  btn.textContent = 'AIが考えています...';
   result.classList.add('visible');
-  text.textContent = '';
+  textEl.textContent = '';
   cta.style.display = 'none';
   try {
     const res = await fetch('/api/consult', {
@@ -274,31 +274,18 @@ async function runDemo() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ challenge: input }),
     });
-    if (!res.ok) throw new Error('error');
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-    let buf = '';
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buf += decoder.decode(value, { stream: true });
-      const lines = buf.split('\n');
-      buf = lines.pop();
-      for (const line of lines) {
-        if (!line.startsWith('data:')) continue;
-        const data = line.slice(5).trim();
-        if (data === '[DONE]') continue;
-        try {
-          const json = JSON.parse(data);
-          if (json.type === 'content_block_delta' && json.delta?.text) {
-            text.textContent += json.delta.text;
-          }
-        } catch {}
-      }
+    const data = await res.json();
+    if (!res.ok || data.error) throw new Error(data.error || 'error');
+    // タイピング風に表示
+    const words = data.result.split('');
+    for (let i = 0; i < words.length; i++) {
+      textEl.textContent += words[i];
+      if (i % 3 === 0) await new Promise(r => setTimeout(r, 10));
     }
     cta.style.display = 'block';
-  } catch {
-    text.textContent = '申し訳ありません、エラーが発生しました。時間をおいてお試しください。';
+  } catch(e) {
+    textEl.textContent = '申し訳ありません、エラーが発生しました。時間をおいてお試しください。';
+    console.error(e);
   }
   btn.disabled = false;
   btn.textContent = 'もう一度試す';
