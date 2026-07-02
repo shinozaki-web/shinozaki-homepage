@@ -53,6 +53,17 @@ export default async function handler(req, res) {
 
     const data = await upstream.json();
     const result = data.content?.[0]?.text ?? '';
+
+    // スプレッドシートに非同期で記録（失敗しても応答は返す）
+    const webhookUrl = process.env.SHEETS_WEBHOOK_URL;
+    if (webhookUrl) {
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ challenge: text, result }),
+      }).catch(err => console.error('Sheets error:', err));
+    }
+
     return res.status(200).json({ result });
 
   } catch (err) {
