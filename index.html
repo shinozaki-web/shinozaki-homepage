@@ -42,7 +42,7 @@
   section{padding:80px 0;}
   section.deep{background:var(--cream-deep);}
   .hero{padding-top:64px;text-align:center;}
-  .avatar{width:96px;height:96px;border-radius:50%;margin:0 auto 24px;background:var(--cream-deep);border:1px solid var(--border);}
+  .avatar{width:160px;height:160px;border-radius:50%;margin:0 auto 28px;background:var(--cream-deep);border:3px solid var(--border);box-shadow:0 4px 20px rgba(43,39,36,0.12);}
   .hero h1{font-size:clamp(26px,4.5vw,38px);line-height:1.45;margin-bottom:16px;}
   .hero p.sub{max-width:480px;margin:0 auto 20px;color:var(--ink-soft);font-size:15px;}
   .tags{display:flex;justify-content:center;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
@@ -134,14 +134,14 @@
       <a href="#ai-support">AI導入支援</a>
       <a href="#app-dev">アプリ開発</a>
       <a href="#school">教室</a>
-      <a href="#contact">お問い合わせ</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScGCPXFnvGvPFMRtUJCivhD1e5wfwi0oGgQVHsBl9iMexZ8YQ/viewform" target="_blank" rel="noopener">お問い合わせ</a>
     </div>
   </div>
 </nav>
 
 <section class="hero" id="about">
   <div class="wrap">
-    <img src="images/profile.jpg" alt="篠崎友寿" style="width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:center top;border:1px solid var(--border);">
+    <img src="images/profile.jpg" alt="篠崎友寿" class="avatar" style="object-fit:cover;object-position:center top;">
     <h1>AIは現代の文房具。<br>日々の定型業務を自動化</h1>
     <p class="sub">門司港でイタリアン「BONGO」を経営しながら、AI導入支援とアプリ開発、子ども向けのAI教室をしています。AnthropicのClaudeをメインにさまざまなAIを活用しています。</p>
     <div class="tags">
@@ -231,8 +231,8 @@
         <button class="btn btn-secondary" onclick="document.getElementById('typingModal').classList.add('open')" style="width:100%;text-align:center;cursor:pointer;margin-top:8px;">サイトのスクリーンショットを見る</button>
       </div>
       <div class="card">
-        <h3>BONGO SNS自動投稿アプリ <span style="font-size:11px;color:var(--terracotta);font-family:'JetBrains Mono',monospace;">開発中</span></h3>
-        <p class="desc">料理・飲み物・店内の写真を1枚アップするだけで、Googleマップ・Instagram・TikTok・YouTube・ECサイトへの投稿を自動生成・配信するアプリ。自店BONGOで実際に使うために開発しています。</p>
+        <h3>BONGO SNS自動投稿アプリ <span style="font-size:11px;color:var(--olive);font-family:'JetBrains Mono',monospace;">自社実験中</span></h3>
+        <p class="desc">料理・飲み物・店内の写真を1枚アップするだけで、Googleマップ・Instagram・TikTok・YouTube・ECサイトへの投稿を自動生成・配信するアプリ。自店BONGOで実際に試しながら精度を上げています。</p>
         <ul>
           <li>写真1枚 → 5媒体同時投稿</li>
           <li>各プラットフォームに最適化したテキストを自動生成</li>
