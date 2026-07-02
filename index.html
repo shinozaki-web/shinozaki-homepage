@@ -278,7 +278,13 @@ async function runDemo() {
     if (!res.ok || data.error) throw new Error(data.error || 'error');
     // マークダウンを簡易HTMLに変換してタイピング風に表示
     function mdToHtml(text) {
-      return text
+      const safe = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;');
+      return safe
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
         .replace(/^- (.+)$/gm, '・$1')
         .replace(/^# (.+)$/gm, '<strong>$1</strong>')
