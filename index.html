@@ -75,7 +75,7 @@
   .sub-body p{font-size:13px;color:var(--ink-soft);margin:0 0 10px;}
   .sub-body .link{font-size:13px;color:var(--olive);font-weight:500;}
   .story{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:start;}
-  .story-photo{height:200px;border-radius:16px;background:var(--cream-deep);border:1px solid var(--border);}
+  .story-photo{height:200px;border-radius:16px;background:var(--cream-deep);border:1px solid var(--border);width:100%;object-fit:cover;object-position:center top;display:block;}
   .story h2{font-size:22px;margin-bottom:16px;}
   .story p{font-size:14px;color:var(--ink-soft);margin-bottom:14px;}
   .closing{text-align:center;background:var(--ink);color:var(--cream);border-radius:24px;padding:56px 32px;}
@@ -283,7 +283,7 @@
   <div class="wrap">
     <span class="eyebrow"># ストーリー</span>
     <div class="story">
-      <div class="story-photo"></div>
+      <img src="images/expo.jpg" class="story-photo" alt="大阪万博にて">
       <div>
         <h2>なぜ料理人がAIをやっているのか</h2>
         <p>愛媛の田舎育ち、野球少年、大学中退、飲食店の失敗と再起——遠回りばかりの人生でした。でも、自分の失敗を素直に認めた日を境に、少しずつ変わっていきました。</p>
