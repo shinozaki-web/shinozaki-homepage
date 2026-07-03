@@ -54,31 +54,29 @@ export default async function handler(req, res) {
     const data = await upstream.json();
     const result = data.content?.[0]?.text ?? '';
 
-    // スプレッドシートに非同期で記録（GASの302リダイレクトを手動追跡）
+    // スプレッドシートに記録（レスポンス前に完了させる）
     const webhookUrl = process.env.SHEETS_WEBHOOK_URL;
     if (webhookUrl) {
-      (async () => {
-        try {
-          const r1 = await fetch(webhookUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ challenge: text, result }),
-            redirect: 'manual',
-          });
-          const location = r1.headers.get('location');
-          if (location) {
-            const redirectUrl = new URL(location);
-            const allowed = ['script.google.com', 'script.googleusercontent.com'];
-            if (allowed.includes(redirectUrl.hostname) && redirectUrl.protocol === 'https:') {
-              await fetch(redirectUrl.toString());
-            } else {
-              console.error('Sheets redirect blocked:', location);
-            }
+      try {
+        const r1 = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ challenge: text, result }),
+          redirect: 'manual',
+        });
+        const location = r1.headers.get('location');
+        if (location) {
+          const redirectUrl = new URL(location);
+          const allowed = ['script.google.com', 'script.googleusercontent.com'];
+          if (allowed.includes(redirectUrl.hostname) && redirectUrl.protocol === 'https:') {
+            await fetch(redirectUrl.toString());
+          } else {
+            console.error('Sheets redirect blocked:', location);
           }
-        } catch (err) {
-          console.error('Sheets error:', err);
         }
-      })();
+      } catch (err) {
+        console.error('Sheets error:', err);
+      }
     }
 
     return res.status(200).json({ result });
