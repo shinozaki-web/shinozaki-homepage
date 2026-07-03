@@ -189,7 +189,7 @@
       <span class="tag">AI教室講師</span>
       <span class="tag">AI導入支援</span>
     </div>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScGCPXFnvGvPFMRtUJCivhD1e5wfwi0oGgQVHsBl9iMexZ8YQ/viewform" target="_blank" rel="noopener" class="btn btn-primary">AI導入の無料相談はこちら</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScGCPXFnvGvPFMRtUJCivhD1e5wfwi0oGgQVHsBl9iMexZ8YQ/viewform" target="_blank" rel="noopener" class="btn btn-primary" onclick="gtag('event', 'cta_click', {event_category: 'CTA', event_label: 'hero_consult'})">AI導入の無料相談はこちら</a>
     <p class="visit-badge">📍 北九州近郊は<strong>無料で訪問相談</strong></p>
 
   </div>
@@ -279,7 +279,7 @@
       <h2>あなたの課題を入れてみてください</h2>
       <p class="demo-lead">AIを使えばどこまで解決できるか、その場で回答します。</p>
       <textarea class="demo-textarea" id="demoInput" placeholder="例：毎日のSNS投稿に時間がかかって続かない&#10;例：現場の日報を紙で管理していて共有が遅い&#10;例：見積書や提案書の作成に追われている" maxlength="400"></textarea>
-      <button class="demo-submit" id="demoBtn" onclick="runDemo()">AIに聞いてみる</button>
+      <button class="demo-submit" id="demoBtn" onclick="gtag('event', 'demo_submit', {event_category: 'Demo', event_label: 'ai_demo'}); runDemo()">AIに聞いてみる</button>
       <div class="demo-result" id="demoResult">
         <div class="demo-result-text" id="demoText"></div>
         <div class="demo-cta" id="demoCta" style="display:none;">
@@ -478,7 +478,7 @@ async function runDemo() {
       <span class="eyebrow" style="color:var(--mustard);"># お問い合わせ</span>
       <h2>AIを&ldquo;現代の文房具&rdquo;にしませんか</h2>
       <p>まずは無料相談から。北九州近郊は無料で訪問、遠方はオンラインで対応します。</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScGCPXFnvGvPFMRtUJCivhD1e5wfwi0oGgQVHsBl9iMexZ8YQ/viewform" target="_blank" rel="noopener" class="btn btn-primary">無料相談を申し込む</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScGCPXFnvGvPFMRtUJCivhD1e5wfwi0oGgQVHsBl9iMexZ8YQ/viewform" target="_blank" rel="noopener" class="btn btn-primary" onclick="gtag('event', 'cta_click', {event_category: 'CTA', event_label: 'footer_consult'})">無料相談を申し込む</a>
     </div>
   </div>
 </section>
