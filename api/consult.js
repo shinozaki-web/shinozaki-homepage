@@ -66,7 +66,15 @@ export default async function handler(req, res) {
             redirect: 'manual',
           });
           const location = r1.headers.get('location');
-          if (location) await fetch(location);
+          if (location) {
+            const redirectUrl = new URL(location);
+            const allowed = ['script.google.com', 'script.googleusercontent.com'];
+            if (allowed.includes(redirectUrl.hostname) && redirectUrl.protocol === 'https:') {
+              await fetch(redirectUrl.toString());
+            } else {
+              console.error('Sheets redirect blocked:', location);
+            }
+          }
         } catch (err) {
           console.error('Sheets error:', err);
         }
