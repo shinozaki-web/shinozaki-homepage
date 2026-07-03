@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>門司港AIプログラミング教室｜ITの国家資格を持つ料理人が教える</title>
+<meta name="description" content="北九州初・Claude実践カリキュラム。マイクラ・スクラッチ・WEBアプリ開発まで。小学生〜高校生対象。門司港栄町銀天街。月謝10,560円（税込）。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFFFFF;
+    --cream-deep:#F6F5F2;
+    --ink:#2B2724;
+    --ink-soft:#5C564E;
+    --terracotta:#C1531B;
+    --terracotta-deep:#9A4015;
+    --mustard:#D9A441;
+    --olive:#6B7A56;
+    --border:rgba(43,39,36,0.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--cream);color:var(--ink);font-family:'Noto Sans JP',sans-serif;line-height:1.8;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Zen Maru Gothic',sans-serif;font-weight:500;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px;}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,0.92);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);}
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:52px;}
+  .nav-name{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;}
+  .nav-link{font-size:12px;color:var(--ink-soft);}
+
+  /* hero */
+  .hero{padding:56px 0 48px;text-align:center;}
+  .hero-badge{display:inline-block;background:var(--terracotta-deep);color:#fff;font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;padding:4px 12px;border-radius:20px;margin-bottom:20px;}
+  .hero h1{font-size:clamp(22px,5vw,32px);line-height:1.5;margin-bottom:16px;}
+  .hero h1 em{font-style:normal;color:var(--terracotta-deep);}
+  .hero-lead{font-size:14px;color:var(--ink-soft);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;}
+  .btn-trial{display:inline-block;background:var(--terracotta-deep);color:#fff;padding:15px 36px;border-radius:10px;font-weight:700;font-size:15px;font-family:'Noto Sans JP',sans-serif;}
+  .btn-trial-note{font-size:12px;color:var(--ink-soft);margin-top:8px;}
+
+  /* features */
+  .features{background:var(--cream-deep);padding:48px 0;}
+  .features h2{font-size:18px;text-align:center;margin-bottom:28px;}
+  .feat-grid{display:grid;gap:14px;}
+  .feat-card{background:#fff;border-radius:14px;padding:20px;border:1px solid var(--border);}
+  .feat-card .feat-icon{font-size:24px;margin-bottom:8px;}
+  .feat-card h3{font-size:15px;font-family:'Zen Maru Gothic',sans-serif;font-weight:500;margin-bottom:6px;}
+  .feat-card p{font-size:13px;color:var(--ink-soft);line-height:1.7;}
+
+  /* courses */
+  .courses{padding:48px 0;}
+  .courses h2{font-size:18px;margin-bottom:6px;}
+  .courses .section-lead{font-size:13px;color:var(--ink-soft);margin-bottom:24px;}
+  .course-list{display:grid;gap:16px;}
+  .course-card{border:1px solid var(--border);border-radius:14px;padding:20px;}
+  .course-tag{display:inline-block;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--terracotta-deep);border:1px solid var(--terracotta-deep);border-radius:4px;padding:2px 8px;margin-bottom:10px;}
+  .course-card h3{font-size:16px;font-family:'Zen Maru Gothic',sans-serif;font-weight:500;margin-bottom:8px;}
+  .course-card p{font-size:13px;color:var(--ink-soft);margin-bottom:10px;line-height:1.7;}
+  .course-meta{font-size:12px;color:var(--ink-soft);}
+  .course-meta span{display:inline-block;background:var(--cream-deep);border-radius:4px;padding:2px 8px;margin:2px 2px 0 0;}
+
+  /* schedule */
+  .schedule{background:var(--ink);padding:40px 0;}
+  .schedule h2{font-size:18px;color:#fff;text-align:center;margin-bottom:24px;}
+  .info-list{display:grid;gap:12px;}
+  .info-row{display:flex;gap:12px;align-items:flex-start;}
+  .info-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--mustard);white-space:nowrap;padding-top:2px;min-width:48px;}
+  .info-value{font-size:14px;color:#F0EDE8;line-height:1.6;}
+
+  /* teacher */
+  .teacher{padding:48px 0;}
+  .teacher-inner{display:flex;gap:20px;align-items:flex-start;}
+  .teacher-photo{width:80px;height:80px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;}
+  .teacher h2{font-size:16px;margin-bottom:4px;}
+  .teacher .teacher-title{font-size:12px;color:var(--terracotta-deep);font-family:'JetBrains Mono',monospace;margin-bottom:10px;}
+  .teacher p{font-size:13px;color:var(--ink-soft);line-height:1.7;}
+  .teacher-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .teacher-tags span{font-size:11px;background:var(--cream-deep);border-radius:4px;padding:3px 8px;color:var(--ink-soft);}
+
+  /* cta */
+  .cta-section{background:var(--cream-deep);padding:48px 0;text-align:center;}
+  .cta-section h2{font-size:20px;margin-bottom:10px;}
+  .cta-section p{font-size:13px;color:var(--ink-soft);margin-bottom:24px;line-height:1.7;}
+  .btn-primary-lg{display:inline-block;background:var(--terracotta-deep);color:#fff;padding:16px 40px;border-radius:10px;font-weight:700;font-size:16px;}
+  .cta-note{font-size:12px;color:var(--ink-soft);margin-top:10px;}
+
+  footer{padding:20px 0;border-top:1px solid var(--border);}
+  footer .wrap{font-size:11px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;}
+
+  @media(min-width:600px){
+    .feat-grid{grid-template-columns:1fr 1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="nav-name">門司港AIプログラミング教室</span>
+    <a href="index.html" class="nav-link">講師のプロフィール →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-badge">北九州初 Claude実践カリキュラム</div>
+    <h1><em>ITの国家資格を持つ料理人</em>が<br>教えるプログラミング教室</h1>
+    <p class="hero-lead">マイクラ・スクラッチから本格的なWEBアプリ開発まで。<br>小学1年生〜高校1年生対象。門司港栄町銀天街。</p>
+    <a href="https://forms.gle/jfv14psCgPWDxLD19" target="_blank" rel="noopener" class="btn-trial">体験授業を申し込む</a>
+    <p class="btn-trial-note">まずは1回体験してみてください</p>
+  </div>
+</section>
+
+<section class="features">
+  <div class="wrap">
+    <h2>この教室の3つの特徴</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon">🤖</div>
+        <h3>AIを本物の道具として使う</h3>
+        <p>Claude・ChatGPTを実際に使いながら学ぶ、北九州初の実践カリキュラム。AIは「魔法」ではなく「文房具」だと体感できます。</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🎮</div>
+        <h3>好きなものでプログラミングを学ぶ</h3>
+        <p>マイクラ・スクラッチなど子どもが夢中になれるものをベースに、楽しみながら論理的思考力を育てます。</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🌐</div>
+        <h3>本物のWEBアプリを作る</h3>
+        <p>中学生以上は実際に公開できるWEBアプリを開発します。「作ったものが社会で動く」体験が自信につながります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="courses">
+  <div class="wrap">
+    <h2>コース一覧</h2>
+    <p class="section-lead">学年・目的に合わせて3つのコースをご用意しています。</p>
+    <div class="course-list">
+
+      <div class="course-card">
+        <span class="course-tag">COURSE 01</span>
+        <h3>小学生コース</h3>
+        <p>マイクラ・スクラッチを使ってプログラミングの基礎を楽しく学びます。AIツールの使い方も一緒に体感します。</p>
+        <div class="course-meta">
+          <span>小学1年生〜6年生</span>
+          <span>月謝 10,560円（税込）</span>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <span class="course-tag">COURSE 02</span>
+        <h3>中学生コース</h3>
+        <p>スクラッチから一歩進み、実際のプログラミング言語に挑戦。AIを使った作品制作で応用力を伸ばします。</p>
+        <div class="course-meta">
+          <span>中学1年生〜3年生</span>
+          <span>月謝 10,560円（税込）</span>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <span class="course-tag">COURSE 03</span>
+        <h3>WEBアプリ開発コース</h3>
+        <p>Claude Codeを使って、実際に公開できるWEBアプリを開発します。高校での情報学習の先取りにもなります。</p>
+        <div class="course-meta">
+          <span>中学3年生〜高校1年生</span>
+          <span>月謝 10,560円（税込）</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="schedule">
+  <div class="wrap">
+    <h2>開講情報</h2>
+    <div class="info-list">
+      <div class="info-row">
+        <span class="info-label">日時</span>
+        <span class="info-value">月曜日 17:30〜19:00（月2回開講）</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">場所</span>
+        <span class="info-value">北九州市門司区栄町２−２２<br>門司港栄町銀天街</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">月謝</span>
+        <span class="info-value">10,560円（税込）</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">対象</span>
+        <span class="info-value">小学1年生〜高校1年生</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="teacher">
+  <div class="wrap">
+    <div class="teacher-inner">
+      <img src="images/profile.jpg" alt="篠崎友寿" class="teacher-photo">
+      <div>
+        <h2>篠崎 友寿</h2>
+        <p class="teacher-title">講師 / BONGO オーナーシェフ</p>
+        <p>門司港でイタリアン「BONGO」を経営しながら、ITの国家資格を独学で取得。AIを自分の店で実際に使い倒した経験をもとに、子どもたちへのプログラミング教室を開講しました。</p>
+        <div class="teacher-tags">
+          <span>ITの国家資格保有</span>
+          <span>中小機構認定 生成AIアドバイザー</span>
+          <span>自社アプリ開発実績</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="wrap">
+    <h2>まずは体験授業から</h2>
+    <p>お子さんのペースに合わせて丁寧に対応します。<br>体験授業は気軽にお申し込みください。</p>
+    <a href="https://forms.gle/jfv14psCgPWDxLD19" target="_blank" rel="noopener" class="btn-primary-lg">体験授業を申し込む</a>
+    <p class="cta-note">Instagramのメッセージでも受け付けています → @mojiko_shinozaki</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>門司港AIプログラミング教室 ／ 北九州市門司区栄町２−２２</span>
+    <a href="index.html">講師プロフィールを見る →</a>
+  </div>
+</footer>
+
+</body>
+</html>
