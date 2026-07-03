@@ -62,7 +62,7 @@ export default async function handler(req, res) {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ challenge: text, result }),
-          redirect: 'follow',
+          redirect: 'manual',
         });
         console.log('Sheets: ok');
       } catch (err) {
