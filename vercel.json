@@ -1,3 +1,15 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/複製-ホーム",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/各種サービス料金",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
 }
