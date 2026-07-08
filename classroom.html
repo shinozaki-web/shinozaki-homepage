@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>門司港AIプログラミング教室｜ITの国家資格を持つ料理人が教える</title>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B4BQKPZNR9"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -17,108 +16,229 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --cream:#FFFFFF;
-    --cream-deep:#F6F5F2;
-    --ink:#2B2724;
-    --ink-soft:#5C564E;
-    --terracotta:#C1531B;
-    --terracotta-deep:#9A4015;
-    --mustard:#D9A441;
-    --olive:#6B7A56;
-    --border:rgba(43,39,36,0.12);
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{background:var(--cream);color:var(--ink);font-family:'Noto Sans JP',sans-serif;line-height:1.8;-webkit-font-smoothing:antialiased;}
-  h1,h2,h3{font-family:'Zen Maru Gothic',sans-serif;font-weight:500;}
-  a{color:inherit;text-decoration:none;}
-  .wrap{max-width:680px;margin:0 auto;padding:0 20px;}
+:root{
+  --cream:#FFFFFF;
+  --cream-warm:#FFF7E6;
+  --blue-light:#EFF6FF;
+  --ink:#1E3A5F;
+  --ink-soft:#4B6A8F;
+  --accent:#3B82F6;
+  --accent-deep:#1D4ED8;
+  --mustard:#FACC15;
+  --green:#22C55E;
+  --border:rgba(30,58,95,0.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream-warm);color:var(--ink);font-family:'Noto Sans JP',sans-serif;line-height:1.8;-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Zen Maru Gothic',sans-serif;font-weight:500;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px;}
 
-  /* nav */
-  nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,0.92);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);}
-  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:52px;}
-  .nav-name{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;}
-  .nav-link{font-size:12px;color:var(--ink-soft);}
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,251,240,0.92);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:52px;}
+.nav-name{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;color:var(--ink);}
+.nav-link{font-size:12px;color:var(--ink-soft);}
 
-  /* hero */
-  .hero{padding:56px 0 48px;text-align:center;}
-  .hero-badge{display:inline-block;background:var(--terracotta-deep);color:#fff;font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;padding:4px 12px;border-radius:20px;margin-bottom:20px;}
-  .hero h1{font-size:clamp(22px,5vw,32px);line-height:1.5;margin-bottom:16px;}
-  .hero h1 em{font-style:normal;color:var(--terracotta-deep);}
-  .hero-lead{font-size:14px;color:var(--ink-soft);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;}
-  .btn-trial{display:inline-block;background:var(--terracotta-deep);color:#fff;padding:15px 36px;border-radius:10px;font-weight:700;font-size:15px;font-family:'Noto Sans JP',sans-serif;}
-  .btn-trial-note{font-size:12px;color:var(--ink-soft);margin-top:8px;}
+/* HERO */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#FFFBF2 0%,#EFF6FF 65%,#F0FDF4 100%);
+  padding:60px 0 56px;text-align:center;
+}
+.hero::before{
+  content:'';position:absolute;
+  width:360px;height:360px;background:var(--accent);opacity:.05;
+  border-radius:50%;top:-100px;right:-80px;pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;
+  width:220px;height:220px;background:var(--mustard);opacity:.07;
+  border-radius:50%;bottom:-60px;left:-50px;pointer-events:none;
+}
+.hero-dots{
+  position:absolute;top:20px;left:18px;
+  display:grid;grid-template-columns:repeat(4,8px);gap:5px;
+  opacity:.15;pointer-events:none;
+}
+.hero-dots span{width:8px;height:8px;background:var(--ink);border-radius:2px;display:block;}
+.hero-blocks{
+  position:absolute;top:28px;right:18px;
+  display:flex;flex-direction:column;gap:4px;
+  opacity:.13;pointer-events:none;
+}
+.hero-blocks .b{height:10px;border-radius:2px;background:var(--accent);}
+.hero-badge{
+  display:inline-block;background:var(--ink);color:#fff;
+  font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:.08em;
+  padding:5px 14px;border-radius:20px;margin-bottom:22px;
+}
+.hero-chips{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+.chip{
+  display:inline-flex;align-items:center;gap:5px;
+  background:#fff;border:1.5px solid var(--border);
+  border-radius:20px;padding:5px 13px;
+  font-size:12px;font-weight:500;color:var(--ink);
+  box-shadow:0 2px 6px rgba(30,58,95,.06);
+}
+.chip.g{border-color:var(--green);color:#15803D;}
+.chip.y{border-color:var(--mustard);color:#92400E;}
+.chip.b{border-color:var(--accent);color:var(--accent-deep);}
+.hero h1{font-size:clamp(24px,6vw,38px);line-height:1.45;margin-bottom:20px;color:var(--ink);}
+.hero h1 em{
+  font-style:normal;color:var(--accent);
+  background:linear-gradient(to bottom,transparent 72%,rgba(250,204,21,.45) 72%);
+}
+.hero-lead{font-size:14px;color:var(--ink-soft);margin:0 auto 32px;max-width:480px;line-height:1.85;}
+.hero-ctas{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:24px;}
+.btn-primary{
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:16px 36px;border-radius:12px;font-weight:700;font-size:15px;
+  box-shadow:0 4px 14px rgba(59,130,246,.35);
+  width:100%;max-width:320px;text-align:center;transition:background .2s;
+}
+.btn-primary:hover{background:var(--accent-deep);}
+.btn-secondary{
+  display:inline-block;background:#fff;color:var(--ink);
+  padding:14px 32px;border-radius:12px;font-weight:500;font-size:14px;
+  border:1.5px solid var(--border);
+  width:100%;max-width:320px;text-align:center;transition:background .2s;
+}
+.btn-secondary:hover{background:var(--cream-warm);}
+.hero-stats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+.stat-badge{
+  font-size:12px;color:var(--ink-soft);
+  background:rgba(255,255,255,.8);border:1px solid var(--border);
+  border-radius:20px;padding:4px 12px;
+}
 
-  /* features */
-  .features{background:var(--cream-deep);padding:48px 0;}
-  .features h2{font-size:18px;text-align:center;margin-bottom:28px;}
-  .feat-grid{display:grid;gap:14px;}
-  .feat-card{background:#fff;border-radius:14px;padding:20px;border:1px solid var(--border);}
-  .feat-card .feat-icon{font-size:24px;margin-bottom:8px;}
-  .feat-card h3{font-size:15px;font-family:'Zen Maru Gothic',sans-serif;font-weight:500;margin-bottom:6px;}
-  .feat-card p{font-size:13px;color:var(--ink-soft);line-height:1.7;}
+/* SECTION HEADER */
+.sec-hd{margin-bottom:32px;}
+.sec-label{
+  display:block;font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:.1em;color:var(--accent);margin-bottom:6px;
+}
+.sec-hd h2{font-size:20px;color:var(--ink);margin-bottom:6px;}
+.sec-hd h2 .ul{display:inline-block;border-bottom:3px solid var(--mustard);padding-bottom:2px;}
+.sec-hd p{font-size:13px;color:var(--ink-soft);}
 
-  /* courses */
-  .courses{padding:48px 0;}
-  .courses h2{font-size:18px;margin-bottom:6px;}
-  .courses .section-lead{font-size:13px;color:var(--ink-soft);margin-bottom:24px;}
-  .course-list{display:grid;gap:16px;}
-  .course-card{border:1px solid var(--border);border-radius:14px;padding:20px;}
-  .course-tag{display:inline-block;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--terracotta-deep);border:1px solid var(--terracotta-deep);border-radius:4px;padding:2px 8px;margin-bottom:10px;}
-  .course-card h3{font-size:16px;font-family:'Zen Maru Gothic',sans-serif;font-weight:500;margin-bottom:8px;}
-  .course-card p{font-size:13px;color:var(--ink-soft);margin-bottom:10px;line-height:1.7;}
-  .course-meta{font-size:12px;color:var(--ink-soft);}
-  .course-meta span{display:inline-block;background:var(--cream-deep);border-radius:4px;padding:2px 8px;margin:2px 2px 0 0;}
+/* FEATURES */
+.features{background:var(--cream-warm);padding:56px 0;}
+.feat-grid{display:grid;gap:16px;}
+.feat-card{
+  background:#fff;border-radius:20px;padding:24px 20px;
+  border:1px solid var(--border);box-shadow:0 2px 12px rgba(30,58,95,.05);
+}
+.feat-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin-bottom:14px;
+}
+.feat-icon.y{background:#FEF9C3;}
+.feat-icon.b{background:#DBEAFE;}
+.feat-icon.g{background:#DCFCE7;}
+.feat-card h3{font-size:15px;margin-bottom:6px;color:var(--ink);}
+.feat-card p{font-size:13px;color:var(--ink-soft);line-height:1.7;}
 
-  /* schedule */
-  .schedule{background:var(--ink);padding:40px 0;}
-  .schedule h2{font-size:18px;color:#fff;text-align:center;margin-bottom:24px;}
-  .info-list{display:grid;gap:12px;}
-  .info-row{display:flex;gap:12px;align-items:flex-start;}
-  .info-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--mustard);white-space:nowrap;padding-top:2px;min-width:48px;}
-  .info-value{font-size:14px;color:#F0EDE8;line-height:1.6;}
+/* STEPS */
+.steps{background:var(--blue-light);padding:56px 0;}
+.steps-grid{display:grid;gap:16px;}
+.step-card{
+  background:#fff;border-radius:20px;padding:24px 20px;
+  box-shadow:0 2px 12px rgba(30,58,95,.06);
+  border-top:4px solid;
+}
+.step-card.s1{border-top-color:var(--accent);}
+.step-card.s2{border-top-color:var(--green);}
+.step-card.s3{border-top-color:var(--mustard);}
+.step-card.s4{border-top-color:#A78BFA;}
+.step-num{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--ink-soft);margin-bottom:8px;}
+.step-icon{font-size:28px;margin-bottom:10px;}
+.step-card h3{font-size:15px;margin-bottom:6px;color:var(--ink);}
+.step-card p{font-size:13px;color:var(--ink-soft);line-height:1.7;}
 
-  /* teacher */
-  .teacher{padding:48px 0;}
-  .teacher-inner{display:flex;gap:20px;align-items:flex-start;}
-  .teacher-photo{width:80px;height:80px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;}
-  .teacher h2{font-size:16px;margin-bottom:4px;}
-  .teacher .teacher-title{font-size:12px;color:var(--terracotta-deep);font-family:'JetBrains Mono',monospace;margin-bottom:10px;}
-  .teacher p{font-size:13px;color:var(--ink-soft);line-height:1.7;}
-  .teacher-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
-  .teacher-tags span{font-size:11px;background:var(--cream-deep);border-radius:4px;padding:3px 8px;color:var(--ink-soft);}
+/* COURSES */
+.courses{background:#fff;padding:56px 0;}
+.course-list{display:grid;gap:20px;}
+.course-card{border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 2px 12px rgba(30,58,95,.05);}
+.course-head{padding:18px 22px 16px;color:#fff;}
+.course-head.blue{background:var(--accent);}
+.course-head.green{background:#16A34A;}
+.course-head.amber{background:#D97706;}
+.course-tag-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;opacity:.85;margin-bottom:4px;display:block;}
+.course-head h3{font-size:18px;font-weight:500;}
+.course-body{padding:20px 22px;}
+.course-body p{font-size:13px;color:var(--ink-soft);margin-bottom:14px;line-height:1.7;}
+.course-meta{display:flex;flex-wrap:wrap;gap:6px;}
+.course-meta span{font-size:12px;background:var(--cream-warm);border-radius:6px;padding:3px 10px;color:var(--ink-soft);}
+.campaign-box{
+  margin-top:14px;background:#FFFDE7;
+  border:1.5px solid var(--mustard);border-radius:10px;
+  padding:10px 14px;font-size:12px;color:#78350F;line-height:1.6;
+}
+.courses-note{font-size:13px;color:var(--ink-soft);margin-top:16px;}
 
-  /* voices */
-  .voices{background:var(--cream-deep);padding:48px 0;}
-  .voices h2{font-size:18px;margin-bottom:24px;}
-  .voice-list{display:grid;gap:16px;}
-  .voice-card{background:#fff;border-radius:14px;padding:20px 24px;border-left:3px solid var(--terracotta-deep);}
-  .voice-text{font-size:14px;line-height:1.8;margin-bottom:10px;}
-  .voice-from{font-size:11px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;}
+/* SCHEDULE */
+.schedule{background:var(--ink);padding:48px 0;}
+.schedule .sec-label{color:var(--mustard);}
+.schedule .sec-hd h2{color:#fff;}
+.info-list{display:grid;gap:16px;}
+.info-row{display:flex;gap:16px;align-items:flex-start;}
+.info-lbl{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--mustard);white-space:nowrap;padding-top:2px;min-width:48px;}
+.info-val{font-size:14px;color:#E0EAF4;line-height:1.7;}
 
-  /* faq */
-  .faq{padding:48px 0;}
-  .faq h2{font-size:18px;margin-bottom:24px;}
-  .faq-list{display:grid;gap:12px;}
-  .faq-item{border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
-  .faq-q{font-size:14px;font-weight:700;margin-bottom:6px;display:flex;gap:10px;}
-  .faq-q::before{content:"Q";color:var(--terracotta-deep);font-family:'JetBrains Mono',monospace;font-size:13px;flex-shrink:0;}
-  .faq-a{font-size:13px;color:var(--ink-soft);line-height:1.7;padding-left:22px;}
+/* TEACHER */
+.teacher{background:var(--blue-light);padding:56px 0;}
+.teacher-inner{display:flex;gap:20px;align-items:flex-start;}
+.teacher-photo{width:80px;height:80px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:3px solid #fff;box-shadow:0 4px 12px rgba(30,58,95,.12);}
+.teacher-inner h3{font-size:17px;margin-bottom:4px;color:var(--ink);}
+.teacher-title{font-size:11px;color:var(--accent-deep);font-family:'JetBrains Mono',monospace;margin-bottom:10px;}
+.teacher-inner p{font-size:13px;color:var(--ink-soft);line-height:1.7;}
+.teacher-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.teacher-tags span{font-size:11px;background:rgba(255,255,255,.8);border:1px solid var(--border);border-radius:6px;padding:3px 10px;color:var(--ink-soft);}
 
-  /* cta */
-  .cta-section{background:var(--cream-deep);padding:48px 0;text-align:center;}
-  .cta-section h2{font-size:20px;margin-bottom:10px;}
-  .cta-section p{font-size:13px;color:var(--ink-soft);margin-bottom:24px;line-height:1.7;}
-  .btn-primary-lg{display:inline-block;background:var(--terracotta-deep);color:#fff;padding:16px 40px;border-radius:10px;font-weight:700;font-size:16px;}
-  .cta-note{font-size:12px;color:var(--ink-soft);margin-top:10px;}
+/* VOICES */
+.voices{background:var(--cream-warm);padding:56px 0;}
+.voice-list{display:grid;gap:20px;}
+.voice-card{background:#fff;border-radius:20px;padding:30px 24px 22px;box-shadow:0 2px 12px rgba(30,58,95,.06);position:relative;}
+.voice-qmark{position:absolute;top:10px;left:16px;font-size:56px;line-height:1;color:var(--accent);opacity:.12;font-family:Georgia,serif;pointer-events:none;}
+.voice-text{font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:14px;}
+.voice-from{font-size:11px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:8px;}
+.voice-from::before{content:'';display:block;width:20px;height:1.5px;background:var(--accent);border-radius:1px;opacity:.5;}
 
-  footer{padding:20px 0;border-top:1px solid var(--border);}
-  footer .wrap{font-size:11px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;}
+/* FAQ */
+.faq{background:#fff;padding:56px 0;}
+.faq-list{display:grid;gap:12px;}
+.faq-item{border:1px solid var(--border);border-radius:16px;padding:18px 20px;background:var(--cream-warm);}
+.faq-q{font-size:14px;font-weight:700;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start;color:var(--ink);}
+.faq-qm{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:var(--accent);color:#fff;border-radius:6px;font-size:12px;font-family:'JetBrains Mono',monospace;flex-shrink:0;margin-top:1px;}
+.faq-a{font-size:13px;color:var(--ink-soft);line-height:1.75;padding-left:32px;}
 
-  @media(min-width:600px){
-    .feat-grid{grid-template-columns:1fr 1fr 1fr;}
-  }
+/* CTA */
+.cta-section{background:var(--ink);padding:60px 0;text-align:center;}
+.cta-section .sec-label{color:var(--mustard);text-align:center;}
+.cta-section h2{font-size:22px;color:#fff;margin-bottom:10px;}
+.cta-section > .wrap > p{font-size:14px;color:#93B4D4;margin-bottom:28px;line-height:1.8;}
+.btn-primary-lg{
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:18px 44px;border-radius:14px;font-weight:700;font-size:16px;
+  box-shadow:0 4px 20px rgba(59,130,246,.4);transition:background .2s;
+}
+.btn-primary-lg:hover{background:var(--accent-deep);}
+.cta-note{font-size:12px;color:#93B4D4;margin-top:12px;}
+
+/* FOOTER */
+footer{background:var(--cream-warm);padding:20px 0;border-top:1px solid var(--border);}
+footer .wrap{font-size:11px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;}
+
+/* RESPONSIVE */
+@media(min-width:600px){
+  .feat-grid{grid-template-columns:1fr 1fr 1fr;}
+  .steps-grid{grid-template-columns:1fr 1fr;}
+  .hero-ctas{flex-direction:row;justify-content:center;}
+  .btn-primary,.btn-secondary{width:auto;}
+}
 </style>
 </head>
 <body>
@@ -130,111 +250,189 @@
   </div>
 </nav>
 
-<section class="hero">
+<section class="hero" id="top">
+  <div class="hero-dots" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="hero-blocks" aria-hidden="true">
+    <div class="b" style="width:32px;"></div>
+    <div class="b" style="width:20px;background:#22C55E;"></div>
+    <div class="b" style="width:40px;"></div>
+    <div class="b" style="width:16px;background:#FACC15;"></div>
+  </div>
   <div class="wrap">
     <div class="hero-badge">北九州初 Claude実践カリキュラム</div>
-    <h1><em>ITの国家資格を持つ料理人</em>が<br>教えるプログラミング教室</h1>
-    <p class="hero-lead">「自分で作ったものが、ネットで動く」その体験が子どもを変えます。<br>マイクラ・スクラッチから本格的なWEBアプリ開発まで。小学1年生〜高校1年生対象。門司港栄町銀天街。</p>
-    <a href="https://forms.gle/jfv14psCgPWDxLD19" target="_blank" rel="noopener" class="btn-trial" onclick="gtag('event', 'cta_click', {event_category: 'CTA', event_label: 'hero_trial'})">無料体験授業を申し込む</a>
-    <p class="btn-trial-note">体験授業は無料です。まずは1回試してみてください。</p>
-    <p style="font-size:12px;color:var(--ink-soft);margin-top:16px;">現在 <strong>6名</strong> 在籍中</p>
+    <div class="hero-chips">
+      <span class="chip g">✅ できた！</span>
+      <span class="chip y">⭐ つくれた！</span>
+      <span class="chip b">🌐 公開できた！</span>
+    </div>
+    <h1>ゲームが好きな子が、<br><em>"つくる側"</em>に変わる。</h1>
+    <p class="hero-lead">マイクラ・Scratch・AIを使って、子どもが夢中になりながら<br>考える力・作る力・伝える力を育てる、<br>門司港の実践型プログラミング教室。</p>
+    <div class="hero-ctas">
+      <a href="https://forms.gle/jfv14psCgPWDxLD19" target="_blank" rel="noopener" class="btn-primary" onclick="gtag('event','cta_click',{event_category:'CTA',event_label:'hero_trial'})">無料体験授業を申し込む</a>
+      <a href="#voices" class="btn-secondary">教室の雰囲気を見てみる</a>
+    </div>
+    <div class="hero-stats">
+      <span class="stat-badge">🟢 現在 6名 在籍中</span>
+      <span class="stat-badge">16:00クラス 残り5席</span>
+    </div>
   </div>
 </section>
 
-<section class="features">
+<section class="features" id="features">
   <div class="wrap">
-    <h2>この教室の3つの特徴</h2>
+    <div class="sec-hd">
+      <span class="sec-label">FEATURES</span>
+      <h2><span class="ul">この教室の3つの特徴</span></h2>
+    </div>
     <div class="feat-grid">
       <div class="feat-card">
-        <div class="feat-icon">🤖</div>
-        <h3>AIを本物の道具として使う</h3>
-        <p>Claude・ChatGPTを実際に使いながら学ぶ、北九州初の実践カリキュラム。AIは「魔法」ではなく「文房具」だと体感できます。</p>
+        <div class="feat-icon y">🎮</div>
+        <h3>好きから始まる</h3>
+        <p>マイクラ・Scratchで、まずは「楽しい！」からスタート。好奇心が一番の先生です。</p>
       </div>
       <div class="feat-card">
-        <div class="feat-icon">🎮</div>
-        <h3>好きなものでプログラミングを学ぶ</h3>
-        <p>マイクラ・スクラッチなど子どもが夢中になれるものをベースに、楽しみながら論理的思考力を育てます。</p>
+        <div class="feat-icon b">🤔</div>
+        <h3>考える力が育つ</h3>
+        <p>試す、失敗する、直す。この繰り返しで、自然と論理的思考が育まれます。</p>
       </div>
       <div class="feat-card">
-        <div class="feat-icon">🌐</div>
-        <h3>本物のWEBアプリを作る</h3>
-        <p>中学生以上は実際に公開できるWEBアプリを開発します。「作ったものが社会で動く」体験が自信につながります。</p>
+        <div class="feat-icon g">🌐</div>
+        <h3>本物を作る</h3>
+        <p>AIやWEBアプリ開発で、人に見せられる本物の作品づくりに挑戦します。</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="courses">
+<section class="steps" id="steps">
   <div class="wrap">
-    <h2>コース一覧</h2>
-    <p class="section-lead">学年・目的に合わせて3つのコースをご用意しています。</p>
+    <div class="sec-hd">
+      <span class="sec-label">GROWTH STEPS</span>
+      <h2><span class="ul">子どもが成長する4ステップ</span></h2>
+      <p>プログラミングは「知識」じゃなく「体験」で育つ。</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card s1">
+        <div class="step-num">STEP 01</div>
+        <div class="step-icon">🎮</div>
+        <h3>ゲーム感覚で楽しく触る</h3>
+        <p>マイクラ・Scratchで「これ楽しい！」を起点に。まずは好奇心を全開にします。</p>
+      </div>
+      <div class="step-card s2">
+        <div class="step-num">STEP 02</div>
+        <div class="step-icon">🤔</div>
+        <h3>自分で考えて動かす</h3>
+        <p>「なぜ？」「どうすれば？」を自分で試して動かす体験が思考力を育てます。</p>
+      </div>
+      <div class="step-card s3">
+        <div class="step-num">STEP 03</div>
+        <div class="step-icon">🛠️</div>
+        <h3>作品を完成させる</h3>
+        <p>ゲームも、アプリも、「完成させる」達成感が次への自信につながります。</p>
+      </div>
+      <div class="step-card s4">
+        <div class="step-num">STEP 04</div>
+        <div class="step-icon">🌟</div>
+        <h3>人に見せて自信になる</h3>
+        <p>友達や家族に見せられる作品が、本物の自信と探究心を育てます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="courses" id="courses">
+  <div class="wrap">
+    <div class="sec-hd">
+      <span class="sec-label">COURSES</span>
+      <h2><span class="ul">コース一覧</span></h2>
+      <p>学年・目的に合わせて3つのコースをご用意しています。</p>
+    </div>
     <div class="course-list">
-
-      <div class="course-card" style="border-color:var(--terracotta-deep);">
-        <span class="course-tag">COURSE 01</span>
-        <h3>小学生コース</h3>
-        <p>マイクラ・スクラッチを使ってプログラミングの基礎を楽しく学びます。AIツールの使い方も一緒に体感します。</p>
-        <div class="course-meta">
-          <span>小学1年生〜6年生</span>
-          <span>月謝 10,560円（税込）</span>
-          <span>月曜 16:00〜17:30 ／ 17:30〜19:00</span>
-        </div>
-        <p style="margin-top:12px;font-size:12px;background:var(--terracotta-deep);color:#fff;border-radius:6px;padding:8px 12px;line-height:1.6;">🎁 16:00〜クラス 募集キャンペーン中：入会金（通常10,000円）が無料！　残り<strong>5名</strong>まで</p>
-      </div>
-
       <div class="course-card">
-        <span class="course-tag">COURSE 02</span>
-        <h3>中学生コース</h3>
-        <p>Claudeをメインに最新のAIをより深く学び、実社会で使えるスキルを実践形式で身につけます。</p>
-        <div class="course-meta">
-          <span>中学1年生〜3年生</span>
-          <span>月謝 14,800円（税込）</span>
-          <span>月曜 17:30〜19:00</span>
+        <div class="course-head blue">
+          <span class="course-tag-label">COURSE 01</span>
+          <h3>小学生コース</h3>
+        </div>
+        <div class="course-body">
+          <p>マイクラ・Scratchを使ってプログラミングの基礎を楽しく学びます。AIツールの使い方も一緒に体感します。</p>
+          <div class="course-meta">
+            <span>小学1年生〜6年生</span>
+            <span>月謝 10,560円（税込）</span>
+            <span>月曜 16:00〜17:30 ／ 17:30〜19:00</span>
+          </div>
+          <div class="campaign-box">🎁 16:00〜クラス 募集キャンペーン中：入会金（通常10,000円）が無料！　残り<strong>5名</strong>まで</div>
         </div>
       </div>
-
       <div class="course-card">
-        <span class="course-tag">COURSE 03</span>
-        <h3>WEBアプリ開発コース</h3>
-        <p>Claude Codeを使って、実際に公開できるWEBアプリを開発します。「動くものを作って世に出す」体験を通じて、本物の開発スキルを身につけます。</p>
-        <div class="course-meta">
-          <span>中学3年生〜高校1年生</span>
-          <span>月謝 24,800円（税込）</span>
-          <span>月曜 19:10〜21:10</span>
+        <div class="course-head green">
+          <span class="course-tag-label">COURSE 02</span>
+          <h3>中学生コース</h3>
+        </div>
+        <div class="course-body">
+          <p>Claudeをメインに最新のAIをより深く学び、実社会で使えるスキルを実践形式で身につけます。</p>
+          <div class="course-meta">
+            <span>中学1年生〜3年生</span>
+            <span>月謝 14,800円（税込）</span>
+            <span>月曜 17:30〜19:00</span>
+          </div>
         </div>
       </div>
-
+      <div class="course-card">
+        <div class="course-head amber">
+          <span class="course-tag-label">COURSE 03</span>
+          <h3>WEBアプリ開発コース</h3>
+        </div>
+        <div class="course-body">
+          <p>Claude Codeを使って、実際に公開できるWEBアプリを開発します。「動くものを作って世に出す」体験を通じて、本物の開発スキルを身につけます。</p>
+          <div class="course-meta">
+            <span>中学3年生〜高校1年生</span>
+            <span>月謝 24,800円（税込）</span>
+            <span>月曜 19:10〜21:10</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <p style="font-size:13px;color:var(--ink-soft);margin-top:16px;">＊小学生から入会していただいている方は全コース月謝は据え置きの10,560円です。</p>
+    <p class="courses-note">＊小学生から入会していただいている方は全コース月謝は据え置きの10,560円です。</p>
   </div>
 </section>
 
-<section class="schedule">
+<section class="schedule" id="schedule">
   <div class="wrap">
-    <h2>開講情報</h2>
+    <div class="sec-hd">
+      <span class="sec-label">INFO</span>
+      <h2>開講情報</h2>
+    </div>
     <div class="info-list">
       <div class="info-row">
-        <span class="info-label">日時</span>
-        <span class="info-value">月曜日（月2回開講）※時間はコースにより異なります</span>
+        <span class="info-lbl">日時</span>
+        <span class="info-val">月曜日（月2回開講）※時間はコースにより異なります</span>
       </div>
       <div class="info-row">
-        <span class="info-label">場所</span>
-        <span class="info-value">北九州市門司区栄町２−２２<br>門司港栄町銀天街</span>
+        <span class="info-lbl">場所</span>
+        <span class="info-val">北九州市門司区栄町２−２２<br>門司港栄町銀天街</span>
       </div>
       <div class="info-row">
-        <span class="info-label">対象</span>
-        <span class="info-value">小学1年生〜高校1年生</span>
+        <span class="info-lbl">対象</span>
+        <span class="info-val">小学1年生〜高校1年生</span>
       </div>
     </div>
   </div>
 </section>
 
-<section class="teacher">
+<section class="teacher" id="teacher">
   <div class="wrap">
+    <div class="sec-hd">
+      <span class="sec-label">TEACHER</span>
+      <h2><span class="ul">講師紹介</span></h2>
+    </div>
     <div class="teacher-inner">
       <img src="images/profile.jpg" alt="篠崎友寿" class="teacher-photo">
       <div>
-        <h2>篠崎 友寿</h2>
+        <h3>篠崎 友寿</h3>
         <p class="teacher-title">プログラミング講師 / ITの国家資格保有 / BONGO オーナーシェフ</p>
         <p>門司港でイタリアン「BONGO」を経営しながら、ITの国家資格を独学で取得。AIを自分の店で実際に使い倒した経験をもとに、子どもたちへのプログラミング教室を開講しました。</p>
         <div class="teacher-tags">
@@ -247,76 +445,77 @@
   </div>
 </section>
 
-<section class="voices">
+<section class="voices" id="voices">
   <div class="wrap">
-    <h2>保護者の声</h2>
+    <div class="sec-hd">
+      <span class="sec-label">VOICES</span>
+      <h2><span class="ul">保護者の声</span></h2>
+    </div>
     <div class="voice-list">
-
       <div class="voice-card">
-        <p class="voice-text">「スクラッチって何？という感じで、正直親としてはうまく共感してあげられなかったんです。でも教室では先生も仲間も同じ熱量で盛り上がってくれるので、毎月すごく楽しみにしています。」</p>
+        <div class="voice-qmark" aria-hidden="true">"</div>
+        <p class="voice-text">スクラッチって何？という感じで、正直親としてはうまく共感してあげられなかったんです。でも教室では先生も仲間も同じ熱量で盛り上がってくれるので、毎月すごく楽しみにしています。</p>
         <p class="voice-from">小学生の保護者</p>
       </div>
-
       <div class="voice-card">
-        <p class="voice-text">「まだ小学1年生だし難しくてついていけないんじゃないかと思っていましたが、ひらがなで授業してくれるのでうちの子でも理解できたみたいで、家に帰ると『次はいつ？』と聞いてきます。」</p>
+        <div class="voice-qmark" aria-hidden="true">"</div>
+        <p class="voice-text">まだ小学1年生だし難しくてついていけないんじゃないかと思っていましたが、ひらがなで授業してくれるのでうちの子でも理解できたみたいで、家に帰ると「次はいつ？」と聞いてきます。</p>
         <p class="voice-from">小学1年生の保護者</p>
       </div>
-
       <div class="voice-card">
-        <p class="voice-text">「Unityの教室に小学生から通っていて本人はできるようになっていたのですが、親として何が何だかわからず、どうしてあげればいいかも見えていませんでした。福岡県内のUnity教室に何件か問い合わせても『お子様のレベルでは当教室では教えられません』と言われ続けて困っていたところ、Claude Codeで世の中の役に立つアプリを作るというきっかけをもらいました。今は同級生のために学習アプリを作っていて、クラスの成績（テストの点数）も上がっているそうで、本人がめちゃめちゃ喜んでいます。」</p>
+        <div class="voice-qmark" aria-hidden="true">"</div>
+        <p class="voice-text">Unityの教室に小学生から通っていて本人はできるようになっていたのですが、親として何が何だかわからず困っていたところ、Claude Codeで世の中の役に立つアプリを作るというきっかけをもらいました。今は同級生のために学習アプリを作っていて、クラスの成績も上がっているそうで、本人がめちゃめちゃ喜んでいます。</p>
         <p class="voice-from">中学生の保護者</p>
       </div>
-
     </div>
   </div>
 </section>
 
-<section class="faq">
+<section class="faq" id="faq">
   <div class="wrap">
-    <h2>よくある質問</h2>
+    <div class="sec-hd">
+      <span class="sec-label">FAQ</span>
+      <h2><span class="ul">よくある質問</span></h2>
+    </div>
     <div class="faq-list">
-
       <div class="faq-item">
-        <div class="faq-q">パソコンは自分で用意する必要がありますか？</div>
+        <div class="faq-q"><span class="faq-qm">Q</span>パソコンは自分で用意する必要がありますか？</div>
         <p class="faq-a">必要ありません。教室でパソコンをご用意しています。ご自身のパソコンをお持ちいただくことも可能です（持参の場合は入会金が無料になります）。</p>
       </div>
-
       <div class="faq-item">
-        <div class="faq-q">入会金はかかりますか？</div>
+        <div class="faq-q"><span class="faq-qm">Q</span>入会金はかかりますか？</div>
         <p class="faq-a">入会金は10,000円です。ただし、ご自身のパソコンをお持ちいただく場合は入会金が無料となります。</p>
       </div>
-
       <div class="faq-item">
-        <div class="faq-q">欠席した場合、振替はできますか？</div>
+        <div class="faq-q"><span class="faq-qm">Q</span>欠席した場合、振替はできますか？</div>
         <p class="faq-a">月単位で個別にご相談いただけます。お気軽にお声がけください。</p>
       </div>
-
       <div class="faq-item">
-        <div class="faq-q">体験授業はどんな内容ですか？</div>
+        <div class="faq-q"><span class="faq-qm">Q</span>体験授業はどんな内容ですか？</div>
         <p class="faq-a">「スクラッチ」というビジュアルプログラミングツールを使って、簡単なゲームを実際に作ってもらいます。初めての方でも手を動かしながら楽しめる内容です。</p>
       </div>
-
       <div class="faq-item">
-        <div class="faq-q">プログラミングが全く初めてでも大丈夫ですか？</div>
+        <div class="faq-q"><span class="faq-qm">Q</span>プログラミングが全く初めてでも大丈夫ですか？</div>
         <p class="faq-a">大丈夫です。視覚的にわかりやすいツールから始めるので、知識ゼロでも問題ありません。体験授業でまず試してみてください。</p>
       </div>
-
     </div>
   </div>
 </section>
 
-<section class="cta-section">
+<section class="cta-section" id="cta">
   <div class="wrap">
+    <span class="sec-label">CONTACT</span>
     <h2>まずは無料体験授業から</h2>
-    <p>体験授業は無料です。お子さんのペースに合わせて丁寧に対応します。<br>気軽にお申し込みください。</p>
-    <a href="https://forms.gle/jfv14psCgPWDxLD19" target="_blank" rel="noopener" class="btn-primary-lg" onclick="gtag('event', 'cta_click', {event_category: 'CTA', event_label: 'footer_trial'})">無料体験授業を申し込む</a>
+    <p>体験授業は無料です。お子さんのペースに合わせて丁寧に対応します。<br>まずは気軽にお申し込みください。</p>
+    <a href="https://forms.gle/jfv14psCgPWDxLD19" target="_blank" rel="noopener" class="btn-primary-lg" onclick="gtag('event','cta_click',{event_category:'CTA',event_label:'footer_trial'})">無料体験授業を申し込む</a>
+    <p class="cta-note">体験授業は無料です。まずは1回試してみてください。</p>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
     <span>門司港AIプログラミング教室 ／ 北九州市門司区栄町２−２２</span>
-    <a href="index.html">講師プロフィールを見る →</a>
+    <span style="display:flex;gap:16px;"><a href="privacy.html">プライバシーポリシー</a><a href="index.html">講師プロフィールを見る →</a></span>
   </div>
 </footer>
 
