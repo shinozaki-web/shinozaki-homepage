@@ -2,8 +2,8 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>篠崎友寿｜門司港のイタリアン経営者によるAI導入支援・アプリ開発</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title>中小企業のAI導入支援 | 篠崎友寿 – 試して終わりにしないAI活用</title>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B4BQKPZNR9"></script>
 <script>
@@ -12,283 +12,774 @@
   gtag('js', new Date());
   gtag('config', 'G-B4BQKPZNR9');
 </script>
-<meta name="description" content="門司港でイタリアン「BONGO」を経営する篠崎友寿の個人サイト。中小企業向けの完全オーダーメイドAI導入支援、課題解決アプリ開発、子ども向けAI教室を紹介。北九州近郊は無料訪問対応。">
+<meta name="description" content="実際に自分の店でAIを導入した現役飲食店経営者が、御社のAI活用を0から伴走支援。ChatGPTを触っただけで終わらせない、中小企業向けの完全オーダーメイドAI導入支援。北九州近郊は無料訪問対応。">
+<meta property="og:title" content="中小企業のAI導入支援 | 篠崎友寿">
+<meta property="og:description" content="実際に自分の店でAIを導入した現役飲食店経営者が、御社のAI活用を0から伴走支援します。試して終わりにしないAI導入。">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --cream:#FFFFFF;
-    --cream-deep:#F6F5F2;
-    --ink:#2B2724;
-    --ink-soft:#5C564E;
-    --terracotta:#C1531B;
-    --terracotta-deep:#9A4015;
-    --mustard:#D9A441;
-    --olive:#6B7A56;
-    --border:rgba(43,39,36,0.14);
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:auto;}
-  @media (prefers-reduced-motion: no-preference){ html{scroll-behavior:smooth;} }
-  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Noto Sans JP',sans-serif;line-height:1.8;-webkit-font-smoothing:antialiased;}
-  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
-  h1,h2,h3{font-family:'Zen Maru Gothic',sans-serif;font-weight:500;margin:0;}
-  a{color:inherit;text-decoration:none;}
-  a:focus-visible, button:focus-visible{outline:2px solid var(--terracotta-deep);outline-offset:3px;border-radius:4px;}
-  .eyebrow{display:block;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--terracotta-deep);letter-spacing:0.02em;margin-bottom:12px;}
-  .btn{display:inline-block;padding:14px 28px;border-radius:8px;font-weight:500;font-size:15px;}
-  @media (prefers-reduced-motion: no-preference){ .btn{transition:transform .15s ease;} .btn:hover{transform:translateY(-1px);} }
-  .btn-primary{background:var(--terracotta-deep);color:#fff;}
-  .btn-secondary{background:transparent;color:var(--ink);border:1.5px solid var(--ink);}
-  .tag{font-size:12px;background:var(--cream-deep);border:1px solid var(--border);border-radius:20px;padding:4px 14px;color:var(--ink-soft);}
-  nav{position:sticky;top:0;z-index:10;background:rgba(247,241,232,0.92);border-bottom:1px solid var(--border);}
-  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:60px;}
-  .nav-name{font-family:'Zen Maru Gothic',sans-serif;font-weight:500;font-size:15px;}
-  .nav-links{display:flex;gap:20px;font-size:13px;color:var(--ink-soft);}
-  .nav-links a:hover{color:var(--terracotta-deep);}
-  section{padding:80px 0;}
-  section.deep{background:var(--cream-deep);}
-  .hero{padding-top:64px;text-align:center;background-image:linear-gradient(rgba(247,241,232,0.82),rgba(247,241,232,0.82)),url('images/mojiko-station.jpg');background-size:cover;background-position:center top;}
-  .avatar{width:160px;height:160px;border-radius:50%;margin:0 auto 28px;background:var(--cream-deep);border:3px solid var(--border);box-shadow:0 4px 20px rgba(43,39,36,0.12);}
-  .hero h1{font-size:clamp(26px,4.5vw,38px);line-height:1.45;margin-bottom:16px;}
-  .hero p.sub{max-width:480px;margin:0 auto 20px;color:var(--ink-soft);font-size:15px;}
-  .tags{display:flex;justify-content:center;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
-  .cta-caption{font-size:12px;color:var(--ink-soft);margin-top:10px;}
-  .visit-badge{display:inline-block;margin-top:14px;padding:8px 18px;background:#FFF3E0;border:1.5px solid var(--terracotta);border-radius:30px;font-size:13px;color:var(--ink);}
-  .trust-note{text-align:center;font-size:14px;color:var(--ink-soft);margin:0;}
-  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px;}
-  .trust-item{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;box-shadow:0 1px 3px rgba(43,39,36,0.06);}
-  .trust-item strong{display:block;font-size:13px;margin-bottom:4px;}
-  .trust-item span{font-size:11px;color:var(--ink-soft);}
-  .section-head h2{font-size:24px;margin-bottom:8px;}
-  .section-head p{color:var(--ink-soft);font-size:14px;margin:0;}
-  .pillar-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:32px;}
-  .card{background:#fff;border-radius:16px;padding:28px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(43,39,36,0.06);}
-  .card.featured{border:2px solid var(--terracotta);}
-  .card h3{font-size:17px;margin-bottom:6px;}
-  .price-line{margin:0 0 12px;}
-  .price{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:500;color:var(--terracotta-deep);}
-  .price-note{font-size:11px;color:var(--ink-soft);margin-left:6px;}
-  .card p.desc{font-size:13px;color:var(--ink-soft);margin-bottom:16px;}
-  .card ul{list-style:none;padding:0;margin:0 0 20px;font-size:13px;color:var(--ink-soft);}
-  .card li{margin-bottom:6px;padding-left:16px;position:relative;}
-  .card li::before{content:"・";position:absolute;left:0;}
-  .card .btn{width:100%;text-align:center;}
-  .sub-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:32px;}
-  .sub-card{background:#fff;border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 1px 3px rgba(43,39,36,0.06);}
-  .sub-photo{height:140px;background:var(--cream-deep);border-bottom:1px solid var(--border);width:100%;object-fit:cover;display:block;}
-  .sub-body{padding:18px;}
-  .sub-body h3{font-size:15px;margin-bottom:4px;}
-  .sub-body p{font-size:13px;color:var(--ink-soft);margin:0 0 10px;}
-  .sub-body .link{font-size:13px;color:var(--olive);font-weight:500;}
-  .story{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:start;}
-  .story-photo{height:200px;border-radius:16px;background:var(--cream-deep);border:1px solid var(--border);width:100%;object-fit:cover;object-position:center 60%;display:block;}
-  .story h2{font-size:22px;margin-bottom:16px;}
-  .story p{font-size:14px;color:var(--ink-soft);margin-bottom:14px;}
-  .closing{text-align:center;background:var(--ink);color:var(--cream);border-radius:24px;padding:56px 32px;}
-  .closing h2{color:var(--cream);font-size:24px;margin-bottom:14px;}
-  .closing p{color:#D8D2C8;font-size:14px;margin-bottom:28px;}
-  .closing .btn-primary{background:var(--mustard);color:var(--ink);}
-  footer{padding:32px 0;}
-  footer .wrap{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--ink-soft);}
-  @media (max-width:720px){
-    .trust-grid{grid-template-columns:repeat(2,1fr);}
-    .pillar-grid,.sub-grid{grid-template-columns:1fr;}
-    .story{grid-template-columns:1fr;}
-    .nav-links{display:none;}
-    section{padding:56px 0;}
-  }
+:root {
+  --cream: #FFFFFF;
+  --cream-deep: #F6F5F2;
+  --ink: #2B2724;
+  --ink-soft: #5C564E;
+  --terracotta: #C1531B;
+  --terracotta-deep: #9A4015;
+  --mustard: #D9A441;
+  --olive: #6B7A56;
+  --border: rgba(43,39,36,0.14);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  min-width: 360px;
+  overflow-x: hidden;
+}
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+h1, h2, h3 { font-family: 'Zen Maru Gothic', sans-serif; font-weight: 500; margin: 0; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--terracotta-deep); outline-offset: 3px; border-radius: 4px; }
+.eyebrow { display: block; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--terracotta-deep); letter-spacing: 0.06em; margin-bottom: 12px; }
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn { transition: transform .15s ease, opacity .15s ease; }
+  .btn:hover { transform: translateY(-1px); opacity: .9; }
+}
+.btn-primary { background: var(--terracotta-deep); color: #fff; }
+.btn-secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+section { padding: 80px 0; }
+section.deep { background: var(--cream-deep); }
 
+/* ---- Nav ---- */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+nav > .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; gap: 16px; }
+.nav-brand { font-family: 'Zen Maru Gothic', sans-serif; font-weight: 500; font-size: 14px; white-space: nowrap; flex-shrink: 0; }
+.nav-links { display: flex; gap: 20px; font-size: 13px; color: var(--ink-soft); margin: 0; padding: 0; }
+.nav-links a:hover { color: var(--terracotta-deep); }
+.nav-cta {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 16px;
+  background: var(--terracotta-deep);
+  color: #fff;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity .15s;
+}
+.nav-cta:hover { opacity: .9; }
+@media (max-width: 720px) { .nav-links { display: none; } }
 
-  /* typing app image modal */
-  .img-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:100;align-items:center;justify-content:center;padding:16px;}
-  .img-modal-overlay.open{display:flex;}
-  .img-modal-box{background:#111;border-radius:16px;max-width:860px;width:100%;overflow:hidden;position:relative;}
-  .img-modal-box img{width:100%;display:block;}
-  .img-modal-close{position:absolute;top:12px;right:14px;background:rgba(0,0,0,0.6);border:none;color:#fff;font-size:20px;cursor:pointer;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;line-height:1;}
-  .typing-thumb{width:100%;border-radius:10px;border:1px solid var(--border);cursor:pointer;transition:opacity .15s;}
-  .typing-thumb:hover{opacity:0.85;}
+/* ---- Sticky mobile CTA ---- */
+.sticky-cta {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: var(--terracotta-deep);
+  color: #fff;
+  text-align: center;
+  padding: 15px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Noto Sans JP', sans-serif;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.15);
+}
+@media (max-width: 720px) { .sticky-cta { display: block; } }
 
+/* ---- Hero ---- */
+.hero {
+  padding: 64px 0 80px;
+  text-align: center;
+  background-image: linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)), url('images/mojiko-station.jpg');
+  background-size: cover;
+  background-position: center top;
+}
+.hero-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 60%;
+  border: 3px solid var(--border);
+  margin: 0 auto 24px;
+  display: block;
+  box-shadow: 0 4px 20px rgba(43,39,36,0.12);
+}
+.hero h1 {
+  font-size: clamp(24px, 5vw, 40px);
+  line-height: 1.45;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+.hero h1 em { font-style: normal; color: var(--terracotta-deep); }
+.hero-sub {
+  max-width: 520px;
+  margin: 0 auto 28px;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.85;
+}
+.hero-cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.hero-note { font-size: 13px; color: var(--ink-soft); }
 
+/* ---- Trust bar ---- */
+.trust-bar { padding: 40px 0; border-bottom: 1px solid var(--border); }
+.trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.trust-item { text-align: center; padding: 16px 8px; }
+.trust-num { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 500; color: var(--terracotta-deep); display: block; line-height: 1.2; }
+.trust-label { font-size: 11px; color: var(--ink-soft); display: block; margin-top: 6px; line-height: 1.55; }
+@media (max-width: 720px) {
+  .trust-grid { grid-template-columns: repeat(2, 1fr); }
+  .trust-bar { padding: 32px 0; }
+}
 
-  /* AI demo */
-  .demo-box{background:var(--ink);border-radius:20px;padding:40px 32px;}
-  .demo-box .eyebrow{color:var(--mustard);}
-  .demo-box h2{color:#fff;font-size:22px;margin-bottom:8px;}
-  .demo-box .demo-lead{color:#D8D2C8;font-size:14px;margin:0 0 24px;}
-  .demo-textarea{width:100%;padding:14px 16px;border-radius:10px;border:none;font-size:15px;font-family:'Noto Sans JP',sans-serif;line-height:1.7;resize:vertical;min-height:96px;outline:none;box-sizing:border-box;color:var(--ink);}
-  .demo-textarea::placeholder{color:#aaa;}
-  .demo-submit{margin-top:12px;width:100%;padding:14px;background:var(--mustard);color:var(--ink);border:none;border-radius:10px;font-size:15px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;transition:opacity .15s;}
-  .demo-submit:hover{opacity:.85;}
-  .demo-submit:disabled{opacity:.5;cursor:not-allowed;}
-  .demo-result{display:none;margin-top:24px;background:rgba(255,255,255,0.06);border-radius:12px;padding:20px 24px;}
-  .demo-result.visible{display:block;}
-  .demo-result-text{color:#F0EDE8;font-size:14px;line-height:1.9;white-space:pre-wrap;min-height:20px;}
-  .demo-cta{margin-top:20px;text-align:center;}
-  .demo-cta a{display:inline-block;padding:12px 28px;background:var(--terracotta-deep);color:#fff;border-radius:8px;font-size:14px;font-weight:700;}
-  .demo-cta p{color:#D8D2C8;font-size:12px;margin:8px 0 0;}
-  @media(max-width:720px){.demo-box{padding:28px 20px;}}
+/* ---- Story / 選ばれる理由 ---- */
+.story-grid { display: grid; grid-template-columns: 180px 1fr; gap: 36px; align-items: start; margin-top: 32px; }
+.story-img { width: 100%; height: 210px; object-fit: cover; object-position: center 40%; border-radius: 14px; display: block; border: 1px solid var(--border); }
+.story-text h2 { font-size: 22px; margin-bottom: 16px; line-height: 1.5; }
+.story-text p { font-size: 14px; color: var(--ink-soft); margin-bottom: 14px; line-height: 1.85; }
+.story-text strong { color: var(--ink); }
+.story-link { font-size: 14px; color: var(--terracotta-deep); font-weight: 700; }
+.story-link:hover { opacity: .8; }
+@media (max-width: 720px) {
+  .story-grid { grid-template-columns: 1fr; }
+  .story-img { height: 220px; }
+}
 
-  /* case studies */
-  .case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:32px;}
-  .case-card{background:var(--cream-deep);border-radius:16px;padding:24px;border:1px solid var(--border);}
-  .case-industry{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--terracotta-deep);letter-spacing:.06em;margin-bottom:12px;display:block;}
-  .case-card h3{font-size:16px;margin-bottom:16px;line-height:1.5;}
-  .case-images{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;}
-  .case-images img{width:100%;height:180px;object-fit:cover;object-position:top;border-radius:10px;}
-  .case-row{display:grid;grid-template-columns:48px 1fr;gap:8px;margin-bottom:10px;align-items:start;}
-  .case-row:last-child{margin-bottom:0;}
-  .case-label{font-size:11px;font-weight:700;color:var(--ink-soft);padding-top:2px;}
-  .case-text{font-size:13px;color:var(--ink-soft);line-height:1.7;}
-  .case-result{color:var(--ink);font-weight:500;}
-  @media(max-width:720px){.case-grid{grid-template-columns:1fr;}.case-images img{height:150px;}}
+/* ---- Pain points ---- */
+.pain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 28px; }
+.pain-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 22px 22px 20px; }
+.pain-icon { font-size: 18px; color: var(--terracotta); display: block; margin-bottom: 8px; font-style: normal; font-family: sans-serif; }
+.pain-card p { font-size: 14px; color: var(--ink); line-height: 1.75; margin: 0; }
+.pain-card strong { color: var(--terracotta-deep); }
+@media (max-width: 720px) { .pain-grid { grid-template-columns: 1fr; } }
 
-  /* curriculum modal */
-  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:100;align-items:center;justify-content:center;padding:16px;}
-  .modal-overlay.open{display:flex;}
-  .modal-box{background:#fff;border-radius:20px;max-width:680px;width:100%;max-height:90vh;overflow-y:auto;padding:32px 28px;}
-  .modal-close{float:right;background:none;border:none;font-size:22px;cursor:pointer;color:var(--ink-soft);line-height:1;}
-  .modal-box h3{font-family:'Zen Maru Gothic',sans-serif;font-size:20px;margin:0 0 20px;}
-  .block-label{display:inline-block;font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em;padding:3px 10px;border-radius:20px;margin-bottom:10px;}
-  .block-a{background:#FFF3E0;color:#C1531B;}
-  .block-b{background:#E8F5E9;color:#2E7D32;}
-  .block-c{background:#EDE7F6;color:#512DA8;}
-  .lesson-row{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid var(--border);}
-  .lesson-row:last-child{border-bottom:none;}
-  .lesson-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;flex-shrink:0;}
-  .num-a{background:#FFF3E0;color:#C1531B;}
-  .num-b{background:#E8F5E9;color:#2E7D32;}
-  .num-c{background:#EDE7F6;color:#512DA8;}
-  .lesson-info strong{display:block;font-size:14px;margin-bottom:2px;}
-  .lesson-info span{font-size:12px;color:var(--ink-soft);}
-  .block-section{margin-bottom:24px;}
-  @media(max-width:720px){.modal-box{padding:24px 16px;}}
+/* ---- Before/After ---- */
+.change-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 32px; }
+.change-card { border-radius: 16px; overflow: hidden; border: 1px solid var(--border); background: #fff; }
+.change-industry { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--terracotta-deep); letter-spacing: .05em; }
+.change-head { background: var(--cream-deep); padding: 20px; border-bottom: 1px solid var(--border); }
+.change-head h3 { font-size: 15px; margin-top: 8px; line-height: 1.55; }
+.change-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.change-row { display: grid; grid-template-columns: 52px 1fr; gap: 8px; align-items: start; }
+.change-lbl { font-size: 11px; font-weight: 700; color: var(--ink-soft); padding-top: 2px; }
+.change-txt { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+.change-txt.result { color: var(--ink); font-weight: 500; }
+@media (max-width: 720px) { .change-grid { grid-template-columns: 1fr; } }
+
+/* ---- Services ---- */
+.service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+.service-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(43,39,36,0.06);
+  display: flex;
+  flex-direction: column;
+}
+.service-card.featured { border-color: var(--terracotta); border-width: 2px; }
+.service-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--terracotta-deep); margin-bottom: 8px; display: block; letter-spacing: .04em; }
+.service-card h3 { font-size: 16px; margin-bottom: 10px; line-height: 1.5; }
+.service-price { font-family: 'JetBrains Mono', monospace; font-size: 20px; color: var(--terracotta-deep); font-weight: 500; }
+.service-price-note { font-size: 11px; color: var(--ink-soft); margin-left: 4px; }
+.service-desc { font-size: 13px; color: var(--ink-soft); margin-top: 10px; line-height: 1.75; flex-grow: 1; }
+.service-link { display: inline-block; margin-top: 14px; font-size: 13px; font-weight: 700; color: var(--terracotta-deep); }
+@media (max-width: 720px) { .service-grid { grid-template-columns: 1fr; } }
+
+/* ---- Process steps ---- */
+.steps { margin-top: 32px; }
+.step { display: grid; grid-template-columns: 52px 1fr; gap: 16px; align-items: start; position: relative; padding-bottom: 28px; }
+.step:last-child { padding-bottom: 0; }
+.step-line { position: absolute; left: 25px; top: 52px; bottom: 0; width: 2px; background: var(--border); }
+.step:last-child .step-line { display: none; }
+.step-num {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--cream);
+  border: 2px solid var(--terracotta);
+  color: var(--terracotta-deep);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; position: relative; z-index: 1;
+}
+.step-body { padding-top: 12px; }
+.step-body h3 { font-size: 16px; margin-bottom: 6px; }
+.step-body p { font-size: 13px; color: var(--ink-soft); line-height: 1.75; }
+
+/* ---- AI Demo ---- */
+.demo-box { background: var(--ink); border-radius: 20px; padding: 40px 32px; }
+.demo-box .eyebrow { color: var(--mustard); }
+.demo-box h2 { color: #fff; font-size: 22px; margin-bottom: 8px; }
+.demo-lead { color: #D8D2C8; font-size: 14px; margin: 0 0 24px; }
+.demo-textarea {
+  width: 100%; padding: 14px 16px; border-radius: 10px; border: none;
+  font-size: 15px; font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.7; resize: vertical; min-height: 96px; outline: none;
+  box-sizing: border-box; color: var(--ink);
+}
+.demo-textarea::placeholder { color: #aaa; }
+.demo-submit {
+  margin-top: 12px; width: 100%; padding: 14px;
+  background: var(--mustard); color: var(--ink); border: none;
+  border-radius: 10px; font-size: 15px; font-weight: 700;
+  font-family: 'Noto Sans JP', sans-serif; cursor: pointer;
+  transition: opacity .15s;
+}
+.demo-submit:hover { opacity: .85; }
+.demo-submit:disabled { opacity: .5; cursor: not-allowed; }
+.demo-result { display: none; margin-top: 24px; background: rgba(255,255,255,0.06); border-radius: 12px; padding: 20px 24px; }
+.demo-result.visible { display: block; }
+.demo-result-text { color: #F0EDE8; font-size: 14px; line-height: 1.9; white-space: pre-wrap; min-height: 20px; }
+.demo-cta { margin-top: 20px; text-align: center; }
+.demo-cta a { display: inline-block; padding: 12px 28px; background: var(--terracotta-deep); color: #fff; border-radius: 8px; font-size: 14px; font-weight: 700; }
+.demo-cta p { color: #D8D2C8; font-size: 12px; margin: 8px 0 0; }
+@media (max-width: 720px) { .demo-box { padding: 28px 20px; } }
+
+/* ---- FAQ ---- */
+.faq-list { margin-top: 32px; display: flex; flex-direction: column; gap: 10px; }
+.faq-item { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: #fff; }
+.faq-q {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 18px 20px; cursor: pointer;
+  font-size: 15px; font-weight: 500;
+  background: #fff; border: none; width: 100%; text-align: left;
+  color: var(--ink); font-family: 'Noto Sans JP', sans-serif; line-height: 1.5;
+}
+.faq-q-tag { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--terracotta-deep); flex-shrink: 0; padding-top: 1px; }
+.faq-q-text { flex-grow: 1; }
+.faq-q-arrow { margin-left: auto; font-size: 18px; color: var(--ink-soft); flex-shrink: 0; transition: transform .2s; padding-top: 1px; }
+.faq-item.open .faq-q-arrow { transform: rotate(45deg); }
+.faq-a { display: none; padding: 0 20px 18px 44px; font-size: 14px; color: var(--ink-soft); line-height: 1.85; }
+.faq-item.open .faq-a { display: block; }
+
+/* ---- Contact form ---- */
+.contact-section { background: var(--ink); padding: 80px 0; }
+.contact-section .eyebrow { color: var(--mustard); }
+.contact-section h2 { color: var(--cream); font-size: clamp(22px, 4vw, 28px); margin-bottom: 12px; line-height: 1.45; }
+.contact-lead { color: #D8D2C8; font-size: 14px; margin: 0 0 36px; line-height: 1.85; }
+.form-inner {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 36px 32px;
+}
+.form-row { margin-bottom: 20px; }
+.form-row label { display: block; font-size: 13px; color: #C8C2BC; margin-bottom: 6px; }
+.form-req { color: var(--mustard); margin-left: 3px; font-size: 12px; }
+.form-ctrl {
+  width: 100%; padding: 12px 14px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08); color: var(--cream);
+  font-family: 'Noto Sans JP', sans-serif; font-size: 15px;
+  box-sizing: border-box; -webkit-appearance: none; appearance: none;
+}
+.form-ctrl::placeholder { color: rgba(255,255,255,0.3); }
+.form-ctrl:focus { outline: none; border-color: var(--mustard); background: rgba(255,255,255,0.12); }
+select.form-ctrl {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8C2BC' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
+}
+select.form-ctrl option { background: #2B2724; color: #fff; }
+textarea.form-ctrl { resize: vertical; min-height: 100px; line-height: 1.7; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-submit {
+  width: 100%; padding: 16px;
+  background: var(--terracotta-deep); color: #fff; border: none;
+  border-radius: 10px; font-size: 16px; font-weight: 700;
+  cursor: pointer; margin-top: 8px;
+  font-family: 'Noto Sans JP', sans-serif; transition: opacity .15s;
+}
+.form-submit:hover { opacity: .9; }
+.form-submit:disabled { opacity: .5; cursor: not-allowed; }
+.form-note { font-size: 12px; color: rgba(255,255,255,0.38); margin-top: 12px; text-align: center; }
+.form-status { margin-top: 16px; padding: 14px 16px; border-radius: 8px; font-size: 14px; text-align: center; display: none; }
+.form-status.success { background: rgba(107,122,86,0.3); color: #B8D4A0; display: block; }
+.form-status.error { background: rgba(193,83,27,0.3); color: #F4A880; display: block; }
+@media (max-width: 720px) {
+  .form-inner { padding: 24px 20px; }
+  .form-grid { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* ---- Section head ---- */
+.section-head h2 { font-size: 24px; margin-bottom: 8px; line-height: 1.45; }
+.section-head p { color: var(--ink-soft); font-size: 14px; margin: 0; }
+
+/* ---- Footer ---- */
+footer { padding: 40px 0; border-top: 1px solid var(--border); }
+.footer-inner { display: flex; flex-direction: column; gap: 16px; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; }
+.footer-brand { font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 500; }
+.footer-sub { font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
+.footer-links { display: flex; gap: 16px; font-size: 12px; color: var(--ink-soft); flex-wrap: wrap; }
+.footer-links a:hover { color: var(--terracotta-deep); }
+.footer-biz { font-size: 12px; color: var(--ink-soft); border-top: 1px solid var(--border); padding-top: 16px; }
+.footer-copy { font-size: 11px; color: var(--ink-soft); }
+@media (max-width: 720px) {
+  section { padding: 56px 0; }
+  .section-head h2 { font-size: 21px; }
+  .contact-section { padding: 56px 0 72px; }
+  footer { padding-bottom: 80px; }
+}
 </style>
 </head>
 <body>
 
+<!-- Sticky mobile CTA -->
+<a class="sticky-cta" href="#contact" onclick="gtag('event','sticky_cta_click')">無料相談を申し込む →</a>
+
+<!-- Nav -->
 <nav>
   <div class="wrap">
-    <span class="nav-name">株式会社 LAM COMPANY</span>
+    <a href="/" class="nav-brand">株式会社 LAM COMPANY</a>
     <div class="nav-links">
-      <a href="#about">事業紹介</a>
-      <a href="#ai-support">AI導入支援</a>
-      <a href="#app-dev">アプリ開発</a>
-      <a href="#school">教室</a>
-      <a href="/ai-training">研修</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScGCPXFnvGvPFMRtUJCivhD1e5wfwi0oGgQVHsBl9iMexZ8YQ/viewform" target="_blank" rel="noopener">お問い合わせ</a>
+      <a href="#services">支援内容</a>
+      <a href="#why">選ばれる理由</a>
+      <a href="#flow">導入の流れ</a>
+      <a href="#faq">FAQ</a>
     </div>
+    <a href="#contact" class="nav-cta" onclick="gtag('event','nav_cta_click')">無料相談</a>
   </div>
 </nav>
 
-<section class="hero" id="about">
+<!-- 1. Hero -->
+<section class="hero" id="hero">
   <div class="wrap">
-    <img src="images/profile.jpg" alt="篠崎友寿" class="avatar" style="object-fit:cover;object-position:center 60%;">
-    <h1>AIは現代の文房具。<br>日々の定型業務を自動化</h1>
-    <p class="sub">SNS投稿・日報・議事録・提案書——繰り返しの作業ほど、AIで自動化できます。実際の経営現場での実践を元に、御社の課題に合わせて設計します。</p>
-    <div class="tags">
-      <span class="tag">BONGO経営</span>
-      <span class="tag">AI教室講師</span>
-      <span class="tag">AI導入支援</span>
+    <img src="images/profile.jpg" alt="篠崎友寿" class="hero-avatar">
+    <h1>中小企業のAI導入を、<br><em>「試して終わり」にしない。</em></h1>
+    <p class="hero-sub">現役のイタリアン経営者が、実際に自分の店で試して成果を出したAI活用を、御社の現場に合わせて設計・伴走します。</p>
+    <div class="hero-cta-wrap">
+      <a href="#contact" class="btn btn-primary" onclick="gtag('event','hero_cta_click')">まず無料相談してみる</a>
+      <p class="hero-note">📍 北九州近郊は無料で訪問 ／ 全国オンライン対応</p>
     </div>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScGCPXFnvGvPFMRtUJCivhD1e5wfwi0oGgQVHsBl9iMexZ8YQ/viewform" target="_blank" rel="noopener" class="btn btn-primary" onclick="gtag('event', 'cta_click', {event_category: 'CTA', event_label: 'hero_consult'})">AI導入の無料相談はこちら</a>
-    <p class="visit-badge">📍 北九州近郊は<strong>無料で訪問相談</strong></p>
-
   </div>
 </section>
 
-<section class="deep">
+<!-- 2. Trust bar -->
+<section class="trust-bar">
   <div class="wrap">
     <div class="trust-grid">
-      <div class="trust-item"><strong>中小機構認定</strong><span>中小企業アドバイザー</span></div>
-      <div class="trust-item"><strong>自社開発SaaS</strong><span>genba-note等を運営</span></div>
-      <div class="trust-item"><strong>YouTube</strong><span>登録者約25,000人</span></div>
-      <div class="trust-item"><strong>SNS自動化</strong><span>自店BONGOで実証済み</span></div>
+      <div class="trust-item">
+        <span class="trust-num">約25,000</span>
+        <span class="trust-label">YouTubeチャンネル<br>登録者数</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-num" style="font-size:15px;line-height:1.7;">中小機構認定</span>
+        <span class="trust-label">中小企業<br>アドバイザー</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-num" style="font-size:15px;line-height:1.7;">本番運用中</span>
+        <span class="trust-label">自店BONGOで<br>SNS自動化を実証</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-num" style="font-size:15px;line-height:1.7;">SaaS運営</span>
+        <span class="trust-label">genba-note等<br>自社開発・公開中</span>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="deep">
+<!-- 3. Story / 選ばれる理由 -->
+<section class="deep" id="why">
+  <div class="wrap">
+    <span class="eyebrow"># 選ばれる理由</span>
+    <div class="story-grid">
+      <img src="images/expo.jpg" alt="篠崎友寿" class="story-img">
+      <div class="story-text">
+        <h2>なぜ、イタリアンの料理人が<br>AI導入を支援しているのか</h2>
+        <p>愛媛出身・大学中退・飲食の失敗と再起——遠回りの多い人生でした。「このままではいけない」と一念発起してITを学び、国家資格を取得。自店BONGOでAIを導入し、週1回の投稿が毎日に、SNS作業が週3時間から30分以下になりました。</p>
+        <p>コンサルタントではなく、<strong>現役の経営者</strong>として実際に使っているから話せることがあります。テンプレの提案ではなく、現場に根ざした伴走支援が私のスタイルです。</p>
+        <p>YouTubeでAI・ITを発信し約25,000人が視聴。IT国家資格保持者として中小企業のAI活用を現場目線で支援しています。</p>
+        <a href="story.html" class="story-link">私のストーリーを読む →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. よくある悩み -->
+<section id="pain">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow"># 相談事例</span>
-      <h2>よくある相談と取り組み例</h2>
-      <p>業種や規模を問わず、現場の課題に合わせて対応しています。</p>
+      <span class="eyebrow"># よくある悩み</span>
+      <h2>こんな状況で止まっていませんか？</h2>
+      <p>多くの中小企業がAI導入の入口で同じ壁にぶつかっています。</p>
     </div>
-    <div class="case-grid">
-
-      <div class="case-card">
-        <span class="case-industry">飲食店 ／ 自店BONGO実証済み</span>
-        <h3>SNS発信が続かない。<br>投稿に時間がかかりすぎる。</h3>
-        <div class="case-images">
-          <img src="images/bongo-photo.png" alt="料理写真を撮影するシーン">
-          <img src="images/bongo-app-ui.png" alt="SNS投稿自動生成アプリのUI">
-        </div>
-        <div class="case-row">
-          <span class="case-label">課題</span>
-          <span class="case-text">毎日投稿したいが、文章を考える時間がなく週1回も続かない状態だった</span>
-        </div>
-        <div class="case-row">
-          <span class="case-label">取り組み</span>
-          <span class="case-text">料理写真を撮るだけで、Instagram・Googleマップ・TikTokの投稿文をAIが自動生成する仕組みを構築</span>
-        </div>
-        <div class="case-row">
-          <span class="case-label">変化</span>
-          <span class="case-text case-result">投稿頻度が週1→ほぼ毎日に。SNSにかかる時間が週3時間→30分以下へ</span>
-        </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <span class="pain-icon">✗</span>
+        <p>研修を受けたり、ChatGPTを試したりしたが、<strong>日常業務に定着しない</strong></p>
       </div>
-
-      <div class="case-card">
-        <span class="case-industry">建設・工務店 ／ genba-note実績</span>
-        <h3>紙の日報を手入力している。<br>現場の情報共有が遅い。</h3>
-        <div class="case-images">
-          <img src="images/genbanote-home.jpg" alt="現場ノートのホーム画面">
-          <img src="images/genbanote-report.jpg" alt="現場ノートの日報画面">
-        </div>
-        <div class="case-row">
-          <span class="case-label">課題</span>
-          <span class="case-text">現場日報を紙に書いて事務所に持ち帰り、夜に手入力する作業が毎日発生していた</span>
-        </div>
-        <div class="case-row">
-          <span class="case-label">取り組み</span>
-          <span class="case-text">スマホで写真と音声メモを残すだけで日報が自動生成・即時共有できるアプリを導入</span>
-        </div>
-        <div class="case-row">
-          <span class="case-label">変化</span>
-          <span class="case-text case-result">日報作成が1件30分→5分以下に。ペーパーレス化で情報共有がリアルタイムになった</span>
-        </div>
+      <div class="pain-card">
+        <span class="pain-icon">✗</span>
+        <p>「AI活用」と言われても、<strong>自社のどの業務に使えるかイメージが湧かない</strong></p>
       </div>
-
+      <div class="pain-card">
+        <span class="pain-icon">✗</span>
+        <p>社員に使わせたいが、<strong>何をどう教えればいいか分からない</strong></p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">✗</span>
+        <p>ツールを導入したが<strong>担当者一人で終わり、組織全体に広がらない</strong></p>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- 5. 導入後の変化 -->
+<section class="deep" id="change">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"># 導入後の変化</span>
+      <h2>支援後、こう変わりました</h2>
+      <p>いずれも実際の支援・自社実験の事例です。</p>
+    </div>
+    <div class="change-grid">
+      <div class="change-card">
+        <div class="change-head">
+          <span class="change-industry">飲食店 ／ 自店BONGO実証済み</span>
+          <h3>SNS投稿に時間がかかりすぎて、<br>続けられない</h3>
+        </div>
+        <div class="change-body">
+          <div class="change-row">
+            <span class="change-lbl">課題</span>
+            <span class="change-txt">文章を考える時間がなく、週1回の投稿も続かない状態だった</span>
+          </div>
+          <div class="change-row">
+            <span class="change-lbl">取り組み</span>
+            <span class="change-txt">料理写真を撮るだけでInstagram等への投稿文をAIが自動生成する仕組みを構築</span>
+          </div>
+          <div class="change-row">
+            <span class="change-lbl">結果</span>
+            <span class="change-txt result">週1回→ほぼ毎日投稿。SNSにかかる時間が週3時間→30分以下へ</span>
+          </div>
+        </div>
+      </div>
+      <div class="change-card">
+        <div class="change-head">
+          <span class="change-industry">建設・工務店 ／ genba-note実績</span>
+          <h3>紙の日報を手入力している。<br>現場の情報共有が遅い</h3>
+        </div>
+        <div class="change-body">
+          <div class="change-row">
+            <span class="change-lbl">課題</span>
+            <span class="change-txt">現場日報を紙に書いて事務所に持ち帰り、夜に手入力する作業が毎日発生</span>
+          </div>
+          <div class="change-row">
+            <span class="change-lbl">取り組み</span>
+            <span class="change-txt">スマホで写真と音声を残すだけで日報が自動生成・即時共有できるアプリを導入</span>
+          </div>
+          <div class="change-row">
+            <span class="change-lbl">結果</span>
+            <span class="change-txt result">日報作成が1件30分→5分以下に。ペーパーレス化でリアルタイム情報共有を実現</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- 6. 支援内容 -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"># 支援内容</span>
+      <h2>AI導入支援は、3つの形で提供しています</h2>
+      <p>御社の課題と規模に合わせて、単体でも組み合わせてもご依頼いただけます。</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card featured">
+        <span class="service-num">01 ／ 伴走支援</span>
+        <h3>完全オーダーメイド<br>AI導入伴走支援</h3>
+        <div style="margin:12px 0;">
+          <span class="service-price">90万円〜</span>
+          <span class="service-price-note">（税別・3ヶ月）</span>
+        </div>
+        <p class="service-desc">テンプレ提案ではなく、御社の課題に直結する計画を実行まで一緒に進めます。社内最大3名のAI人材育成、月次ミーティング。北九州近郊は無料訪問対応。</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">02 ／ アプリ開発</span>
+        <h3>業務課題解決<br>アプリ開発</h3>
+        <div style="margin:12px 0;">
+          <span class="service-price" style="color:var(--ink-soft);">50万円〜</span>
+          <span class="service-price-note">（税別）</span>
+        </div>
+        <p class="service-desc">御社の業務課題を解決する専用アプリを、要件整理から構築までオーダーメイドで開発。genba-note等の自社開発実績あり。伴走支援との同時依頼は+30万円〜。</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">03 ／ 社員研修</span>
+        <h3>生成AI活用<br>社員研修</h3>
+        <div style="margin:12px 0;">
+          <span class="service-price" style="color:var(--ink-soft);">15万円〜</span>
+          <span class="service-price-note">（税別・1名）</span>
+        </div>
+        <p class="service-desc">12時間の実践演習で「明日から使えるAI活用」まで伴走。全国対応・助成金活用相談にも対応。</p>
+        <a href="/ai-training" class="service-link">研修の詳細はこちら →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-<section>
+<!-- 7. 進め方 -->
+<section class="deep" id="flow">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"># 導入の流れ</span>
+      <h2>まず相談から。最短1週間で動き始めます</h2>
+      <p>最初のステップは無料の30分相談。押し売りは一切ありません。</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-line"></div>
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <h3>無料相談（オンライン30分）</h3>
+          <p>現在の課題・業務内容・AIへの理解度をお聞きします。北九州近郊は対面でも対応。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line"></div>
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <h3>課題整理・支援計画の提案</h3>
+          <p>相談内容をもとに、御社に最適な支援の形と費用感をご提案します。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line"></div>
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <h3>実行・月次ミーティングで伴走</h3>
+          <p>計画を実行しながら、月1回以上のミーティングで進捗確認・改善を繰り返します。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <h3>定着・自走できる状態へ</h3>
+          <p>AIを「試すだけ」で終わらせず、社内に根付かせることが最終ゴールです。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. AI体験デモ -->
+<section id="demo">
   <div class="wrap">
     <div class="demo-box">
       <span class="eyebrow"># AI体験デモ</span>
       <h2>あなたの課題を入れてみてください</h2>
       <p class="demo-lead">AIを使えばどこまで解決できるか、その場で回答します。</p>
-      <textarea class="demo-textarea" id="demoInput" placeholder="例：毎日のSNS投稿に時間がかかって続かない&#10;例：現場の日報を紙で管理していて共有が遅い&#10;例：見積書や提案書の作成に追われている" maxlength="400"></textarea>
-      <button class="demo-submit" id="demoBtn" onclick="gtag('event', 'demo_submit', {event_category: 'Demo', event_label: 'ai_demo'}); runDemo()">AIに聞いてみる</button>
+      <textarea class="demo-textarea" id="demoInput"
+        placeholder="例：毎日のSNS投稿に時間がかかって続かない&#10;例：現場の日報を紙で管理していて共有が遅い&#10;例：見積書や提案書の作成に追われている"
+        maxlength="400"></textarea>
+      <button class="demo-submit" id="demoBtn" onclick="demoStart()">AIに聞いてみる</button>
       <div class="demo-result" id="demoResult">
         <div class="demo-result-text" id="demoText"></div>
         <div class="demo-cta" id="demoCta" style="display:none;">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLScGCPXFnvGvPFMRtUJCivhD1e5wfwi0oGgQVHsBl9iMexZ8YQ/viewform" target="_blank" rel="noopener">この課題、一緒に解決しましょう →</a>
-          <p>北九州近郊は無料で訪問。まずは気軽にご相談ください。</p>
+          <a href="#contact" onclick="gtag('event','final_cta_click',{from:'demo'})">この課題、一緒に解決しましょう →</a>
+          <p>まずは無料相談で話してみてください。</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- 9. FAQ -->
+<section class="deep" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"># FAQ</span>
+      <h2>よくある質問</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-tag">Q</span>
+          <span class="faq-q-text">北九州以外でも対応できますか？</span>
+          <span class="faq-q-arrow">+</span>
+        </button>
+        <div class="faq-a">はい、全国対応しています。基本的にはオンライン（Zoom等）での支援となります。北九州近郊（北九州市・福岡市・下関市など）は訪問相談も無料で対応しています。</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-tag">Q</span>
+          <span class="faq-q-text">AIやITに詳しくない経営者でも大丈夫ですか？</span>
+          <span class="faq-q-arrow">+</span>
+        </button>
+        <div class="faq-a">はい、もちろんです。むしろ「ChatGPTを触ったことがない」「AIがよく分からない」という方こそ、最も変化を実感しやすい状態です。専門用語を使わず、現場目線でお話しします。</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-tag">Q</span>
+          <span class="faq-q-text">支援期間はどのくらいかかりますか？</span>
+          <span class="faq-q-arrow">+</span>
+        </button>
+        <div class="faq-a">伴走支援は3ヶ月を標準としています。その後も継続して支援することも可能です。社員研修は1日〜複数回の集中型もご相談いただけます。</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-tag">Q</span>
+          <span class="faq-q-text">助成金は使えますか？</span>
+          <span class="faq-q-arrow">+</span>
+        </button>
+        <div class="faq-a">IT導入補助金や人材開発支援助成金が活用できる場合があります。申請の流れや対象要件のご相談にも対応しています。なお、助成金の採択を保証するものではありません。</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q-tag">Q</span>
+          <span class="faq-q-text">まず何から始めればいいか分かりません</span>
+          <span class="faq-q-arrow">+</span>
+        </button>
+        <div class="faq-a">まずは無料相談からです。現状の業務・課題・AIへの理解度をお聞きした上で、「何から始めるか」を一緒に整理します。いきなり費用が発生することはありません。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. 最終CTA + Form -->
+<section class="contact-section" id="contact">
+  <div class="wrap">
+    <span class="eyebrow"># 無料相談</span>
+    <h2>まず、30分だけ<br>話してみませんか。</h2>
+    <p class="contact-lead">現状の課題をお聞きして、御社に合う進め方をご提案します。<br>費用は一切かかりません。</p>
+    <div class="form-inner">
+      <!-- TODO: Formspreeダッシュボードで送信先メールアドレスを確認してください -->
+      <form id="contactForm" action="https://formspree.io/f/mdarqkkn" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="【LAM COMPANY】AI導入支援 無料相談のお申し込み">
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="f-company">会社名<span class="form-req">*</span></label>
+            <input id="f-company" name="会社名" type="text" class="form-ctrl" placeholder="株式会社〇〇" required>
+          </div>
+          <div class="form-row">
+            <label for="f-name">お名前<span class="form-req">*</span></label>
+            <input id="f-name" name="お名前" type="text" class="form-ctrl" placeholder="篠崎 友寿" required>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="f-email">メールアドレス<span class="form-req">*</span></label>
+            <input id="f-email" name="メールアドレス" type="email" class="form-ctrl" placeholder="you@example.com" required>
+          </div>
+          <div class="form-row">
+            <label for="f-tel">電話番号</label>
+            <input id="f-tel" name="電話番号" type="tel" class="form-ctrl" placeholder="093-000-0000">
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="f-position">あなたの立場<span class="form-req">*</span></label>
+            <select id="f-position" name="立場" class="form-ctrl" required>
+              <option value="">選択してください</option>
+              <option value="経営者・代表">経営者・代表</option>
+              <option value="役員・取締役">役員・取締役</option>
+              <option value="人事・研修担当">人事・研修担当</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="f-ai-status">現在のAI活用状況<span class="form-req">*</span></label>
+            <select id="f-ai-status" name="AI活用状況" class="form-ctrl" required>
+              <option value="">選択してください</option>
+              <option value="AIについて何も知らない">AIについて何も知らない</option>
+              <option value="ChatGPTを触ったことがある">ChatGPTを触ったことがある</option>
+              <option value="一部業務で活用中">一部業務で活用中</option>
+              <option value="本格導入を検討中">本格導入を検討中</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="f-message">相談したいこと<span class="form-req">*</span></label>
+          <textarea id="f-message" name="相談内容" class="form-ctrl"
+            placeholder="例：社員10名のサービス業です。日常業務でAIを使わせたいが、何から始めればいいか分からない。" required></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="formSubmit" onclick="gtag('event','final_cta_click',{from:'form'})">無料相談を申し込む</button>
+        <p class="form-note">送信後、2営業日以内にご連絡します。</p>
+        <div class="form-status" id="formStatus" role="alert" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">株式会社 LAM COMPANY</div>
+          <div class="footer-sub">代表取締役 篠崎友寿 ／ 北九州市門司区</div>
+        </div>
+        <div class="footer-links">
+          <a href="/ai-training">AI研修</a>
+          <a href="/classroom">プログラミング教室</a>
+          <a href="story.html">ストーリー</a>
+          <a href="privacy.html">プライバシーポリシー</a>
+        </div>
+      </div>
+      <div class="footer-biz">
+        <strong>BONGO</strong>（自社飲食店）　門司区栄町2−22　定休：月・火　☎ 093-342-7205
+      </div>
+      <div class="footer-copy">© LAM COMPANY</div>
+    </div>
+  </div>
+</footer>
+
 <script>
+/* ---- FAQ accordion ---- */
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => {
+    el.classList.remove('open');
+    el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+  });
+  if (!wasOpen) {
+    item.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+}
+
+/* ---- AI demo ---- */
+let demoTracked = false;
+function demoStart() {
+  const input = document.getElementById('demoInput').value.trim();
+  if (!input || input.length < 5) return;
+  if (!demoTracked) { demoTracked = true; gtag('event', 'demo_start'); }
+  runDemo();
+}
+
 async function runDemo() {
   const input = document.getElementById('demoInput').value.trim();
-  if (!input || input.length < 5) { alert('課題を入力してください（5文字以上）'); return; }
   const btn = document.getElementById('demoBtn');
   const result = document.getElementById('demoResult');
   const textEl = document.getElementById('demoText');
@@ -306,14 +797,10 @@ async function runDemo() {
     });
     const data = await res.json();
     if (!res.ok || data.error) throw new Error(data.error || 'error');
-    // マークダウンを簡易HTMLに変換してタイピング風に表示
     function mdToHtml(text) {
       const safe = text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#x27;');
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
       return safe
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
         .replace(/^- (.+)$/gm, '・$1')
@@ -324,12 +811,10 @@ async function runDemo() {
     let buf = '';
     for (let i = 0; i < chars.length; i++) {
       buf += chars[i];
-      if (i % 3 === 0) {
-        textEl.innerHTML = mdToHtml(buf);
-        await new Promise(r => setTimeout(r, 10));
-      }
+      if (i % 3 === 0) { textEl.innerHTML = mdToHtml(buf); await new Promise(r => setTimeout(r, 10)); }
     }
     textEl.innerHTML = mdToHtml(buf);
+    gtag('event', 'demo_complete');
     cta.style.display = 'block';
   } catch(e) {
     textEl.textContent = '申し訳ありません、エラーが発生しました。時間をおいてお試しください。';
@@ -338,244 +823,64 @@ async function runDemo() {
   btn.disabled = false;
   btn.textContent = 'もう一度試す';
 }
+
+/* ---- Contact form ---- */
+const _form = document.getElementById('contactForm');
+let _formStarted = false;
+_form.addEventListener('input', () => {
+  if (!_formStarted) { _formStarted = true; gtag('event', 'form_start'); }
+}, { once: true });
+
+_form.addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = document.getElementById('formSubmit');
+  const status = document.getElementById('formStatus');
+
+  const required = _form.querySelectorAll('[required]');
+  for (const el of required) {
+    if (!el.value.trim()) {
+      el.focus();
+      status.className = 'form-status error';
+      status.textContent = '必須項目をすべて入力・選択してください。';
+      return;
+    }
+  }
+
+  btn.disabled = true;
+  btn.textContent = '送信中...';
+  status.className = 'form-status';
+  status.textContent = '';
+  try {
+    const res = await fetch(_form.action, {
+      method: 'POST',
+      body: new FormData(_form),
+      headers: { 'Accept': 'application/json' },
+    });
+    if (res.ok) {
+      gtag('event', 'form_submit');
+      status.className = 'form-status success';
+      status.textContent = 'ありがとうございます！2営業日以内にご連絡します。';
+      _form.reset();
+      _formStarted = false;
+    } else {
+      throw new Error('送信失敗');
+    }
+  } catch(e) {
+    status.className = 'form-status error';
+    status.textContent = '送信に失敗しました。時間をおいて再度お試しいただくか、直接メールでご連絡ください。';
+  }
+  btn.disabled = false;
+  btn.textContent = '無料相談を申し込む';
+});
+
+/* ---- Scroll depth tracking ---- */
+let _s50 = false, _s75 = false;
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY + window.innerHeight) / document.body.scrollHeight;
+  if (!_s50 && pct >= 0.5) { _s50 = true; gtag('event', 'scroll_50'); }
+  if (!_s75 && pct >= 0.75) { _s75 = true; gtag('event', 'scroll_75'); }
+}, { passive: true });
 </script>
-
-
-
-<section id="ai-support">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow"># 企業様へのAI導入支援</span>
-      <h2>AI導入支援は、3つの形でご提供しています</h2>
-      <p>御社の課題と規模感に合わせて、伴走支援・アプリ開発・社員研修、それぞれ単体でも、組み合わせてもご依頼いただけます。</p>
-    </div>
-    <div class="pillar-grid">
-      <div class="card featured">
-        <h3>完全オーダーメイドAI導入支援</h3>
-        <p class="price-line"><span class="price">90万円〜</span><span class="price-note">（税別・3ヶ月）</span></p>
-        <p class="desc">テンプレ通りの提案ではなく、御社の課題解決に直結する計画を、実行まで一緒に進めます。</p>
-        <ul>
-          <li>3ヶ月の伴走で、計画から実施までワンストップ</li>
-          <li>社内に最大3名、AIを使える人材を育てます</li>
-          <li>北九州近郊は無料で訪問、遠方はオンラインで対応</li>
-          <li>Claude Codeなどを使った業務自動化も含みます</li>
-        </ul>
-      </div>
-      <div class="card" id="app-dev">
-        <h3>アプリ開発</h3>
-        <p class="price-line"><span class="price" style="color:var(--ink-soft);">50万円〜</span><span class="price-note">（税別）</span></p>
-        <p class="desc">御社の業務課題を解決する専用アプリを、要件整理から構築までオーダーメイドで作ります。</p>
-        <ul>
-          <li>genba-note（建設業向け管理SaaS）等の自社開発実績</li>
-          <li>予約管理・在庫管理など、業務に合わせて個別構築</li>
-          <li>AI導入支援と同時にご依頼の場合は+30万円〜</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card" style="margin-top:20px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;">
-      <div>
-        <h3 style="margin-bottom:8px;">生成AI活用・業務自動化スキル実践研修</h3>
-        <p class="price-line" style="margin-bottom:10px;"><span class="price" style="color:var(--ink-soft);">15万円〜</span><span class="price-note">（税別・1名あたり）</span></p>
-        <p class="desc">ChatGPTを触っただけで終わらせない。現場を知る講師が、12時間の演習で「明日から使えるAI活用」まで伴走します。全国対応・助成金活用相談にも対応。</p>
-      </div>
-      <a href="/ai-training" class="btn btn-secondary" style="white-space:nowrap;flex-shrink:0;">研修の詳細を見る →</a>
-    </div>
-  </div>
-</section>
-<section id="portfolio">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow"># 開発実績</span>
-      <h2>アプリ開発プロダクト</h2>
-      <p>自分で企画・設計・開発まで一貫して手がけたアプリです。</p>
-    </div>
-    <div class="pillar-grid" style="margin-top:32px;">
-      <div class="card featured">
-        <h3>現場ノート（genba-note）</h3>
-        <p class="desc">建設・工務店向けの現場ノート管理SaaS。日報・写真・進捗をスマホ1台で記録・共有できます。LINE登録で30日間無料で試せます。</p>
-        <ul>
-          <li>現場写真・日報をクラウドで一元管理</li>
-          <li>紙・LINEのやり取りをゼロに</li>
-          <li>サブスクリプションで公開中</li>
-        </ul>
-        <a href="https://lin.ee/tvsSa4y" class="btn btn-primary" target="_blank" rel="noopener">30日無料で試す（LINE登録）</a>
-      </div>
-      <div class="card">
-        <h3>TripType（トリップタイピング）</h3>
-        <p class="desc">学校の学習内容×地域の特性×ゲーム性を組み合わせた自社開発タイピングアプリ。日本地図や地理・理科など教科横断の題材で、楽しみながらタイピング力が上がる設計。教室の生徒向けに開発・運用しています。</p>
-        <ul>
-          <li>学校教科（地理・理科・社会）に沿ったコンテンツ</li>
-          <li>北九州など地域の特性を活かした問題設定</li>
-          <li>ゲーム感覚で継続できるUI設計</li>
-        </ul>
-        <button class="btn btn-secondary" onclick="document.getElementById('typingModal').classList.add('open')" style="width:100%;text-align:center;cursor:pointer;margin-top:8px;">サイトのスクリーンショットを見る</button>
-      </div>
-      <div class="card">
-        <h3>BONGO SNS自動投稿アプリ <span style="font-size:11px;color:var(--olive);font-family:'JetBrains Mono',monospace;">自社実験中</span></h3>
-        <p class="desc">料理・飲み物・店内の写真を1枚アップするだけで、Googleマップ・Instagram・TikTok・YouTube・ECサイトへの投稿を自動生成・配信するアプリ。自店BONGOで実際に試しながら精度を上げています。</p>
-        <ul>
-          <li>写真1枚 → 5媒体同時投稿</li>
-          <li>各プラットフォームに最適化したテキストを自動生成</li>
-          <li>Claude APIを活用した文章生成</li>
-        </ul>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScGCPXFnvGvPFMRtUJCivhD1e5wfwi0oGgQVHsBl9iMexZ8YQ/viewform" target="_blank" rel="noopener" class="btn btn-secondary">このアプリについて相談する</a>
-      </div>
-      <div class="card">
-        <h3>門司港AI教室 カリキュラム</h3>
-        <p class="desc">小学4年生〜中学生向け、全14回のAI・プログラミング教育カリキュラム。「体感させる」をコンセプトに、実際にAIを動かしながら学ぶ授業設計をWebアプリとして自社開発しました。</p>
-        <ul>
-          <li>3ブロック・全14回構成（小4〜中3対応）</li>
-          <li>バッジ収集で達成感を演出（北九州ゆるキャラモチーフ）</li>
-          <li>先生用ダッシュボードで全生徒の進捗を一覧管理</li>
-          <li>ログイン不要・クラスコード方式で運用</li>
-        </ul>
-        <button class="btn btn-secondary" onclick="document.getElementById('curriculumModal').classList.add('open')" style="width:100%;text-align:center;cursor:pointer;">全14回のカリキュラムを見る</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="deep">
-  <div class="wrap">
-    <span class="eyebrow"># その他の事業</span>
-    <div class="sub-grid">
-      <div class="sub-card">
-        <img src="images/bongo.jpg" class="sub-photo" alt="門司港イタリアンBONGO">
-        <div class="sub-body">
-          <h3>門司港のイタリアン「BONGO」</h3>
-          <p>僕がオーナーシェフを務める門司港のイタリアンレストランです。</p>
-          <p style="font-size:13px;color:var(--ink-soft);margin:6px 0 0;">📍 門司区栄町2−22<br>定休日：月曜日・火曜日<br>☎︎ 093-342-7205</p>
-        </div>
-      </div>
-      <div class="sub-card" id="school">
-        <img src="images/school.jpg" class="sub-photo" alt="門司港プログラミング教室">
-        <div class="sub-body">
-          <h3>門司港プログラミング教室</h3>
-          <p>小学生向けに、AIとプログラミングを教えています。&ldquo;体感させる&rdquo;ことを大事にした、北九州の子どもたちのための教室です。</p>
-          <a href="/classroom" class="link">教室の詳細はこちら →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <span class="eyebrow"># ストーリー</span>
-    <div class="story">
-      <img src="images/expo.jpg" class="story-photo" alt="大阪万博にて">
-      <div>
-        <h2>なぜ料理人がAIをやっているのか</h2>
-        <p>愛媛の田舎育ち、野球少年、大学中退、飲食店の失敗と再起——遠回りばかりの人生でした。でも、自分の失敗を素直に認めた日を境に、少しずつ変わっていきました。</p>
-        <p>ITを学び、国家資格を取り、AIを自分の店で使い始めた。その経験を、他の経営者にも、子どもたちにも伝えたいと思っています。</p>
-        <a href="story.html" class="btn btn-secondary" style="display:inline-block;margin-top:16px;">全部読む →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="wrap">
-    <div class="closing">
-      <span class="eyebrow" style="color:var(--mustard);"># お問い合わせ</span>
-      <h2>AIを&ldquo;現代の文房具&rdquo;にしませんか</h2>
-      <p>まずは無料相談から。北九州近郊は無料で訪問、遠方はオンラインで対応します。</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScGCPXFnvGvPFMRtUJCivhD1e5wfwi0oGgQVHsBl9iMexZ8YQ/viewform" target="_blank" rel="noopener" class="btn btn-primary" onclick="gtag('event', 'cta_click', {event_category: 'CTA', event_label: 'footer_consult'})">無料相談を申し込む</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <span>LAM COMPANY ／ 門司港, 北九州</span>
-    <a href="privacy.html" style="color:var(--ink-soft);">プライバシーポリシー</a>
-  </div>
-</footer>
-
-
-<div class="img-modal-overlay" id="typingModal" onclick="if(event.target===this)this.classList.remove('open')">
-  <div class="img-modal-box">
-    <button class="img-modal-close" onclick="document.getElementById('typingModal').classList.remove('open')" aria-label="閉じる">✕</button>
-    <img src="images/triptyping.png" alt="TripType トップページ" />
-  </div>
-</div>
-
-<div class="modal-overlay" id="curriculumModal" onclick="if(event.target===this)this.classList.remove('open')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="document.getElementById('curriculumModal').classList.remove('open')" aria-label="閉じる">✕</button>
-    <h3>全14回カリキュラム</h3>
-
-    <div class="block-section">
-      <span class="block-label block-a">ブロック① AIと仲良くなる｜第1〜4回</span>
-      <div class="lesson-row">
-        <div class="lesson-num num-a">1</div>
-        <div class="lesson-info"><strong>AIってなんだろう？Claudeと話してみよう</strong><span>AIの基本を知り、実際にclaude.aiで会話する体験</span></div>
-      </div>
-      <div class="lesson-row">
-        <div class="lesson-num num-a">2</div>
-        <div class="lesson-info"><strong>聞き方を変えると変わる</strong><span>プロンプトの工夫でAIの答えがどう変わるかを体感する</span></div>
-      </div>
-      <div class="lesson-row">
-        <div class="lesson-num num-a">3</div>
-        <div class="lesson-info"><strong>役割を与えてみよう</strong><span>AIにキャラクターや立場を与えて会話が変わる面白さを学ぶ</span></div>
-      </div>
-      <div class="lesson-row">
-        <div class="lesson-num num-a">4</div>
-        <div class="lesson-info"><strong>AIに教えてあげよう</strong><span>情報を与えるとAIの回答がどう変わるか。コンテキストの概念を体験</span></div>
-      </div>
-    </div>
-
-    <div class="block-section">
-      <span class="block-label block-b">ブロック② AIと一緒に作る｜第5〜10回</span>
-      <div class="lesson-row">
-        <div class="lesson-num num-b">5</div>
-        <div class="lesson-info"><strong>詩・クイズを作ろう</strong><span>AIと一緒に詩やクイズを制作。アウトプットの面白さを体験</span></div>
-      </div>
-      <div class="lesson-row">
-        <div class="lesson-num num-b">6</div>
-        <div class="lesson-info"><strong>地域を調べよう</strong><span>門司港・北九州の地域課題をAIと一緒に調査・整理する</span></div>
-      </div>
-      <div class="lesson-row">
-        <div class="lesson-num num-b">7</div>
-        <div class="lesson-info"><strong>AIと発表資料を作る</strong><span>構成→文章→デザイン案まで、AIを使って発表スライドを完成させる</span></div>
-      </div>
-      <div class="lesson-row">
-        <div class="lesson-num num-b">8</div>
-        <div class="lesson-info"><strong>自由制作①</strong><span>テーマを自分で決めて、AIと一緒に作品を制作する</span></div>
-      </div>
-      <div class="lesson-row">
-        <div class="lesson-num num-b">9</div>
-        <div class="lesson-info"><strong>自由制作②</strong><span>前回の続き。完成に向けてAIとの対話を深める</span></div>
-      </div>
-      <div class="lesson-row">
-        <div class="lesson-num num-b">10</div>
-        <div class="lesson-info"><strong>作品発表・ふりかえり</strong><span>作品を発表し合い、AIをどう使ったかを言語化する</span></div>
-      </div>
-    </div>
-
-    <div class="block-section">
-      <span class="block-label block-c">ブロック③ AIを問い直す｜第11〜14回</span>
-      <div class="lesson-row">
-        <div class="lesson-num num-c">11</div>
-        <div class="lesson-info"><strong>AIはウソをつく？</strong><span>ハルシネーションとは何か。AIの回答を自分で検証する力を育てる</span></div>
-      </div>
-      <div class="lesson-row">
-        <div class="lesson-num num-c">12</div>
-        <div class="lesson-info"><strong>著作権とAIの倫理</strong><span>AI生成物の著作権・なりすまし・偏りなど、社会的な問いを考える</span></div>
-      </div>
-      <div class="lesson-row">
-        <div class="lesson-num num-c">13</div>
-        <div class="lesson-info"><strong>地域課題をAIで解決しよう</strong><span>北九州市の課題をテーマに、AIを使った解決策を考えて提案する</span></div>
-      </div>
-      <div class="lesson-row">
-        <div class="lesson-num num-c">14</div>
-        <div class="lesson-info"><strong>チャレンジ発表会</strong><span>全員が発表。中学生はここからさらに深掘りのチャレンジミッションへ</span></div>
-      </div>
-    </div>
-
-    <p style="font-size:12px;color:var(--ink-soft);text-align:center;margin-top:8px;">体験会のお申し込みは<a href="https://docs.google.com/forms/d/e/1FAIpQLSfI1vUJ19Tj8unyx5ehgovvx6UQZ-5hnM5P4kx8xSk7_e57xQ/viewform" target="_blank" rel="noopener" style="color:var(--terracotta-deep);font-weight:700;">こちらから →</a></p>
-  </div>
-</div>
 
 </body>
 </html>
