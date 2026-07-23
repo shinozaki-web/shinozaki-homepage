@@ -7,6 +7,7 @@ const SITE_URL = 'https://www.moji-lamcompany.com';
 const FEED_URL = process.env.INSIGHTS_FEED_URL || '';
 const FEED_TOKEN = process.env.INSIGHTS_FEED_TOKEN || '';
 const TODAY = new Date().toISOString().slice(0, 10);
+const EXCLUDED_SLUGS = new Set(['社員がaiを使い続けるには']);
 
 const MANUAL_ARTICLES = [
   {
@@ -78,7 +79,7 @@ function mergeArticles(manualArticles, feedArticles) {
   });
   feedArticles.forEach((article) => {
     const normalized = normalizeArticle(article);
-    if (!normalized.slug) return;
+    if (!normalized.slug || EXCLUDED_SLUGS.has(normalized.slug)) return;
     if (!bySlug.has(normalized.slug)) {
       bySlug.set(normalized.slug, normalized);
     }
