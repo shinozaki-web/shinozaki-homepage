@@ -43,6 +43,12 @@ async function mirrorPublicSite() {
   }
 
   for (const dir of dirs) {
-    await fs.cp(path.join(ROOT, dir), path.join(PUBLIC_DIR, dir), { recursive: true });
+    const src = path.join(ROOT, dir);
+    try {
+      await fs.access(src);
+      await fs.cp(src, path.join(PUBLIC_DIR, dir), { recursive: true });
+    } catch {
+      // directory not present (untracked), skip
+    }
   }
 }
