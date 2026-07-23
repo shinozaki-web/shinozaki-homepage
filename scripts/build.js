@@ -33,7 +33,13 @@ async function mirrorPublicSite() {
   const dirs = ['images', 'insights', 'story'];
 
   for (const file of files) {
-    await fs.cp(path.join(ROOT, file), path.join(PUBLIC_DIR, file), { recursive: true });
+    const src = path.join(ROOT, file);
+    try {
+      await fs.access(src);
+      await fs.cp(src, path.join(PUBLIC_DIR, file), { recursive: true });
+    } catch {
+      // file not present (untracked), skip
+    }
   }
 
   for (const dir of dirs) {

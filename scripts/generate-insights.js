@@ -97,7 +97,7 @@ function normalizeArticle(article) {
     publishedAt: String(article.publishedAt || article.datePublished || TODAY),
     keywords: Array.isArray(article.keywords) ? article.keywords : [],
     ctaLabel: String(article.ctaLabel || '相談する'),
-    ctaHref: String(article.ctaHref || '/#contact'),
+    ctaHref: safeCta(article.ctaHref),
     sections: Array.isArray(article.sections) ? article.sections : [],
   };
 }
@@ -241,7 +241,7 @@ async function writeSitemap(articles) {
   ];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((entry) => `  <url><loc>${entry.loc}</loc><lastmod>${entry.lastmod}</lastmod></url>`).join('\n')}
+${urls.map((entry) => `  <url><loc>${escapeXml(entry.loc)}</loc><lastmod>${escapeXml(entry.lastmod)}</lastmod></url>`).join('\n')}
 </urlset>
 `;
   await writeFile(path.join(ROOT, 'sitemap.xml'), sitemap);
@@ -262,6 +262,25 @@ function slugify(input) {
     .replace(/[^\w\u3040-\u30ff\u4e00-\u9faf]+/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '') || `article-${Date.now()}`;
+}
+
+function safeCta(value) {
+  if (!value) return '/#contact';
+  try {
+    const u = new URL(value, 'https://example.com');
+    return ['https:', 'http:', 'mailto:'].includes(u.protocol) ? String(value) : '/#contact';
+  } catch {
+    return String(value).startsWith('/') ? String(value) : '/#contact';
+  }
+}
+
+function escapeXml(value) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
 }
 
 function escapeHtml(value) {
