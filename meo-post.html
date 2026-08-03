@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MEOポスト｜店舗向けGoogleマップ投稿作成・投稿支援｜LAM COMPANY</title>
+<meta name="description" content="MEOポストは、店舗事業者が写真と簡単な情報からGoogleマップ向けの投稿文を作成し、内容を確認して自店舗へ投稿するためのサービスです。株式会社 LAM COMPANYが開発・運営しています。">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://www.moji-lamcompany.com/meo-post">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MEOポスト｜店舗向けGoogleマップ投稿作成・投稿支援">
+<meta property="og:description" content="写真とひとことから投稿案を作成。店舗事業者本人が確認し、自分で管理するGoogle Business Profileへの投稿を支援します。">
+<meta property="og:url" content="https://www.moji-lamcompany.com/meo-post">
+<meta property="og:image" content="https://www.moji-lamcompany.com/images/bongo-photo.webp">
+<meta property="og:site_name" content="株式会社 LAM COMPANY">
+<meta name="theme-color" content="#172028">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "MEOポスト",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "url": "https://meopost.vercel.app/",
+  "description": "店舗事業者がGoogleマップ向けの投稿案を作成し、本人の確認と操作で自店舗への投稿を行うためのWebサービスです。",
+  "author": {
+    "@type": "Organization",
+    "name": "株式会社 LAM COMPANY",
+    "url": "https://www.moji-lamcompany.com/"
+  }
+}
+</script>
+<style>
+:root{--ink:#172028;--text:#20262b;--muted:#5d6469;--ivory:#f5f2ea;--white:#fff;--orange:#b6532d;--orange-dark:#93401f;--green:#506858;--border:#d9d6cf;--soft:#f1f2f1}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;min-width:320px;background:var(--white);color:var(--text);font-family:'Noto Sans JP',sans-serif;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3{margin:0;color:var(--ink);font-family:'Zen Kaku Gothic New',sans-serif;line-height:1.35;letter-spacing:-.03em;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+ul{margin:0;padding:0;list-style:none}
+.wrap{width:min(100% - 40px,1120px);margin-inline:auto}
+.skip{position:absolute;top:-80px;left:16px;z-index:30;padding:8px 14px;background:var(--ink);color:#fff}
+.skip:focus{top:8px}
+.site-header{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--border);background:rgba(255,255,255,.96);backdrop-filter:blur(8px)}
+.header-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{color:var(--ink);text-decoration:none;line-height:1.25}
+.brand strong{display:block;font-size:15px}
+.brand small{display:block;color:var(--muted);font-size:10px}
+.header-nav{display:flex;align-items:center;gap:22px;font-size:13px}
+.header-nav a{text-decoration:none}
+.header-cta,.button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding:10px 20px;border-radius:6px;background:var(--orange-dark);color:#fff;font-weight:700;text-decoration:none}
+.button-secondary{border:1px solid var(--border);background:#fff;color:var(--ink)}
+.eyebrow{display:block;margin-bottom:16px;color:var(--orange-dark);font:700 11px 'JetBrains Mono',monospace;letter-spacing:.14em}
+.hero{padding:84px 0 92px;background:var(--ivory)}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:64px;align-items:center}
+.hero h1{font-size:clamp(42px,6vw,68px)}
+.hero-lead{max-width:680px;margin-top:26px;color:var(--muted);font-size:18px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.product-panel{padding:30px;border:1px solid var(--border);border-radius:12px;background:#fff;box-shadow:0 20px 50px rgba(23,32,40,.08)}
+.panel-top{display:flex;align-items:center;justify-content:space-between;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.panel-logo{font-family:'Zen Kaku Gothic New',sans-serif;font-size:21px;font-weight:900;color:var(--green)}
+.panel-status{padding:5px 9px;border-radius:99px;background:#edf3ee;color:#385044;font-size:11px;font-weight:700}
+.panel-photo{height:174px;margin-top:20px;border-radius:8px;background:linear-gradient(135deg,#d7d1c2 0 42%,#9c755c 42% 64%,#38483f 64%);position:relative;overflow:hidden}
+.panel-photo::after{content:'店舗の写真';position:absolute;right:12px;bottom:10px;padding:4px 8px;border-radius:4px;background:rgba(255,255,255,.88);font-size:11px}
+.panel-lines{display:grid;gap:9px;margin-top:20px}
+.panel-lines i{display:block;height:9px;border-radius:99px;background:#e8e7e3}
+.panel-lines i:nth-child(2){width:88%}.panel-lines i:nth-child(3){width:62%}
+.panel-action{margin-top:22px;padding:12px;border-radius:6px;background:var(--green);color:#fff;text-align:center;font-size:13px;font-weight:700}
+.section{padding:96px 0}
+.section-soft{background:var(--soft)}
+.section-dark{background:var(--ink);color:#fff}
+.section-head{max-width:790px;margin-bottom:48px}
+.section-head h2{font-size:clamp(32px,5vw,52px)}
+.section-head p{margin-top:20px;color:var(--muted);font-size:17px}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{padding:32px;border:1px solid var(--border);border-radius:8px;background:#fff}
+.card-num{display:block;margin-bottom:16px;color:var(--orange-dark);font:700 11px 'JetBrains Mono',monospace;letter-spacing:.12em}
+.card h3{margin-bottom:12px;font-size:23px}
+.card p{color:var(--muted)}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.flow-step{position:relative;padding:26px 20px;border:1px solid rgba(255,255,255,.2);border-radius:8px}
+.flow-step:not(:last-child)::after{content:'→';position:absolute;right:-12px;top:50%;transform:translate(50%,-50%);z-index:2;color:#efad8f;font-weight:700}
+.flow-step span{display:block;margin-bottom:12px;color:#efad8f;font:700 11px 'JetBrains Mono',monospace}
+.flow-step strong{display:block;color:#fff;font-size:16px;line-height:1.55}
+.section-dark .section-head h2{color:#fff}
+.section-dark .section-head p{color:#c9ced1}
+.policy-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.policy-card{padding:34px;border:1px solid var(--border);border-radius:8px}
+.policy-card h3{margin-bottom:18px;font-size:24px}
+.check-list{display:grid;gap:12px}
+.check-list li{position:relative;padding-left:26px;color:var(--muted)}
+.check-list li::before{content:'✓';position:absolute;left:0;color:var(--orange-dark);font-weight:700}
+.notice{margin-top:28px;padding:22px 24px;border-left:4px solid var(--orange);background:var(--ivory);color:var(--muted);font-size:14px}
+.company{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:start}
+.company h2{font-size:clamp(32px,5vw,50px)}
+.company-list{border-top:1px solid var(--border)}
+.company-row{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--border)}
+.company-row dt{font-weight:700;color:var(--ink)}
+.company-row dd{margin:0;color:var(--muted)}
+.company-row a{color:var(--orange-dark)}
+.final-cta{padding:88px 0;background:var(--ivory);text-align:center}
+.final-cta h2{font-size:clamp(34px,5vw,54px)}
+.final-cta p{max-width:700px;margin:20px auto 0;color:var(--muted)}
+.final-cta .button{margin-top:30px}
+footer{padding:38px 0;background:var(--ink);color:#c9ced1}
+.footer-inner{display:flex;justify-content:space-between;gap:30px;font-size:12px}
+.footer-links{display:flex;flex-wrap:wrap;gap:18px}
+.footer-links a{color:#fff;text-decoration:none}
+a:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+@media(max-width:900px){.flow{grid-template-columns:1fr}.flow-step:not(:last-child)::after{content:'↓';right:auto;left:50%;top:auto;bottom:-16px;transform:translate(-50%,50%)}}
+@media(max-width:760px){.wrap{width:min(100% - 32px,1120px)}.header-nav>a:not(.header-cta){display:none}.hero{padding:54px 0 66px}.hero-grid,.company{grid-template-columns:1fr;gap:38px}.hero h1{font-size:clamp(38px,11vw,48px)}.hero-lead{font-size:16px}.hero-actions{flex-direction:column}.hero-actions .button{width:100%}.product-panel{padding:22px}.section{padding:68px 0}.section-head{margin-bottom:34px}.section-head h2{font-size:34px}.section-head p{font-size:16px}.feature-grid,.policy-grid{grid-template-columns:1fr}.card,.policy-card{padding:26px 22px}.company-row{grid-template-columns:1fr;gap:4px}.footer-inner{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<script defer src="/analytics.js" data-measurement-id="G-B4BQKPZNR9"></script>
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="株式会社 LAM COMPANY トップへ">
+      <strong>株式会社 LAM COMPANY</strong>
+      <small>中小企業のAI導入・定着支援</small>
+    </a>
+    <nav class="header-nav" aria-label="メインナビゲーション">
+      <a href="#features">機能</a>
+      <a href="#google-data">Google連携</a>
+      <a href="#company">運営会社</a>
+      <a class="header-cta" href="https://meopost.vercel.app/" target="_blank" rel="noopener">MEOポストを開く</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">STORE CONTENT ASSISTANT</span>
+        <h1>写真とひとことから、<br>店舗の投稿を<br>続けやすく。</h1>
+        <p class="hero-lead">MEOポストは、店舗事業者がGoogleマップ向けの投稿案を作成し、内容を確認して、自分で管理する店舗へ投稿するためのWebサービスです。</p>
+        <div class="hero-actions">
+          <a class="button" href="https://meopost.vercel.app/" target="_blank" rel="noopener">MEOポストを開く</a>
+          <a class="button button-secondary" href="#google-data">Google連携について確認する</a>
+        </div>
+      </div>
+      <div class="product-panel" aria-label="MEOポストの操作イメージ">
+        <div class="panel-top"><span class="panel-logo">MEOポスト</span><span class="panel-status">投稿前に本人が確認</span></div>
+        <div class="panel-photo"></div>
+        <div class="panel-lines" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="panel-action">内容を確認して投稿する</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">WHAT IT DOES</span>
+        <h2>投稿を丸投げするのではなく、<br>店舗の発信を支援します。</h2>
+        <p>AIが作成するのは投稿の下書きです。公開する内容と投稿先は、店舗事業者本人が確認して決定します。</p>
+      </div>
+      <div class="feature-grid">
+        <article class="card"><span class="card-num">01 ／ CREATE</span><h3>投稿案を作成</h3><p>店舗の写真と簡単な情報から、Googleマップ向けの投稿文案を作成します。</p></article>
+        <article class="card"><span class="card-num">02 ／ REVIEW</span><h3>本人が確認・編集</h3><p>生成された内容をそのまま自動投稿せず、利用者が確認し、必要に応じて編集します。</p></article>
+        <article class="card"><span class="card-num">03 ／ PUBLISH</span><h3>自店舗へ投稿</h3><p>利用者自身が管理するGoogle Business Profileの店舗を選び、明示的な操作で投稿します。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">USER-CONTROLLED FLOW</span>
+        <h2>Googleアカウントの連携から投稿まで。</h2>
+        <p>利用者のGoogleアカウントのパスワードを当社が取得することはありません。Google OAuthの同意画面を通じて、利用者本人が権限を付与します。</p>
+      </div>
+      <div class="flow" aria-label="Google連携から投稿までの流れ">
+        <div class="flow-step"><span>STEP 1</span><strong>MEOポストへログイン</strong></div>
+        <div class="flow-step"><span>STEP 2</span><strong>Google OAuthで本人が許可</strong></div>
+        <div class="flow-step"><span>STEP 3</span><strong>管理する店舗を選択</strong></div>
+        <div class="flow-step"><span>STEP 4</span><strong>投稿内容を確認・編集</strong></div>
+        <div class="flow-step"><span>STEP 5</span><strong>本人の操作で投稿</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft" id="google-data">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">GOOGLE USER DATA</span>
+        <h2>Googleデータの利用目的と管理。</h2>
+        <p>MEOポストは、機能提供に必要な範囲に限定してGoogle Business Profileの権限を利用します。</p>
+      </div>
+      <div class="policy-grid">
+        <article class="policy-card">
+          <h3>利用する目的</h3>
+          <ul class="check-list">
+            <li>許可した利用者が管理するアカウントと店舗の取得</li>
+            <li>利用者本人による投稿先店舗の選択</li>
+            <li>本人が確認したローカル投稿の公開</li>
+          </ul>
+        </article>
+        <article class="policy-card">
+          <h3>行わないこと</h3>
+          <ul class="check-list">
+            <li>利用者が管理していない店舗へのアクセス</li>
+            <li>本人の確認や操作を伴わない無断投稿</li>
+            <li>Googleユーザーデータの販売や広告目的での提供</li>
+          </ul>
+        </article>
+      </div>
+      <p class="notice">Googleとの連携には <code>https://www.googleapis.com/auth/business.manage</code> を使用します。認証情報は安全性に配慮して保存し、利用者はGoogleアカウントの「サードパーティとの接続」からいつでもアクセス権を取り消せます。直接投稿機能は、Google Business Profile APIの利用承認後に提供します。</p>
+    </div>
+  </section>
+
+  <section class="section" id="company">
+    <div class="wrap company">
+      <div>
+        <span class="eyebrow">OPERATOR</span>
+        <h2>開発・運営は<br>株式会社 LAM COMPANYです。</h2>
+      </div>
+      <dl class="company-list">
+        <div class="company-row"><dt>サービス名</dt><dd>MEOポスト</dd></div>
+        <div class="company-row"><dt>運営会社</dt><dd>株式会社 LAM COMPANY</dd></div>
+        <div class="company-row"><dt>代表取締役</dt><dd>篠崎友寿</dd></div>
+        <div class="company-row"><dt>法人番号</dt><dd>1290801027501</dd></div>
+        <div class="company-row"><dt>所在地</dt><dd>〒801-0863 福岡県北九州市門司区栄町2-22 きただや第一ビル1F BONGO内</dd></div>
+        <div class="company-row"><dt>電話番号</dt><dd><a href="tel:0933427321">093-342-7321</a></dd></div>
+        <div class="company-row"><dt>事業用メール</dt><dd><a href="mailto:shinozaki@meolabo.com">shinozaki@meolabo.com</a></dd></div>
+        <div class="company-row"><dt>メールドメイン</dt><dd><a href="https://www.meolabo.com/" target="_blank" rel="noopener">meolabo.comは株式会社 LAM COMPANYが運営するMEOポストのドメインです</a></dd></div>
+        <div class="company-row"><dt>サービス規約</dt><dd><a href="https://meopost.vercel.app/terms" target="_blank" rel="noopener">MEOポスト利用規約</a></dd></div>
+        <div class="company-row"><dt>データの取り扱い</dt><dd><a href="https://meopost.vercel.app/privacy" target="_blank" rel="noopener">MEOポスト プライバシーポリシー</a></dd></div>
+        <div class="company-row"><dt>お問い合わせ</dt><dd><a href="/#contact">株式会社 LAM COMPANY お問い合わせフォーム</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="wrap">
+      <span class="eyebrow">MEO POST</span>
+      <h2>店舗の発信を、<br>無理なく続けられる形へ。</h2>
+      <p>写真を起点に投稿案を作り、内容は店舗事業者本人が確認。日々の情報発信にかかる時間を減らします。</p>
+      <a class="button" href="https://meopost.vercel.app/" target="_blank" rel="noopener">MEOポストを開く</a>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap footer-inner">
+    <span>© LAM COMPANY. All rights reserved.</span>
+    <nav class="footer-links" aria-label="フッターナビゲーション">
+      <a href="/">法人トップ</a>
+      <a href="/privacy">会社プライバシーポリシー</a>
+      <a href="https://meopost.vercel.app/terms" target="_blank" rel="noopener">利用規約</a>
+      <a href="https://meopost.vercel.app/privacy" target="_blank" rel="noopener">サービスプライバシーポリシー</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

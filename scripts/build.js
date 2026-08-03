@@ -25,9 +25,11 @@ async function mirrorPublicSite() {
     'ai-training.html',
     'coworking.html',
     'classroom.html',
+    'meo-post.html',
     'privacy.html',
     'robots.txt',
     'sitemap.xml',
+    'analytics.js',
   ];
 
   const dirs = ['images', 'insights', 'story'];

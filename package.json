@@ -2,6 +2,7 @@
   "name": "shinozaki-homepage",
   "private": true,
   "scripts": {
+    "test": "node --test analytics.test.js",
     "build": "node scripts/build.js",
     "vercel-build": "node scripts/build.js"
   }

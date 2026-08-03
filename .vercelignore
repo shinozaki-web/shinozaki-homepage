@@ -1,0 +1,18 @@
+backups/
+*.md
+before-*.png
+after-*.png
+index.before-*.html
+privacy.before-*.html
+
+# WebPへ置き換え済みで、公開ページから参照されない元画像
+images/hero-consulting.jpg
+images/hero-consulting2.jpg
+images/bongo-photo.png
+images/bongo.jpg
+images/genbanote-home.jpg
+images/genbanote-report.jpg
+images/scene-workshop.png
+images/consult-explaining.jpg
+images/consult-filming.jpg
+images/consult-meeting.jpg

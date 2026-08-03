@@ -122,18 +122,17 @@ function renderIndex(articles) {
 <meta property="og:title" content="中小企業のAI導入・業務改善コラム｜LAM COMPANY">
 <meta property="og:description" content="中小企業のAI導入と社内定着を、現場での実践をもとに解説します。">
 <meta property="og:url" content="${SITE_URL}/insights">
-<meta property="og:site_name" content="株式会社LAM COMPANY">
+<meta property="og:site_name" content="株式会社 LAM COMPANY">
 <meta property="og:image" content="${SITE_URL}/images/hero-consulting.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/insights/insights.css">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B4BQKPZNR9"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-B4BQKPZNR9');</script>
+<script defer src="/analytics.js" data-measurement-id="G-B4BQKPZNR9"></script>
 </head>
 <body>
 <a class="skip" href="#main">本文へ移動</a>
-<header class="site-header"><div class="wrap header-inner"><a class="brand" href="/"><strong>株式会社LAM COMPANY</strong><small>中小企業のAI導入・定着支援</small></a><nav class="header-nav" aria-label="メインナビゲーション"><a href="/">法人トップ</a><a class="header-cta" href="/#contact">相談する</a></nav></div></header>
+<header class="site-header"><div class="wrap header-inner"><a class="brand" href="/"><strong>株式会社 LAM COMPANY</strong><small>中小企業のAI導入・定着支援</small></a><nav class="header-nav" aria-label="メインナビゲーション"><a href="/">法人トップ</a><a class="header-cta" href="/#contact">相談する</a></nav></div></header>
 <main id="main">
 <section class="index-hero"><div class="wrap"><span class="eyebrow">INSIGHTS</span><h1>中小企業のAI導入を、<br>現場の言葉で考える。</h1><p>AIを導入して終わりにしないために。社員研修、業務整理、社内ルール、業務効率化について、実際の店舗経営と支援現場で得た知見を紹介します。</p></div></section>
 <section class="article-list"><div class="wrap">
@@ -180,15 +179,14 @@ function renderArticle(article) {
 <meta property="og:title" content="${escapeAttr(article.title)}">
 <meta property="og:description" content="${escapeAttr(article.description || article.lead || '')}">
 <meta property="og:url" content="${SITE_URL}/insights/${article.slug}">
-<meta property="og:site_name" content="株式会社LAM COMPANY">
+<meta property="og:site_name" content="株式会社 LAM COMPANY">
 <meta property="og:image" content="${SITE_URL}/images/hero-consulting.webp">
 <meta property="article:published_time" content="${escapeAttr(published)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/insights/insights.css">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B4BQKPZNR9"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-B4BQKPZNR9');</script>
+<script defer src="/analytics.js" data-measurement-id="G-B4BQKPZNR9"></script>
 <script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -200,12 +198,12 @@ function renderArticle(article) {
     mainEntityOfPage: `${SITE_URL}/insights/${article.slug}`,
     image: `${SITE_URL}/images/hero-consulting.webp`,
     author: { '@type': 'Person', name: '篠崎友寿', url: `${SITE_URL}/story` },
-    publisher: { '@type': 'Organization', name: '株式会社LAM COMPANY', url: `${SITE_URL}/` },
+    publisher: { '@type': 'Organization', name: '株式会社 LAM COMPANY', url: `${SITE_URL}/` },
   })}</script>
 </head>
 <body>
 <a class="skip" href="#article">本文へ移動</a>
-<header class="site-header"><div class="wrap header-inner"><a class="brand" href="/"><strong>株式会社LAM COMPANY</strong><small>中小企業のAI導入・定着支援</small></a><nav class="header-nav" aria-label="メインナビゲーション"><a href="/insights">記事一覧</a><a class="header-cta" href="/#contact" data-article-cta="header">相談する</a></nav></div></header>
+<header class="site-header"><div class="wrap header-inner"><a class="brand" href="/"><strong>株式会社 LAM COMPANY</strong><small>中小企業のAI導入・定着支援</small></a><nav class="header-nav" aria-label="メインナビゲーション"><a href="/insights">記事一覧</a><a class="header-cta" href="/#contact" data-article-cta="header">相談する</a></nav></div></header>
 <main>
 <header class="article-hero"><div class="wrap article-hero-inner"><nav class="breadcrumb" aria-label="パンくずリスト"><a href="/">法人トップ</a> ／ <a href="/insights">記事一覧</a></nav><span class="eyebrow">${escapeHtml(article.eyebrow)}</span><h1>${escapeHtml(article.title)}</h1><p class="article-lead">${escapeHtml(article.lead || article.description || '')}</p><div class="byline"><span>執筆：篠崎友寿</span><time datetime="${escapeAttr(published)}">公開：${escapeHtml(formatDateJa(published))}</time><span>読了目安：8分</span></div></div></header>
 <div class="wrap article-layout"><article class="article-body" id="article">
@@ -214,7 +212,6 @@ ${body}
 </article><nav class="toc" aria-label="記事内の目次"><strong>この記事の内容</strong>${toc}</nav></div>
 </main>
 <footer><div class="wrap footer-inner"><span>© LAM COMPANY. All rights reserved.</span><nav class="footer-links" aria-label="フッターナビゲーション"><a href="/">法人トップ</a><a href="/insights">記事一覧</a><a href="/story">代表者について</a><a href="/privacy">プライバシーポリシー</a></nav></div></footer>
-<script>document.querySelectorAll('[data-article-cta]').forEach(function(link){link.addEventListener('click',function(){if(typeof window.gtag==='function'){gtag('event','insight_cta_click',{cta_location:link.getAttribute('data-article-cta'),article_slug:'${escapeJs(article.slug)}'})}})});</script>
 </body>
 </html>`;
 }
