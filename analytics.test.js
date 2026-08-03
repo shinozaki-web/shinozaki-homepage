@@ -112,6 +112,23 @@ test('CTAクリック1回でcta_clickを1回だけ送信する', () => {
   assert.equal(window.dataLayer.filter((item) => item[1] === 'cta_click').length, 1);
 });
 
+test('旧プロジェクト属性のクリックをproject_clickへ統合する', () => {
+  const { window, listeners } = load();
+  const el = {
+    id: '', href: 'https://www.moji-lamcompany.com/coworking',
+    dataset: { event: 'click_coworking_concept' }, textContent: 'プロジェクトの構想を見る',
+    classList: { contains: () => false },
+    getAttribute: () => null,
+    matches: () => false,
+    closest: (selector) => selector === 'a,button,[data-event],[data-insight-open]' ? el : null,
+    hasAttribute: () => false
+  };
+  listeners.click({ target: el });
+  const events = window.dataLayer.filter((item) => item[1] === 'project_click');
+  assert.equal(events.length, 1);
+  assert.equal(events[0][2].project_id, 'coworking');
+});
+
 test('個人情報になり得るパラメータを除外する', () => {
   const { window } = load();
   window.LamAnalytics.track('form_submit_error', {

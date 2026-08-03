@@ -228,7 +228,7 @@
   };
 
   initGtag();
-  function init() { document.addEventListener('click', onClick); initScrollDepth(); initSections(); initForms(); }
+  function init() { document.addEventListener('click', onClick, true); initScrollDepth(); initSections(); initForms(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })(window, document);
