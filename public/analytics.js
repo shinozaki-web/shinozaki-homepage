@@ -132,6 +132,10 @@
     var location = clickLocation(el);
     var params;
 
+    if (el.dataset.projectId) {
+      track('project_click', { project_id: el.dataset.projectId, click_location: location, destination_url: url });
+      return;
+    }
     if (el.dataset.analyticsSocial) {
       track('social_click', { social_platform: el.dataset.analyticsSocial, account_id: el.dataset.analyticsAccount || '', click_location: location, destination_url: url });
       return;
