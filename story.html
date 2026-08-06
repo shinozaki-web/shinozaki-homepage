@@ -32,6 +32,9 @@
 .social-mini-list{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px;margin-top:32px;color:var(--navy);font-weight:700}.social-mini-list>span{color:var(--muted);font-size:13px}.social-mini-list>a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--orange)}
 
 .insight-trigger{margin-top:18px;min-height:48px;padding:11px 18px;border:1px solid var(--navy);border-radius:6px;background:transparent;color:var(--navy);font:700 14px 'Noto Sans JP',sans-serif;cursor:pointer}.insight-trigger:hover{background:rgba(23,50,74,.06)}.insight-trigger:focus-visible,.insight-dialog-close:focus-visible{outline:3px solid var(--orange);outline-offset:3px}.insight-dialog{width:min(100% - 32px,680px);max-height:min(82vh,760px);padding:0;border:0;border-radius:12px;background:var(--paper);color:var(--ink);box-shadow:0 24px 80px rgba(15,38,57,.28)}.insight-dialog::backdrop{background:rgba(15,38,57,.7)}.insight-dialog-inner{padding:clamp(26px,6vw,48px)}.insight-dialog .eyebrow{margin-bottom:12px}.insight-dialog h2{margin:0 0 24px;color:var(--navy);font-size:clamp(26px,5vw,38px);line-height:1.45}.insight-dialog p{margin:0 0 18px;color:var(--muted);font-size:16px;line-height:1.9}.insight-dialog-close{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-top:8px;padding:8px 20px;border:0;border-radius:6px;background:var(--navy);color:white;font-weight:700;cursor:pointer}
+.marche-card{background:white;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:28px;padding:clamp(28px,5vw,56px)}.marche-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,72px);align-items:start}.marche-card h3{font-size:clamp(28px,4vw,44px);line-height:1.3;color:var(--navy);margin:0 0 24px;letter-spacing:-.025em}.marche-body{color:var(--muted);font-size:17px;line-height:1.9;margin:0 0 16px}.marche-closing{font-family:'Noto Serif JP',serif;font-size:19px;color:var(--navy);margin:clamp(24px,4vw,36px) 0 0;padding-top:clamp(20px,3vw,28px);border-top:1px solid var(--line);line-height:1.75}.marche-media img{width:100%;height:auto;border-radius:8px;display:block}.marche-caption{font-size:12px;color:var(--muted);margin:10px 0 0;text-align:center}
+@media(max-width:850px){.marche-grid{grid-template-columns:1fr}}
+@media(max-width:620px){.marche-card{padding:clamp(20px,5vw,28px)}.marche-card h3{font-size:28px}.marche-body{font-size:15px;line-height:1.85}.marche-closing{font-size:17px;margin:18px 0 0;padding-top:16px}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"篠崎友寿","url":"https://www.moji-lamcompany.com/story","jobTitle":"代表取締役","worksFor":{"@type":"Organization","name":"株式会社 LAM COMPANY","url":"https://www.moji-lamcompany.com/"},"sameAs":["https://www.facebook.com/shinozaki.tomohisa","https://www.instagram.com/mojiko_sakaemachinomirai","https://www.youtube.com/@BONGO-moji"],"knowsAbout":["飲食店経営","地域事業づくり","AI・IT活用","プログラミング教育"]}</script>
 </head>
@@ -43,6 +46,21 @@
 <section class="intro"><div class="wrap"><div class="intro-card"><img class="portrait" src="/images/story/portrait_shinozaki_landscape.webp" alt="BONGOの店内にいる篠崎友寿" width="1400" height="787"><div class="intro-copy"><h2>篠崎友寿</h2><p class="role">門司港で飲食店を営む経営者<br>IT国家資格保有</p></div></div></div></section>
 <section class="section" id="projects"><div class="wrap"><div class="section-head reveal"><span class="eyebrow">CURRENT PROJECTS</span><h2>取り組んでいること</h2></div>
 <article class="featured reveal" data-project="coworking"><div class="featured-grid"><div class="featured-media"><img data-config-image src="/images/story/coworking_space_stock.webp" alt="コワーキングスペースの利用イメージ" width="1920" height="1080"><span class="asset-state">イメージ写真 / replace-later</span></div><div class="featured-copy"><div class="status-list"><span class="status">2027年1月開業予定</span><span class="status">現在準備中</span><span class="status">2026年10月頃クラウドファンディング予定</span></div><span class="project-kicker">コワーキング門司港</span><h3>コワーキング<br>スペース開業</h3><p class="tagline">得意と仕事、子どもの学びをつなぐ場所。</p><p>2027年1月、門司港イタリアンBONGOの2階に、仕事・学び・交流がつながる新しい拠点を開業します。</p><p>地元企業や店舗の仕事を地域の人材につなぐ「MOJIKO WORK BOARD」と、小学生から高校生までが、自分のペースで宿題や自習に取り組める学習区画を設けます。</p><p>子どもが利用する時間帯にはスタッフを配置し、必要なときには質問や相談ができる環境を予定しています。</p><span class="prepared" data-config-link data-event="click_coworking_project">コワーキング計画を詳しく見る</span></div></div></article>
+<article class="marche-card reveal">
+  <div class="marche-grid">
+    <div class="marche-copy">
+      <span class="project-kicker">栄町日曜マルシェ</span>
+      <h3>商店街の日曜日を、<br>もっと楽しく。</h3>
+      <p class="marche-body">日曜日に多くのお店が閉まる栄町銀天街で、各店舗の軒先を活用したマルシェを準備しています。</p>
+      <p class="marche-body">既存のお店に無理な営業をお願いするのではなく、空いている軒先に地域の出店者が集まり、お店・出店者・来場者が自然につながる日曜日をつくる取り組みです。</p>
+    </div>
+    <div class="marche-media">
+      <img src="/images/story/sakaemachi_sunday_marche.webp" alt="栄町銀天街の両側の軒先に出店が並ぶ栄町日曜マルシェの開催イメージ" width="941" height="1672" loading="lazy">
+      <p class="marche-caption">※画像は開催時のイメージです。</p>
+    </div>
+  </div>
+  <p class="marche-closing">商店街の軒先を活かし、地域のお店・出店者・来場者がつながる日曜日をつくっていきます。</p>
+</article>
 <div class="project-grid">
 <article class="project-card reveal" data-project="homeRestaurant"><div class="project-image-wrap"><img data-config-image src="/images/story/home_restaurant_temporary.webp" alt="HOME RESTAURANT by BONGOのイメージ" width="1200" height="900" loading="lazy"><span class="asset-state">temporary / shoot-required</span></div><div class="project-body"><span class="project-kicker">HOME RESTAURANT by BONGO</span><h3>レストランの味をご自宅へ<br>真空冷凍配送事業</h3><p>門司港イタリアンBONGOの料理と商品開発の経験を生かし、レストランの味をご自宅で楽しめる、真空冷凍商品の開発・配送事業を展開しています。</p></div></article>
 <article class="project-card reveal" data-project="programming"><div class="project-image-wrap"><img data-config-image src="/images/story/programming_class_temporary.webp" alt="制作物を前に考えるプログラミング教室の子ども" width="1200" height="900" loading="lazy"><span class="asset-state">replace-later</span></div><div class="project-body"><span class="project-kicker">門司港プログラミング教室</span><h3>小中学生・高校生の<br>AI・プログラミング教育事業</h3><p>Scratchやプログラミング、AIに触れながら、自分で考え、試し、形にする力を育てています。</p></div></article>
