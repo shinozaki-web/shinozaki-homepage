@@ -12,10 +12,10 @@ const EXCLUDED_SLUGS = new Set(['社員がaiを使い続けるには']);
 const MANUAL_ARTICLES = [
   {
     slug: 'how-to-make-ai-stick-after-introduction',
-    title: 'AI導入後に、社員が使い続ける会社にするには',
-    description: '導入して終わりにしないために、業務整理、試す期間、社内ルール、改善の流れをどうつなぐかを整理します。',
+    title: 'AI導入後に社員が使い続ける会社の作り方｜定着設計の7つのポイント',
+    description: 'AIを導入しても使われなくなる3パターンと、社員が使い続ける会社に共通する定着設計を解説。業務への落とし込み・ルール整備・改善サイクルまで具体的に説明します。',
     eyebrow: 'AI ADOPTION',
-    publishedAt: '2026-07-21',
+    publishedAt: '2026-08-11',
   },
   {
     slug: 'ai-automation-examples-for-small-businesses',
@@ -26,24 +26,24 @@ const MANUAL_ARTICLES = [
   },
   {
     slug: 'why-ai-training-doesnt-stick',
-    title: 'AI研修を受けても、社員が使い続けない7つの理由',
-    description: '研修の満足度と社内定着は別です。実務で試す期間、利用ルール、共有方法、改善体制のどこで止まるかを整理します。',
+    title: 'AI研修が定着しない7つの理由と対策｜研修設計・運用の見直しポイント',
+    description: 'AI研修後に社員が使わなくなる7つの理由と定着率を上げる対策を解説。研修設計・業務落とし込み・利用ルール・改善体制のどこに問題があるかを診断します。',
     eyebrow: 'AI TRAINING',
-    publishedAt: '2026-07-20',
+    publishedAt: '2026-08-11',
   },
   {
     slug: 'how-small-businesses-start-ai',
-    title: '中小企業のAI導入は、何から始めるべきか',
-    description: '最初にツールを選ぶ必要はありません。業務整理から小規模実証、社員研修、ルール整備、改善まで、失敗しにくい7つの手順を紹介します。',
+    title: '中小企業のAI導入は何から始めるべきか｜失敗しない7つのステップ',
+    description: 'IT担当者がいない中小企業がAIを導入するための7ステップを解説。業務整理・ツール比較・利用ルール・試用期間の設け方まで、失敗しないための具体的な手順を紹介します。',
     eyebrow: 'AI STRATEGY',
-    publishedAt: '2026-07-20',
+    publishedAt: '2026-08-11',
   },
   {
     slug: 'why-employees-dont-use-chatgpt',
-    title: 'ChatGPTを導入しても、社員が使わない7つの理由',
-    description: 'ツールを用意し、使うように伝えても社内に広がらないのは、社員の意欲だけが原因ではありません。業務、ルール、研修、運用の観点から原因を整理します。',
+    title: 'ChatGPTを導入しても社員が使わない7つの理由と解決策',
+    description: 'ツールを用意し研修もしたのに社内に広がらない——社員の意欲だけが原因ではありません。業務設計・ルール整備・研修方法・運用の4つの観点から原因と解決策を整理します。',
     eyebrow: 'AI ADOPTION',
-    publishedAt: '2026-07-20',
+    publishedAt: '2026-08-11',
   },
 ];
 
