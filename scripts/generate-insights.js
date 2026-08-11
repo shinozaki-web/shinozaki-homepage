@@ -19,10 +19,10 @@ const MANUAL_ARTICLES = [
   },
   {
     slug: 'ai-automation-examples-for-small-businesses',
-    title: '中小企業のAI活用と、業務自動化の具体例',
-    description: 'メール、議事録、社内文書、投稿案、定型業務など、現場で試しやすいAIと自動化の使い方をまとめます。',
+    title: '中小企業のAI活用と業務自動化の具体例｜現場で使える7つの場面',
+    description: 'IT担当者がいない中小企業でも実践できるAI活用の7場面を具体的に解説。メール下書き、議事録整理、SNS投稿、マニュアル作成、業務自動化の始め方と失敗しないコツを紹介します。',
     eyebrow: 'AI USE CASES',
-    publishedAt: '2026-07-21',
+    publishedAt: '2026-08-11',
   },
   {
     slug: 'why-ai-training-doesnt-stick',
