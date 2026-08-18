@@ -74,6 +74,12 @@ a{color:inherit;text-decoration:none}img{max-width:100%}button{-webkit-tap-highl
 .brand-mark{width:31px;height:31px;display:grid;place-items:center;background:var(--navy);border-radius:9px;color:var(--yellow);font-family:'DM Mono',monospace;font-size:13px}
 .nav-back{color:var(--muted);font-size:12px;font-weight:600;display:flex;align-items:center;gap:4px}
 .nav-back::before{content:"←"}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-teacher-btn{font-size:12px;font-weight:700;padding:7px 13px;background:none;border:1.5px solid var(--line);border-radius:8px;color:var(--muted);font-family:'Noto Sans JP',sans-serif;transition:.15s}
+.nav-teacher-btn:hover{border-color:var(--navy);color:var(--navy)}
+.nav-teacher-mode{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--blue)}
+.nav-logout-btn{font-size:11px;padding:5px 10px;background:none;border:1px solid var(--line);border-radius:6px;color:var(--muted);font-family:'Noto Sans JP',sans-serif;transition:.15s;cursor:pointer}
+.nav-logout-btn:hover{border-color:var(--text);color:var(--text)}
 
 /* Hero */
 .gallery-hero{padding:52px 0 44px;background:linear-gradient(135deg,#FFFDF8 0%,#F4F8FF 58%,#EAF3FF 100%);position:relative;overflow:hidden}
@@ -196,14 +202,27 @@ a{color:inherit;text-decoration:none}img{max-width:100%}button{-webkit-tap-highl
 .password-input-row input:focus{border-color:var(--blue)}
 .password-input-row button{padding:11px 18px;background:var(--navy);border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:700;font-family:'Noto Sans JP',sans-serif}
 .password-error{font-size:12px;color:#EF4444;margin-top:8px;display:none}
-.teacher-toggle-btn{margin-top:16px;background:none;border:none;color:var(--muted);font-size:12px;font-family:'Noto Sans JP',sans-serif;cursor:pointer;text-decoration:underline}
-.teacher-login-section{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);text-align:left}
-.teacher-login-section label{font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px}
-.teacher-login-section input{width:100%;padding:9px 12px;border:2px solid var(--line);border-radius:8px;font-size:14px;font-family:'Noto Sans JP',sans-serif;outline:none;transition:border-color .15s;margin-bottom:8px}
-.teacher-login-section input:focus{border-color:var(--blue)}
-.teacher-login-section button{width:100%;padding:10px;background:var(--navy);border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:700;font-family:'Noto Sans JP',sans-serif}
 .btn-delete{padding:13px 22px;background:#FEE2E2;border:1.5px solid #FCA5A5;border-radius:10px;color:#DC2626;font-size:14px;font-weight:700;font-family:'Noto Sans JP',sans-serif;transition:.15s}
 .btn-delete:hover{background:#DC2626;color:#fff}
+
+/* Card delete button (teacher mode) */
+.card-delete-btn{position:absolute;top:8px;right:8px;width:32px;height:32px;background:rgba(220,38,38,.88);border:none;border-radius:50%;color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;z-index:5;transition:.15s;cursor:pointer}
+.card-delete-btn:hover{background:#B91C1C;transform:scale(1.12)}
+
+/* Teacher login modal */
+.tlogin-overlay{position:fixed;inset:0;background:rgba(16,42,67,.6);z-index:400;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.2s}
+.tlogin-overlay.open{opacity:1;pointer-events:auto}
+.tlogin-box{background:#fff;border-radius:20px;width:100%;max-width:360px;padding:28px;position:relative;transform:scale(.96);transition:.2s}
+.tlogin-overlay.open .tlogin-box{transform:scale(1)}
+.tlogin-box h2{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;color:var(--navy);margin-bottom:20px}
+.tlogin-box label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:4px;margin-top:14px}
+.tlogin-box label:first-of-type{margin-top:0}
+.tlogin-box input{width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:8px;font-size:14px;font-family:'Noto Sans JP',sans-serif;outline:none;transition:border-color .15s}
+.tlogin-box input:focus{border-color:var(--blue)}
+.tlogin-submit{margin-top:18px;width:100%;padding:13px;background:var(--navy);border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;transition:.15s}
+.tlogin-submit:hover{background:var(--navy-2)}
+.tlogin-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;color:var(--muted);cursor:pointer}
+.tlogin-error{font-size:12px;color:#EF4444;margin-top:10px;display:none}
 
 .submit-btn{width:100%;padding:15px;background:var(--blue);border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:800;font-family:'Zen Maru Gothic',sans-serif;transition:.15s;display:flex;align-items:center;justify-content:center;gap:10px}
 .submit-btn:hover:not(:disabled){background:var(--blue-dark)}
@@ -290,7 +309,14 @@ footer p+p{margin-top:6px}
       <div class="brand-mark">AI</div>
       門司港AIプログラミング教室
     </a>
-    <a href="/classroom" class="nav-back">教室トップ</a>
+    <div class="nav-right">
+      <button class="nav-teacher-btn" id="teacher-login-nav-btn" onclick="openTeacherLoginModal()">🔑 先生ログイン</button>
+      <div class="nav-teacher-mode" id="teacher-mode-indicator" style="display:none">
+        <span>先生モード中</span>
+        <button class="nav-logout-btn" onclick="doTeacherLogout()">ログアウト</button>
+      </div>
+      <a href="/classroom" class="nav-back">教室トップ</a>
+    </div>
   </div>
 </nav>
 
@@ -397,7 +423,7 @@ footer p+p{margin-top:6px}
 <div class="upload-overlay" id="upload-overlay" role="dialog" aria-modal="true">
   <div class="upload-box">
     <div class="upload-header">
-      <h2 id="upload-title">🔐 先生ログイン</h2>
+      <h2 id="upload-title">📤 作品をアップロードしよう！</h2>
       <button class="upload-close" id="upload-close" aria-label="閉じる">✕</button>
     </div>
 
@@ -410,15 +436,6 @@ footer p+p{margin-top:6px}
         <button onclick="doLogin()">入る</button>
       </div>
       <p class="password-error" id="password-error"></p>
-      <button type="button" class="teacher-toggle-btn" onclick="toggleTeacherLogin()">先生はこちら（削除モード）</button>
-      <div class="teacher-login-section" id="teacher-login" style="display:none">
-        <label>先生メールアドレス</label>
-        <input type="email" id="teacher-email" placeholder="teacher@example.com" autocomplete="email">
-        <label>パスワード</label>
-        <input type="password" id="teacher-pw" placeholder="パスワード" autocomplete="current-password">
-        <button type="button" onclick="doTeacherLogin()">先生ログイン</button>
-        <p class="password-error" id="teacher-error"></p>
-      </div>
     </div>
 
     <!-- Upload form (hidden until authenticated) -->
@@ -492,6 +509,20 @@ footer p+p{margin-top:6px}
         <span>🚀 作品を公開する</span>
       </button>
     </form>
+  </div>
+</div>
+
+<!-- ====== Teacher Login Modal ====== -->
+<div class="tlogin-overlay" id="tlogin-overlay" role="dialog" aria-modal="true">
+  <div class="tlogin-box">
+    <button class="tlogin-close" onclick="closeTeacherLoginModal()" aria-label="閉じる">✕</button>
+    <h2>🔑 先生ログイン</h2>
+    <label>メールアドレス</label>
+    <input type="email" id="tm-email" placeholder="teacher@example.com" autocomplete="email">
+    <label>パスワード</label>
+    <input type="password" id="tm-pw" placeholder="パスワード" autocomplete="current-password">
+    <p class="tlogin-error" id="tm-error"></p>
+    <button class="tlogin-submit" onclick="doTeacherLoginModal()">ログイン</button>
   </div>
 </div>
 
@@ -584,6 +615,9 @@ function renderGrid() {
         <span class="work-category-badge cat-${escHtml(work.category)}">${escHtml(work.category)}</span>
         ${work.category === 'ゲーム' && work.work_url
           ? `<button class="play-overlay" onclick="event.stopPropagation();openGame('${work.id}')" aria-label="ゲームをプレイ"><div class="play-circle">▶</div></button>`
+          : ''}
+        ${isTeacher
+          ? `<button class="card-delete-btn" onclick="event.stopPropagation();deleteWork('${work.id}')" title="削除">🗑</button>`
           : ''}
       </div>
       <div class="work-body">
@@ -689,6 +723,9 @@ function closeUpload() {
 document.getElementById('login-password').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLogin();
 });
+document.getElementById('tm-pw').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doTeacherLoginModal();
+});
 
 function doLogin() {
   const code = document.getElementById('login-password').value;
@@ -699,35 +736,56 @@ function doLogin() {
     currentUser = true;
     document.getElementById('password-gate').style.display = 'none';
     document.getElementById('upload-form').style.display = 'flex';
-    document.getElementById('upload-title').textContent = '📤 作品をアップロードしよう！';
   } else {
     errEl.textContent = 'クラスコードが違います。先生に確認してね！';
     errEl.style.display = 'block';
   }
 }
 
-function toggleTeacherLogin() {
-  const el = document.getElementById('teacher-login');
-  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+function openTeacherLoginModal() {
+  document.getElementById('tlogin-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('tm-email').focus();
 }
 
-async function doTeacherLogin() {
-  const email = document.getElementById('teacher-email').value.trim();
-  const pw = document.getElementById('teacher-pw').value;
-  const errEl = document.getElementById('teacher-error');
+function closeTeacherLoginModal() {
+  document.getElementById('tlogin-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('tlogin-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeTeacherLoginModal();
+});
+
+async function doTeacherLoginModal() {
+  const email = document.getElementById('tm-email').value.trim();
+  const pw = document.getElementById('tm-pw').value;
+  const errEl = document.getElementById('tm-error');
   errEl.style.display = 'none';
-  if (!email || !pw) { errEl.textContent = 'メールアドレスとパスワードを入力してください'; errEl.style.display = 'block'; return; }
-  const { data, error } = await db.auth.signInWithPassword({ email, password: pw });
+  if (!email || !pw) {
+    errEl.textContent = 'メールアドレスとパスワードを入力してください';
+    errEl.style.display = 'block';
+    return;
+  }
+  const { error } = await db.auth.signInWithPassword({ email, password: pw });
   if (error) {
     errEl.textContent = 'ログインに失敗しました。メールアドレスとパスワードを確認してください。';
     errEl.style.display = 'block';
     return;
   }
   isTeacher = true;
-  currentUser = true;
-  document.getElementById('password-gate').style.display = 'none';
-  document.getElementById('upload-form').style.display = 'flex';
-  document.getElementById('upload-title').textContent = '📤 作品の管理（先生モード）';
+  document.getElementById('teacher-login-nav-btn').style.display = 'none';
+  document.getElementById('teacher-mode-indicator').style.display = 'flex';
+  closeTeacherLoginModal();
+  renderGrid();
+}
+
+async function doTeacherLogout() {
+  await db.auth.signOut();
+  isTeacher = false;
+  document.getElementById('teacher-login-nav-btn').style.display = '';
+  document.getElementById('teacher-mode-indicator').style.display = 'none';
+  renderGrid();
 }
 
 async function deleteWork(id) {
