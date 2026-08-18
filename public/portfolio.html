@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>作品ギャラリー｜門司港AIプログラミング教室</title>
+<meta name="description" content="門司港AIプログラミング教室の子どもたちが作った作品を展示しています。">
+<script defer src="/analytics.js" data-measurement-id="G-B4BQKPZNR9"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=Noto+Sans+JP:wght@400;500;600;700;800&family=Zen+Maru+Gothic:wght@700&display=swap" rel="stylesheet">
+
+<!--
+=======================================================
+  Supabase セットアップ手順
+=======================================================
+1. 下の SUPABASE_URL と SUPABASE_ANON_KEY を自分のものに変更
+   （Settings → API → Project URL / anon public key）
+
+2. Supabase の SQL Editor で以下を実行:
+
+CREATE TABLE portfolio_works (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  title text NOT NULL,
+  student_name text NOT NULL,
+  grade text NOT NULL DEFAULT '小学生',
+  category text NOT NULL DEFAULT '作品',
+  description text,
+  image_url text,
+  work_url text,
+  created_at timestamptz DEFAULT now()
+);
+ALTER TABLE portfolio_works ENABLE ROW LEVEL SECURITY;
+-- 誰でも閲覧できる
+CREATE POLICY "anon_select" ON portfolio_works FOR SELECT TO anon USING (true);
+-- ログイン済みユーザー（先生）のみ追加・削除できる
+CREATE POLICY "auth_insert" ON portfolio_works FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "auth_delete" ON portfolio_works FOR DELETE TO authenticated USING (true);
+
+3. Authentication → Sign Up を無効化（先生アカウントのみ使うため）
+   Dashboard → Auth → Settings → "Enable email confirmations": OFF
+   Dashboard → Auth → Settings → "Disable signup": ON
+
+4. Authentication → Users → 「Add user」で先生のメールアドレスとパスワードを登録
+
+5. Storage → New bucket → 名前: portfolio-images → Public: ON
+   Storage → portfolio-images → Policies → 以下を追加:
+   - anon: SELECT（公開閲覧）
+   - authenticated: INSERT（先生がアップロード）
+
+=======================================================
+-->
+
+<style>
+:root{
+  --navy:#102A43;--navy-2:#183B56;--blue:#146EF5;--blue-dark:#0755C7;
+  --sky:#EAF3FF;--yellow:#FFD54A;--mint:#DDF8EA;--paper:#FFFDF8;
+  --white:#FFFFFF;--text:#243B53;--muted:#627D98;--line:#D9E2EC;
+  --shadow:0 16px 44px rgba(16,42,67,.12);
+  --green:#22C55E;--orange:#F97316;--purple:#A855F7;--pink:#EC4899;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--paper);color:var(--text);font-family:'Noto Sans JP',sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}img{max-width:100%}button{-webkit-tap-highlight-color:transparent;cursor:pointer}
+.wrap{width:min(1120px,calc(100% - 40px));margin-inline:auto}
+.narrow{width:min(820px,calc(100% - 40px));margin-inline:auto}
+
+/* Nav */
+.site-nav{position:sticky;top:0;z-index:100;background:rgba(255,253,248,.92);border-bottom:1px solid rgba(217,226,236,.9);backdrop-filter:blur(14px)}
+.nav-inner{height:66px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--navy);font-size:14px;font-weight:800;white-space:nowrap}
+.brand-mark{width:31px;height:31px;display:grid;place-items:center;background:var(--navy);border-radius:9px;color:var(--yellow);font-family:'DM Mono',monospace;font-size:13px}
+.nav-back{color:var(--muted);font-size:12px;font-weight:600;display:flex;align-items:center;gap:4px}
+.nav-back::before{content:"←"}
+
+/* Hero */
+.gallery-hero{padding:52px 0 44px;background:linear-gradient(135deg,#FFFDF8 0%,#F4F8FF 58%,#EAF3FF 100%);position:relative;overflow:hidden}
+.gallery-hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(20,110,245,.12) 1px,transparent 1px);background-size:23px 23px;mask-image:linear-gradient(90deg,transparent,black);pointer-events:none}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;padding:7px 12px;background:#fff;border:1px solid #C8DCF8;border-radius:999px;color:var(--blue-dark);font-size:12px;font-weight:700}
+.hero-eyebrow::before{content:"";width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 0 4px #DCFCE7}
+.gallery-hero h1{color:var(--navy);font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(30px,5vw,48px);line-height:1.35}
+.gallery-hero h1 .accent{position:relative;z-index:0}.gallery-hero h1 .accent::after{content:"";position:absolute;z-index:-1;left:-2px;right:-2px;bottom:5px;height:12px;background:var(--yellow);border-radius:3px;transform:rotate(-1deg)}
+.gallery-hero p{margin-top:12px;color:var(--muted);font-size:15px;max-width:560px}
+.stats-row{display:flex;gap:28px;margin-top:24px;flex-wrap:wrap}
+.stat-chip{display:flex;align-items:center;gap:8px;padding:10px 16px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.stat-chip b{color:var(--navy);font-size:20px;font-family:'DM Mono',monospace}
+.stat-chip span{font-size:12px;color:var(--muted)}
+
+/* Filters */
+.filters-bar{padding:24px 0 8px}
+.filters-inner{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.filter-label{font-size:12px;font-weight:700;color:var(--muted);margin-right:4px}
+.filter-btn{padding:7px 16px;border:1.5px solid var(--line);border-radius:999px;background:#fff;color:var(--text);font-size:13px;font-weight:700;font-family:'Noto Sans JP',sans-serif;transition:.15s}
+.filter-btn:hover{border-color:var(--blue);color:var(--blue)}
+.filter-btn.active{background:var(--navy);border-color:var(--navy);color:#fff}
+
+/* Grid */
+.gallery-section{padding:8px 0 72px}
+.works-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-top:24px}
+
+.work-card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.2s ease;cursor:pointer}
+.work-card:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(16,42,67,.14)}
+.work-thumb{aspect-ratio:4/3;background:linear-gradient(135deg,#EAF3FF,#F0EEFF);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.work-thumb img{width:100%;height:100%;object-fit:cover}
+.work-thumb-placeholder{font-size:56px;user-select:none}
+.work-category-badge{position:absolute;top:12px;left:12px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800;font-family:'DM Mono',monospace}
+.cat-物語{background:#FEE2E2;color:#B91C1C}
+.cat-ゲーム{background:#DCFCE7;color:#15803D}
+.cat-絵{background:#EDE9FE;color:#6D28D9}
+.cat-クイズ{background:#FEF3C7;color:#92400E}
+.cat-レポート{background:#DBEAFE;color:#1E40AF}
+.cat-その他{background:#F3F4F6;color:#374151}
+.work-body{padding:18px 18px 20px}
+.work-title{font-family:'Zen Maru Gothic',sans-serif;font-size:17px;color:var(--navy);line-height:1.4;margin-bottom:8px}
+.work-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.work-student{font-size:12px;font-weight:700;color:var(--blue)}
+.work-grade{font-size:11px;color:var(--muted);padding:3px 8px;background:var(--sky);border-radius:999px}
+.work-desc{font-size:13px;color:var(--muted);line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* Empty state */
+.empty-state{grid-column:1/-1;text-align:center;padding:64px 20px}
+.empty-icon{font-size:56px;margin-bottom:16px}
+.empty-state h3{color:var(--navy);font-family:'Zen Maru Gothic',sans-serif;font-size:22px;margin-bottom:8px}
+.empty-state p{color:var(--muted);font-size:14px}
+
+/* Loading */
+.loading-state{grid-column:1/-1;display:flex;justify-content:center;padding:64px}
+.spinner{width:40px;height:40px;border:3px solid var(--line);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Detail Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(16,42,67,.6);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.2s}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal-box{background:#fff;border-radius:24px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;transform:scale(.96);transition:.2s}
+.modal-overlay.open .modal-box{transform:scale(1)}
+.modal-thumb{aspect-ratio:16/9;background:linear-gradient(135deg,#EAF3FF,#F0EEFF);position:relative;display:flex;align-items:center;justify-content:center;font-size:72px}
+.modal-thumb img{width:100%;height:100%;object-fit:cover}
+.modal-content{padding:28px 28px 32px}
+.modal-category{display:inline-block;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:800;font-family:'DM Mono',monospace;margin-bottom:14px}
+.modal-title{font-family:'Zen Maru Gothic',sans-serif;font-size:24px;color:var(--navy);line-height:1.4;margin-bottom:10px}
+.modal-meta{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.modal-student{font-size:13px;font-weight:700;color:var(--blue)}
+.modal-grade{font-size:12px;color:var(--muted);padding:4px 10px;background:var(--sky);border-radius:999px}
+.modal-date{font-size:12px;color:var(--muted)}
+.modal-desc{font-size:14px;color:var(--text);line-height:1.8;margin-bottom:20px}
+.modal-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;background:var(--blue);border-radius:12px;color:#fff;font-size:13px;font-weight:800;border:none;font-family:'Noto Sans JP',sans-serif;transition:.15s}
+.btn-primary:hover{background:var(--blue-dark)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;background:#fff;border:1.5px solid var(--line);border-radius:12px;color:var(--text);font-size:13px;font-weight:700;font-family:'Noto Sans JP',sans-serif;transition:.15s}
+.btn-secondary:hover{border-color:var(--navy);color:var(--navy)}
+.modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--muted);cursor:pointer;backdrop-filter:blur(8px)}
+.modal-thumb{position:relative}
+
+/* Admin FAB */
+.admin-fab{position:fixed;bottom:28px;right:24px;z-index:150}
+.admin-fab-btn{width:52px;height:52px;background:var(--navy);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;box-shadow:0 8px 24px rgba(16,42,67,.3);transition:.2s}
+.admin-fab-btn:hover{background:var(--navy-2);transform:scale(1.08)}
+
+/* Upload Modal */
+.upload-overlay{position:fixed;inset:0;background:rgba(16,42,67,.7);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.2s}
+.upload-overlay.open{opacity:1;pointer-events:auto}
+.upload-box{background:#fff;border-radius:24px;width:100%;max-width:540px;max-height:92vh;overflow-y:auto;transform:translateY(16px);transition:.2s}
+.upload-overlay.open .upload-box{transform:translateY(0)}
+.upload-header{padding:24px 24px 0;display:flex;align-items:center;justify-content:space-between}
+.upload-header h2{font-family:'Zen Maru Gothic',sans-serif;font-size:20px;color:var(--navy)}
+.upload-close{background:none;border:none;font-size:22px;color:var(--muted);padding:4px}
+.upload-form{padding:20px 24px 28px;display:flex;flex-direction:column;gap:18px}
+
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:12px;font-weight:700;color:var(--navy)}
+.field label .req{color:#EF4444;margin-left:3px}
+.field label .opt{font-weight:400;color:var(--muted);margin-left:4px}
+.field input,.field textarea,.field select{padding:11px 13px;border:2px solid var(--line);border-radius:10px;font-size:14px;font-family:'Noto Sans JP',sans-serif;color:var(--text);outline:none;transition:border-color .15s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--blue)}
+.field textarea{resize:vertical;min-height:80px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.thumb-upload-area{border:2px dashed var(--line);border-radius:12px;padding:28px;text-align:center;cursor:pointer;transition:.15s;position:relative}
+.thumb-upload-area:hover{border-color:var(--blue);background:var(--sky)}
+.thumb-upload-area.has-file{border-style:solid;border-color:var(--blue);background:var(--sky)}
+.thumb-upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.thumb-preview{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;margin-bottom:8px;display:none}
+.thumb-preview.visible{display:block}
+.thumb-upload-icon{font-size:36px;margin-bottom:8px}
+.thumb-upload-text{font-size:13px;color:var(--muted)}
+.thumb-upload-text b{color:var(--blue)}
+
+/* Password gate */
+.password-gate{padding:28px 24px;text-align:center}
+.password-gate h3{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;color:var(--navy);margin-bottom:6px}
+.password-gate p{font-size:13px;color:var(--muted);margin-bottom:18px}
+.password-input-row{display:flex;gap:8px}
+.password-input-row input{flex:1;padding:11px 13px;border:2px solid var(--line);border-radius:10px;font-size:15px;font-family:'Noto Sans JP',sans-serif;outline:none;transition:border-color .15s}
+.password-input-row input:focus{border-color:var(--blue)}
+.password-input-row button{padding:11px 18px;background:var(--navy);border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:700;font-family:'Noto Sans JP',sans-serif}
+.password-error{font-size:12px;color:#EF4444;margin-top:8px;display:none}
+.teacher-toggle-btn{margin-top:16px;background:none;border:none;color:var(--muted);font-size:12px;font-family:'Noto Sans JP',sans-serif;cursor:pointer;text-decoration:underline}
+.teacher-login-section{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);text-align:left}
+.teacher-login-section label{font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px}
+.teacher-login-section input{width:100%;padding:9px 12px;border:2px solid var(--line);border-radius:8px;font-size:14px;font-family:'Noto Sans JP',sans-serif;outline:none;transition:border-color .15s;margin-bottom:8px}
+.teacher-login-section input:focus{border-color:var(--blue)}
+.teacher-login-section button{width:100%;padding:10px;background:var(--navy);border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:700;font-family:'Noto Sans JP',sans-serif}
+.btn-delete{padding:13px 22px;background:#FEE2E2;border:1.5px solid #FCA5A5;border-radius:10px;color:#DC2626;font-size:14px;font-weight:700;font-family:'Noto Sans JP',sans-serif;transition:.15s}
+.btn-delete:hover{background:#DC2626;color:#fff}
+
+.submit-btn{width:100%;padding:15px;background:var(--blue);border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:800;font-family:'Zen Maru Gothic',sans-serif;transition:.15s;display:flex;align-items:center;justify-content:center;gap:10px}
+.submit-btn:hover:not(:disabled){background:var(--blue-dark)}
+.submit-btn:disabled{opacity:.55;cursor:not-allowed}
+
+/* Progress bar */
+.upload-progress{height:4px;background:var(--line);border-radius:2px;margin-top:4px;overflow:hidden;display:none}
+.upload-progress.visible{display:block}
+.upload-progress-bar{height:100%;background:var(--blue);border-radius:2px;width:0;transition:width .3s}
+
+.upload-success{background:#DCFCE7;border:1px solid #BBF7D0;border-radius:12px;padding:16px;text-align:center;display:none}
+.upload-success.visible{display:block}
+.upload-success p{color:#15803D;font-weight:700;font-size:14px}
+
+/* Play overlay on game cards */
+.play-overlay{position:absolute;inset:0;background:rgba(16,42,67,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:.2s;border:none;width:100%;cursor:pointer}
+.work-card:hover .play-overlay{opacity:1}
+.play-circle{width:58px;height:58px;background:rgba(255,255,255,.95);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;padding-left:4px}
+
+/* Game modal */
+.game-overlay{position:fixed;inset:0;background:#000;z-index:400;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:.2s}
+.game-overlay.open{opacity:1;pointer-events:auto}
+.game-header{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(255,255,255,.06);flex-shrink:0;gap:12px}
+.game-title-text{color:#fff;font-weight:800;font-size:14px;font-family:'Noto Sans JP',sans-serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.game-close-btn{background:none;border:1px solid rgba(255,255,255,.3);border-radius:8px;color:#fff;padding:7px 16px;font-size:12px;font-family:'Noto Sans JP',sans-serif;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.game-frame{flex:1;width:100%;border:none}
+
+/* SNS share */
+.share-row{display:flex;gap:8px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line);margin-top:8px;align-items:center}
+.share-label{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em}
+.share-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border-radius:8px;font-size:12px;font-weight:700;font-family:'Noto Sans JP',sans-serif;border:1.5px solid var(--line);background:#fff;color:var(--text);cursor:pointer;transition:.15s}
+.share-btn:hover{border-color:var(--ink);color:var(--ink)}
+.share-btn-x{border-color:#000;color:#000}.share-btn-x:hover{background:#000;color:#fff}
+.share-btn-line{border-color:#06C755;color:#06C755}.share-btn-line:hover{background:#06C755;color:#fff}
+.copy-toast{font-size:11px;color:#15803D;display:none}.copy-toast.visible{display:block}
+
+/* Exhibition overlay */
+.exhibition-overlay{position:fixed;inset:0;background:#070710;z-index:500;display:none;flex-direction:column}
+.exhibition-overlay.active{display:flex}
+.ex-top-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;position:absolute;top:0;left:0;right:0;z-index:2}
+.ex-counter{color:rgba(255,255,255,.4);font-size:13px;font-family:'DM Mono',monospace}
+.ex-close-btn{background:none;border:1px solid rgba(255,255,255,.2);border-radius:8px;color:rgba(255,255,255,.7);padding:7px 18px;font-size:12px;font-family:'Noto Sans JP',sans-serif;cursor:pointer;transition:.15s}
+.ex-close-btn:hover{background:rgba(255,255,255,.1)}
+.ex-main{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.ex-visual{max-width:88%;max-height:75vh;object-fit:contain;transition:opacity .5s;border-radius:8px}
+.ex-visual.fade{opacity:0}
+.ex-emoji{font-size:clamp(80px,15vw,140px);transition:opacity .5s;user-select:none}
+.ex-emoji.fade{opacity:0}
+.ex-info-bar{position:absolute;bottom:0;left:0;right:0;padding:60px 40px 32px;background:linear-gradient(transparent,rgba(7,7,16,.95));pointer-events:none}
+.ex-cat-badge{display:inline-block;padding:4px 11px;border-radius:4px;font-size:11px;font-weight:800;margin-bottom:10px}
+.ex-title{color:#fff;font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(22px,4vw,40px);line-height:1.3;margin-bottom:6px;text-wrap:balance}
+.ex-meta{color:rgba(255,255,255,.55);font-size:14px}
+.ex-nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:#fff;width:50px;height:50px;border-radius:50%;font-size:20px;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;z-index:2}
+.ex-nav-btn:hover{background:rgba(255,255,255,.22)}
+.ex-prev{left:18px}.ex-next{right:18px}
+.ex-progress{height:2px;background:rgba(255,255,255,.12);position:absolute;bottom:0;left:0;right:0}
+.ex-progress-fill{height:100%;background:rgba(255,255,255,.6);width:0}
+
+/* Exhibition launch button */
+.exhibition-launch{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--navy);border:none;border-radius:99px;color:#fff;font-size:12px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;transition:.15s;margin-top:18px}
+.exhibition-launch:hover{background:var(--navy-2)}
+
+/* Footer */
+footer{background:var(--navy);color:#BCCCDC;padding:40px 0;text-align:center;font-size:13px}
+footer a{color:var(--yellow);font-weight:700}
+footer p+p{margin-top:6px}
+
+@media(max-width:600px){
+  .gallery-hero h1{font-size:26px}
+  .works-grid{grid-template-columns:1fr}
+  .field-row{grid-template-columns:1fr}
+  .stats-row{gap:12px}
+  .stat-chip b{font-size:17px}
+  .modal-content{padding:20px 20px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- ====== Nav ====== -->
+<nav class="site-nav">
+  <div class="wrap nav-inner">
+    <a href="/" class="brand">
+      <div class="brand-mark">AI</div>
+      門司港AIプログラミング教室
+    </a>
+    <a href="/classroom" class="nav-back">教室トップ</a>
+  </div>
+</nav>
+
+<!-- ====== Hero ====== -->
+<section class="gallery-hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">作品ギャラリー公開中</div>
+    <h1>子どもたちの<br><span class="accent">アイデアと作品</span></h1>
+    <p>門司港AIプログラミング教室で生まれた、みんなの作品を展示しています。</p>
+    <div class="stats-row">
+      <div class="stat-chip"><b id="stat-count">—</b><span>作品</span></div>
+      <div class="stat-chip"><b id="stat-students">—</b><span>人の子どもたち</span></div>
+    </div>
+    <button class="exhibition-launch" onclick="startExhibition()">🖼 個展モードで見る</button>
+  </div>
+</section>
+
+<!-- ====== Filters ====== -->
+<div class="filters-bar">
+  <div class="wrap filters-inner">
+    <span class="filter-label">カテゴリー</span>
+    <button class="filter-btn active" data-cat="all">すべて</button>
+    <button class="filter-btn" data-cat="物語">物語</button>
+    <button class="filter-btn" data-cat="ゲーム">ゲーム</button>
+    <button class="filter-btn" data-cat="絵">絵・アート</button>
+    <button class="filter-btn" data-cat="クイズ">クイズ</button>
+    <button class="filter-btn" data-cat="レポート">レポート</button>
+    <button class="filter-btn" data-cat="その他">その他</button>
+  </div>
+</div>
+
+<!-- ====== Gallery ====== -->
+<section class="gallery-section">
+  <div class="wrap">
+    <div class="works-grid" id="works-grid">
+      <div class="loading-state"><div class="spinner"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Detail Modal ====== -->
+<div class="modal-overlay" id="detail-modal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-thumb" id="modal-thumb">
+      <button class="modal-close" id="modal-close" aria-label="閉じる">✕</button>
+      <span id="modal-thumb-placeholder"></span>
+    </div>
+    <div class="modal-content">
+      <div class="modal-category" id="modal-category"></div>
+      <h2 class="modal-title" id="modal-title"></h2>
+      <div class="modal-meta">
+        <span class="modal-student" id="modal-student"></span>
+        <span class="modal-grade" id="modal-grade"></span>
+        <span class="modal-date" id="modal-date"></span>
+      </div>
+      <p class="modal-desc" id="modal-desc"></p>
+      <div class="modal-actions" id="modal-actions"></div>
+      <div class="share-row">
+        <span class="share-label">シェア</span>
+        <button class="share-btn share-btn-x" onclick="shareX()">𝕏</button>
+        <button class="share-btn share-btn-line" onclick="shareLINE()">LINE</button>
+        <button class="share-btn" onclick="copyLink()">🔗 コピー</button>
+        <span class="copy-toast" id="copy-toast">コピーしました！</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== Game Modal ====== -->
+<div class="game-overlay" id="game-overlay" role="dialog" aria-modal="true">
+  <div class="game-header">
+    <span class="game-title-text" id="game-title-text"></span>
+    <button class="game-close-btn" onclick="closeGame()">✕ 閉じる</button>
+  </div>
+  <iframe class="game-frame" id="game-iframe" src="" allow="fullscreen" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock"></iframe>
+</div>
+
+<!-- ====== Exhibition Overlay ====== -->
+<div class="exhibition-overlay" id="exhibition-overlay" role="dialog" aria-modal="true">
+  <div class="ex-top-bar">
+    <span class="ex-counter" id="ex-counter"></span>
+    <button class="ex-close-btn" onclick="closeExhibition()">✕ 閉じる</button>
+  </div>
+  <div class="ex-main">
+    <img class="ex-visual" id="ex-visual" src="" alt="" style="display:none">
+    <div class="ex-emoji" id="ex-emoji" style="display:none"></div>
+    <div class="ex-info-bar">
+      <div class="ex-cat-badge" id="ex-cat-badge"></div>
+      <h2 class="ex-title" id="ex-title"></h2>
+      <p class="ex-meta" id="ex-meta"></p>
+    </div>
+    <div class="ex-progress"><div class="ex-progress-fill" id="ex-progress-fill"></div></div>
+  </div>
+  <button class="ex-nav-btn ex-prev" onclick="exNav(-1)" aria-label="前へ">&#8592;</button>
+  <button class="ex-nav-btn ex-next" onclick="exNav(1)" aria-label="次へ">&#8594;</button>
+</div>
+
+<!-- ====== Admin FAB ====== -->
+<div class="admin-fab">
+  <button class="admin-fab-btn" id="admin-fab-btn" title="作品を追加（先生用）">＋</button>
+</div>
+
+<!-- ====== Upload Modal ====== -->
+<div class="upload-overlay" id="upload-overlay" role="dialog" aria-modal="true">
+  <div class="upload-box">
+    <div class="upload-header">
+      <h2 id="upload-title">🔐 先生ログイン</h2>
+      <button class="upload-close" id="upload-close" aria-label="閉じる">✕</button>
+    </div>
+
+    <!-- Class code gate -->
+    <div class="password-gate" id="password-gate">
+      <h3>クラスコードを入力してね</h3>
+      <p>先生から教えてもらったクラスコードを入れてください</p>
+      <div class="password-input-row">
+        <input type="password" id="login-password" placeholder="クラスコード" />
+        <button onclick="doLogin()">入る</button>
+      </div>
+      <p class="password-error" id="password-error"></p>
+      <button type="button" class="teacher-toggle-btn" onclick="toggleTeacherLogin()">先生はこちら（削除モード）</button>
+      <div class="teacher-login-section" id="teacher-login" style="display:none">
+        <label>先生メールアドレス</label>
+        <input type="email" id="teacher-email" placeholder="teacher@example.com" autocomplete="email">
+        <label>パスワード</label>
+        <input type="password" id="teacher-pw" placeholder="パスワード" autocomplete="current-password">
+        <button type="button" onclick="doTeacherLogin()">先生ログイン</button>
+        <p class="password-error" id="teacher-error"></p>
+      </div>
+    </div>
+
+    <!-- Upload form (hidden until authenticated) -->
+    <form class="upload-form" id="upload-form" style="display:none" onsubmit="handleUpload(event)">
+
+      <div class="field">
+        <label>作品のサムネイル画像 <span class="opt">（任意）</span></label>
+        <div class="thumb-upload-area" id="thumb-drop">
+          <img class="thumb-preview" id="thumb-preview" src="" alt="プレビュー">
+          <div id="thumb-placeholder">
+            <div class="thumb-upload-icon">🖼️</div>
+            <div class="thumb-upload-text"><b>クリックして選択</b>、またはドラッグ＆ドロップ<br>JPG・PNG・GIF（5MBまで）<br>なしでも投稿できます</div>
+          </div>
+          <input type="file" id="thumb-file" accept="image/*">
+        </div>
+        <div class="upload-progress" id="img-progress"><div class="upload-progress-bar" id="img-progress-bar"></div></div>
+      </div>
+
+      <div class="field">
+        <label>作品タイトル <span class="req">必須</span></label>
+        <input type="text" id="f-title" placeholder="例：門司港の未来を考えたレポート" required maxlength="80">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>子どもの名前 <span class="req">必須</span></label>
+          <input type="text" id="f-student" placeholder="例：たろう" required maxlength="30">
+        </div>
+        <div class="field">
+          <label>学年 <span class="req">必須</span></label>
+          <select id="f-grade">
+            <option>小学4年生</option>
+            <option>小学5年生</option>
+            <option>小学6年生</option>
+            <option>中学1年生</option>
+            <option>中学2年生</option>
+            <option>中学3年生</option>
+            <option>高校1年生</option>
+            <option>高校2年生</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>カテゴリー <span class="req">必須</span></label>
+        <select id="f-category">
+          <option>物語</option>
+          <option>ゲーム</option>
+          <option>絵</option>
+          <option>クイズ</option>
+          <option>レポート</option>
+          <option>その他</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>作品の説明 <span class="opt">（任意）</span></label>
+        <textarea id="f-desc" placeholder="どんな工夫をしたか、どんな思いで作ったか…" maxlength="300"></textarea>
+      </div>
+
+      <div class="field">
+        <label>作品のURL <span class="opt">（任意・外部サイトに公開している場合）</span></label>
+        <input type="url" id="f-url" placeholder="https://...">
+      </div>
+
+      <div class="upload-success" id="upload-success">
+        <p>✅ アップロードが完了しました！ページを更新すると表示されます。</p>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submit-btn">
+        <span>🚀 作品を公開する</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ====== Footer ====== -->
+<footer>
+  <div class="wrap">
+    <p>© 2026 門司港AIプログラミング教室</p>
+    <p><a href="/classroom">教室トップに戻る</a></p>
+  </div>
+</footer>
+
+<script>
+// ========================================================
+// 設定 — ここを自分のSupabaseプロジェクトの値に変更してください
+// ========================================================
+const SUPABASE_URL = 'https://lzujqehpldabbrgimmjv.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6dWpxZWhwbGRhYmJyZ2ltbWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY5NTk2MDYsImV4cCI6MjEwMjUzNTYwNn0.EIDoKk4TY6dAeL1GDAPUqRQx7qfb0twMBu1mfdYIg94';
+const STORAGE_BUCKET = 'portfolio-images';
+const TABLE_NAME = 'portfolio_works';
+const CLASS_CODE = 'mojiko2026'; // ← 生徒に教えるクラスコード（自由に変更可）
+// ========================================================
+
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const CATEGORY_EMOJI = {
+  '物語':'📖','ゲーム':'🎮','絵':'🎨','クイズ':'❓','レポート':'📊','その他':'⭐'
+};
+
+// -------- State --------
+let allWorks = [];
+let currentCat = 'all';
+let currentUser = null;
+let isTeacher = false;
+let currentDetailId = null;
+let exIndex = 0;
+let exTimer = null;
+const EX_DURATION = 6000;
+
+// -------- Load works --------
+async function loadWorks() {
+  const grid = document.getElementById('works-grid');
+  try {
+    const { data, error } = await db
+      .from(TABLE_NAME)
+      .select('*')
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    allWorks = data || [];
+    updateStats();
+    renderGrid();
+  } catch(e) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">😅</div>
+        <h3>読み込みに失敗しました</h3>
+        <p>Supabaseの設定を確認してください: ${escHtml(e.message)}</p>
+      </div>`;
+  }
+}
+
+function updateStats() {
+  document.getElementById('stat-count').textContent = allWorks.length;
+  const uniqueStudents = new Set(allWorks.map(w => w.student_name)).size;
+  document.getElementById('stat-students').textContent = uniqueStudents;
+}
+
+function renderGrid() {
+  const grid = document.getElementById('works-grid');
+  const filtered = currentCat === 'all'
+    ? allWorks
+    : allWorks.filter(w => w.category === currentCat);
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🌟</div>
+        <h3>まだ作品がありません</h3>
+        <p>最初の作品が登録されるのをお楽しみに！</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(work => `
+    <div class="work-card" onclick="openDetail('${work.id}')" tabindex="0" role="button">
+      <div class="work-thumb">
+        ${work.image_url
+          ? `<img src="${escHtml(work.image_url)}" alt="${escHtml(work.title)}" loading="lazy">`
+          : `<div class="work-thumb-placeholder">${CATEGORY_EMOJI[work.category] || '⭐'}</div>`}
+        <span class="work-category-badge cat-${escHtml(work.category)}">${escHtml(work.category)}</span>
+        ${work.category === 'ゲーム' && work.work_url
+          ? `<button class="play-overlay" onclick="event.stopPropagation();openGame('${work.id}')" aria-label="ゲームをプレイ"><div class="play-circle">▶</div></button>`
+          : ''}
+      </div>
+      <div class="work-body">
+        <h3 class="work-title">${escHtml(work.title)}</h3>
+        <div class="work-meta">
+          <span class="work-student">${escHtml(work.student_name)}</span>
+          <span class="work-grade">${escHtml(work.grade)}</span>
+        </div>
+        ${work.description ? `<p class="work-desc">${escHtml(work.description)}</p>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+// -------- Filters --------
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = btn.dataset.cat;
+    renderGrid();
+  });
+});
+
+// -------- Detail Modal --------
+function openDetail(id) {
+  const work = allWorks.find(w => w.id === id);
+  if (!work) return;
+  currentDetailId = id;
+
+  const thumb = document.getElementById('modal-thumb');
+  const placeholder = document.getElementById('modal-thumb-placeholder');
+  const existingImg = thumb.querySelector('img');
+  if (existingImg && existingImg !== document.getElementById('modal-close').nextSibling) {
+    existingImg.remove();
+  }
+
+  if (work.image_url) {
+    placeholder.style.display = 'none';
+    const img = document.createElement('img');
+    img.src = work.image_url;
+    img.alt = work.title;
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;position:absolute;inset:0';
+    thumb.appendChild(img);
+  } else {
+    placeholder.textContent = CATEGORY_EMOJI[work.category] || '⭐';
+    placeholder.style.display = '';
+    const oldImg = thumb.querySelector('img:not(.modal-close img)');
+    if (oldImg) oldImg.remove();
+  }
+
+  const catEl = document.getElementById('modal-category');
+  catEl.textContent = work.category;
+  catEl.className = `modal-category cat-${work.category}`;
+  document.getElementById('modal-title').textContent = work.title;
+  document.getElementById('modal-student').textContent = work.student_name;
+  document.getElementById('modal-grade').textContent = work.grade;
+  document.getElementById('modal-date').textContent = formatDate(work.created_at);
+  document.getElementById('modal-desc').textContent = work.description || '';
+
+  const actions = document.getElementById('modal-actions');
+  const gameBtn = work.category === 'ゲーム' && work.work_url
+    ? `<button class="btn-primary" onclick="closeDetail();openGame('${work.id}')">▶ ゲームを遊ぶ</button>`
+    : '';
+  const linkBtn = work.work_url && work.category !== 'ゲーム'
+    ? `<a href="${escHtml(safeUrl(work.work_url))}" target="_blank" rel="noopener noreferrer" class="btn-primary">作品を見る →</a>`
+    : '';
+  const deleteBtn = isTeacher
+    ? `<button class="btn-delete" onclick="deleteWork('${work.id}')">🗑 削除</button>`
+    : '';
+  actions.innerHTML = gameBtn + linkBtn + `<button class="btn-secondary" onclick="closeDetail()">閉じる</button>` + deleteBtn;
+
+  document.getElementById('detail-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+  document.getElementById('detail-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('modal-close').onclick = closeDetail;
+document.getElementById('detail-modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeDetail();
+});
+
+// -------- Admin --------
+document.getElementById('admin-fab-btn').onclick = () => {
+  document.getElementById('upload-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (!currentUser) {
+    document.getElementById('login-email').focus();
+  }
+};
+document.getElementById('upload-close').onclick = closeUpload;
+document.getElementById('upload-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeUpload();
+});
+function closeUpload() {
+  document.getElementById('upload-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('login-password').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+
+function doLogin() {
+  const code = document.getElementById('login-password').value;
+  const errEl = document.getElementById('password-error');
+  errEl.style.display = 'none';
+
+  if (code === CLASS_CODE) {
+    currentUser = true;
+    document.getElementById('password-gate').style.display = 'none';
+    document.getElementById('upload-form').style.display = 'flex';
+    document.getElementById('upload-title').textContent = '📤 作品をアップロードしよう！';
+  } else {
+    errEl.textContent = 'クラスコードが違います。先生に確認してね！';
+    errEl.style.display = 'block';
+  }
+}
+
+function toggleTeacherLogin() {
+  const el = document.getElementById('teacher-login');
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+async function doTeacherLogin() {
+  const email = document.getElementById('teacher-email').value.trim();
+  const pw = document.getElementById('teacher-pw').value;
+  const errEl = document.getElementById('teacher-error');
+  errEl.style.display = 'none';
+  if (!email || !pw) { errEl.textContent = 'メールアドレスとパスワードを入力してください'; errEl.style.display = 'block'; return; }
+  const { data, error } = await db.auth.signInWithPassword({ email, password: pw });
+  if (error) {
+    errEl.textContent = 'ログインに失敗しました。メールアドレスとパスワードを確認してください。';
+    errEl.style.display = 'block';
+    return;
+  }
+  isTeacher = true;
+  currentUser = true;
+  document.getElementById('password-gate').style.display = 'none';
+  document.getElementById('upload-form').style.display = 'flex';
+  document.getElementById('upload-title').textContent = '📤 作品の管理（先生モード）';
+}
+
+async function deleteWork(id) {
+  if (!confirm('この作品を削除しますか？\n削除すると元に戻せません。')) return;
+  const { error } = await db.from(TABLE_NAME).delete().eq('id', id);
+  if (error) { alert('削除できませんでした: ' + escHtml(error.message)); return; }
+  closeDetail();
+  await loadWorks();
+}
+
+// -------- Thumbnail preview --------
+const thumbFile = document.getElementById('thumb-file');
+const thumbPreview = document.getElementById('thumb-preview');
+const thumbPlaceholder = document.getElementById('thumb-placeholder');
+const thumbDrop = document.getElementById('thumb-drop');
+
+thumbFile.addEventListener('change', () => previewThumb(thumbFile.files[0]));
+thumbDrop.addEventListener('dragover', e => { e.preventDefault(); thumbDrop.style.borderColor = 'var(--blue)'; });
+thumbDrop.addEventListener('dragleave', () => { thumbDrop.style.borderColor = ''; });
+thumbDrop.addEventListener('drop', e => {
+  e.preventDefault();
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    thumbFile.files = e.dataTransfer.files;
+    previewThumb(file);
+  }
+  thumbDrop.style.borderColor = '';
+});
+
+function previewThumb(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    thumbPreview.src = e.target.result;
+    thumbPreview.classList.add('visible');
+    thumbPlaceholder.style.display = 'none';
+    thumbDrop.classList.add('has-file');
+  };
+  reader.readAsDataURL(file);
+}
+
+// -------- Upload --------
+async function handleUpload(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span>アップロード中…</span>';
+
+  const successEl = document.getElementById('upload-success');
+  successEl.classList.remove('visible');
+
+  try {
+    let imageUrl = null;
+
+    // Upload image
+    const file = thumbFile.files[0];
+    if (file) {
+      const progress = document.getElementById('img-progress');
+      const bar = document.getElementById('img-progress-bar');
+      progress.classList.add('visible');
+
+      const ext = file.name.split('.').pop();
+      const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+
+      bar.style.width = '30%';
+      const { data: storageData, error: storageError } = await db.storage
+        .from(STORAGE_BUCKET)
+        .upload(filename, file, { cacheControl: '3600', upsert: false });
+
+      if (storageError) throw storageError;
+      bar.style.width = '80%';
+
+      const { data: urlData } = db.storage
+        .from(STORAGE_BUCKET)
+        .getPublicUrl(storageData.path);
+      imageUrl = urlData.publicUrl;
+      bar.style.width = '100%';
+    }
+
+    // Save to DB
+    const { error: dbError } = await db.from(TABLE_NAME).insert({
+      title: document.getElementById('f-title').value.trim(),
+      student_name: document.getElementById('f-student').value.trim(),
+      grade: document.getElementById('f-grade').value,
+      category: document.getElementById('f-category').value,
+      description: document.getElementById('f-desc').value.trim() || null,
+      image_url: imageUrl,
+      work_url: document.getElementById('f-url').value.trim() || null,
+    });
+    if (dbError) throw dbError;
+
+    // Success
+    successEl.classList.add('visible');
+    e.target.reset();
+    thumbPreview.classList.remove('visible');
+    thumbPlaceholder.style.display = '';
+    thumbDrop.classList.remove('has-file');
+    document.getElementById('img-progress').classList.remove('visible');
+    document.getElementById('img-progress-bar').style.width = '0';
+
+    // Reload works
+    await loadWorks();
+
+  } catch(err) {
+    alert('エラーが発生しました: ' + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span>🚀 作品を公開する</span>';
+  }
+}
+
+// -------- Game --------
+function openGame(id) {
+  const work = allWorks.find(w => w.id === id);
+  if (!work || !work.work_url) return;
+  document.getElementById('game-title-text').textContent = work.title;
+  document.getElementById('game-iframe').src = safeUrl(work.work_url);
+  document.getElementById('game-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeGame() {
+  document.getElementById('game-overlay').classList.remove('open');
+  document.getElementById('game-iframe').src = '';
+  document.body.style.overflow = '';
+}
+
+// -------- Share --------
+function shareX() {
+  const work = allWorks.find(w => w.id === currentDetailId);
+  if (!work) return;
+  const text = `「${work.title}」${work.student_name}（${work.grade}）の作品です｜門司港AIプログラミング教室`;
+  const url = `${location.origin}/portfolio`;
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'noopener,noreferrer,width=600,height=400');
+}
+function shareLINE() {
+  const work = allWorks.find(w => w.id === currentDetailId);
+  if (!work) return;
+  const text = `「${work.title}」${work.student_name}（${work.grade}）の作品です｜門司港AIプログラミング教室\n${location.origin}/portfolio`;
+  window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(location.origin + '/portfolio')}&text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+}
+async function copyLink() {
+  try {
+    await navigator.clipboard.writeText(`${location.origin}/portfolio`);
+    const el = document.getElementById('copy-toast');
+    el.classList.add('visible');
+    setTimeout(() => el.classList.remove('visible'), 2000);
+  } catch { /* clipboard permission denied */ }
+}
+
+// -------- Exhibition --------
+function startExhibition() {
+  if (allWorks.length === 0) return;
+  exIndex = 0;
+  document.getElementById('exhibition-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  showExSlide(exIndex);
+}
+function closeExhibition() {
+  document.getElementById('exhibition-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+  if (exTimer) { clearTimeout(exTimer); exTimer = null; }
+  const fill = document.getElementById('ex-progress-fill');
+  fill.style.transition = 'none'; fill.style.width = '0';
+}
+function exNav(dir) {
+  if (exTimer) { clearTimeout(exTimer); exTimer = null; }
+  exIndex = (exIndex + dir + allWorks.length) % allWorks.length;
+  showExSlide(exIndex);
+}
+function showExSlide(idx) {
+  const work = allWorks[idx];
+  const visual = document.getElementById('ex-visual');
+  const emoji = document.getElementById('ex-emoji');
+  const fill = document.getElementById('ex-progress-fill');
+
+  fill.style.transition = 'none'; fill.style.width = '0';
+  visual.classList.add('fade'); emoji.classList.add('fade');
+
+  setTimeout(() => {
+    if (work.image_url) {
+      visual.src = work.image_url; visual.style.display = 'block';
+      emoji.style.display = 'none';
+    } else {
+      emoji.textContent = CATEGORY_EMOJI[work.category] || '⭐';
+      emoji.style.display = 'block'; visual.style.display = 'none';
+    }
+    const badge = document.getElementById('ex-cat-badge');
+    badge.textContent = work.category;
+    badge.className = `ex-cat-badge cat-${work.category}`;
+    document.getElementById('ex-title').textContent = work.title;
+    document.getElementById('ex-meta').textContent = `${work.student_name} ・ ${work.grade}`;
+    document.getElementById('ex-counter').textContent = `${idx + 1} / ${allWorks.length}`;
+    visual.classList.remove('fade'); emoji.classList.remove('fade');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      fill.style.transition = `width ${EX_DURATION}ms linear`;
+      fill.style.width = '100%';
+    }));
+  }, 300);
+
+  if (exTimer) clearTimeout(exTimer);
+  exTimer = setTimeout(() => { exIndex = (exIndex + 1) % allWorks.length; showExSlide(exIndex); }, EX_DURATION);
+}
+
+document.addEventListener('keydown', e => {
+  if (document.getElementById('exhibition-overlay').classList.contains('active')) {
+    if (e.key === 'ArrowLeft') exNav(-1);
+    else if (e.key === 'ArrowRight') exNav(1);
+    else if (e.key === 'Escape') closeExhibition();
+  } else if (document.getElementById('game-overlay').classList.contains('open')) {
+    if (e.key === 'Escape') closeGame();
+  }
+});
+
+// -------- Utils --------
+function escHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function safeUrl(url) {
+  if (!url) return '#';
+  try {
+    const u = new URL(url);
+    return (u.protocol === 'https:' || u.protocol === 'http:') ? url : '#';
+  } catch { return '#'; }
+}
+
+function formatDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+}
+
+// -------- Init --------
+loadWorks().then(() => {
+  if (new URLSearchParams(location.search).get('exhibition') === '1') startExhibition();
+});
+</script>
+</body>
+</html>
