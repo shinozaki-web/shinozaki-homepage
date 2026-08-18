@@ -25,6 +25,7 @@ async function mirrorPublicSite() {
     'ai-training.html',
     'coworking.html',
     'classroom.html',
+    'portfolio.html',
     'meo-post.html',
     'privacy.html',
     'robots.txt',
@@ -39,8 +40,9 @@ async function mirrorPublicSite() {
     try {
       await fs.access(src);
       await fs.cp(src, path.join(PUBLIC_DIR, file), { recursive: true });
-    } catch {
-      // file not present (untracked), skip
+      console.log(`copied: ${file}`);
+    } catch (e) {
+      console.warn(`skipped: ${file} (${e.message})`);
     }
   }
 
