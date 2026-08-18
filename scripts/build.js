@@ -40,9 +40,8 @@ async function mirrorPublicSite() {
     try {
       await fs.access(src);
       await fs.cp(src, path.join(PUBLIC_DIR, file), { recursive: true });
-      console.log(`copied: ${file}`);
-    } catch (e) {
-      console.warn(`skipped: ${file} (${e.message})`);
+    } catch {
+      // file not present (untracked), skip
     }
   }
 
