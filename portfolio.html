@@ -204,6 +204,8 @@ a{color:inherit;text-decoration:none}img{max-width:100%}button{-webkit-tap-highl
 .password-error{font-size:12px;color:#EF4444;margin-top:8px;display:none}
 .btn-delete{padding:13px 22px;background:#FEE2E2;border:1.5px solid #FCA5A5;border-radius:10px;color:#DC2626;font-size:14px;font-weight:700;font-family:'Noto Sans JP',sans-serif;transition:.15s}
 .btn-delete:hover{background:#DC2626;color:#fff}
+.btn-suzuri{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;background:#FF6B35;border-radius:12px;color:#fff;font-size:13px;font-weight:800;border:none;font-family:'Noto Sans JP',sans-serif;transition:.15s;text-decoration:none}
+.btn-suzuri:hover{background:#E55A25}
 
 /* Card delete button (teacher mode) */
 .card-delete-btn{position:absolute;top:8px;right:8px;width:32px;height:32px;background:rgba(220,38,38,.88);border:none;border-radius:50%;color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;z-index:5;transition:.15s;cursor:pointer}
@@ -501,6 +503,11 @@ footer p+p{margin-top:6px}
         <input type="url" id="f-url" placeholder="https://...">
       </div>
 
+      <div class="field">
+        <label>SUZURI販売URL <span class="opt">（任意・SUZURIでグッズを販売している場合）</span></label>
+        <input type="url" id="f-suzuri" placeholder="https://suzuri.jp/...">
+      </div>
+
       <div class="upload-success" id="upload-success">
         <p>✅ アップロードが完了しました！ページを更新すると表示されます。</p>
       </div>
@@ -685,10 +692,13 @@ function openDetail(id) {
   const linkBtn = work.work_url && work.category !== 'ゲーム'
     ? `<a href="${escHtml(safeUrl(work.work_url))}" target="_blank" rel="noopener noreferrer" class="btn-primary">作品を見る →</a>`
     : '';
+  const suzuriBtn = work.suzuri_url
+    ? `<a href="${escHtml(safeUrl(work.suzuri_url))}" target="_blank" rel="noopener noreferrer" class="btn-suzuri">🛍 SUZURIで購入</a>`
+    : '';
   const deleteBtn = isTeacher
     ? `<button class="btn-delete" onclick="deleteWork('${work.id}')">🗑 削除</button>`
     : '';
-  actions.innerHTML = gameBtn + linkBtn + `<button class="btn-secondary" onclick="closeDetail()">閉じる</button>` + deleteBtn;
+  actions.innerHTML = gameBtn + linkBtn + suzuriBtn + `<button class="btn-secondary" onclick="closeDetail()">閉じる</button>` + deleteBtn;
 
   document.getElementById('detail-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -874,6 +884,7 @@ async function handleUpload(e) {
       description: document.getElementById('f-desc').value.trim() || null,
       image_url: imageUrl,
       work_url: document.getElementById('f-url').value.trim() || null,
+      suzuri_url: document.getElementById('f-suzuri').value.trim() || null,
     });
     if (dbError) throw dbError;
 
