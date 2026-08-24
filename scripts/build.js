@@ -26,6 +26,7 @@ async function mirrorPublicSite() {
     'coworking.html',
     'classroom.html',
     'portfolio.html',
+    'portfolio-data.json',
     'meo-post.html',
     'privacy.html',
     'robots.txt',

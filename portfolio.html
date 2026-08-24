@@ -6,51 +6,9 @@
 <title>作品ギャラリー｜門司港AIプログラミング教室</title>
 <meta name="description" content="門司港AIプログラミング教室の子どもたちが作った作品を展示しています。">
 <script defer src="/analytics.js" data-measurement-id="G-B4BQKPZNR9"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=Noto+Sans+JP:wght@400;500;600;700;800&family=Zen+Maru+Gothic:wght@700&display=swap" rel="stylesheet">
-
-<!--
-=======================================================
-  Supabase セットアップ手順
-=======================================================
-1. 下の SUPABASE_URL と SUPABASE_ANON_KEY を自分のものに変更
-   （Settings → API → Project URL / anon public key）
-
-2. Supabase の SQL Editor で以下を実行:
-
-CREATE TABLE portfolio_works (
-  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-  title text NOT NULL,
-  student_name text NOT NULL,
-  grade text NOT NULL DEFAULT '小学生',
-  category text NOT NULL DEFAULT '作品',
-  description text,
-  image_url text,
-  work_url text,
-  created_at timestamptz DEFAULT now()
-);
-ALTER TABLE portfolio_works ENABLE ROW LEVEL SECURITY;
--- 誰でも閲覧できる
-CREATE POLICY "anon_select" ON portfolio_works FOR SELECT TO anon USING (true);
--- ログイン済みユーザー（先生）のみ追加・削除できる
-CREATE POLICY "auth_insert" ON portfolio_works FOR INSERT TO authenticated WITH CHECK (true);
-CREATE POLICY "auth_delete" ON portfolio_works FOR DELETE TO authenticated USING (true);
-
-3. Authentication → Sign Up を無効化（先生アカウントのみ使うため）
-   Dashboard → Auth → Settings → "Enable email confirmations": OFF
-   Dashboard → Auth → Settings → "Disable signup": ON
-
-4. Authentication → Users → 「Add user」で先生のメールアドレスとパスワードを登録
-
-5. Storage → New bucket → 名前: portfolio-images → Public: ON
-   Storage → portfolio-images → Policies → 以下を追加:
-   - anon: SELECT（公開閲覧）
-   - authenticated: INSERT（先生がアップロード）
-
-=======================================================
--->
 
 <style>
 :root{
@@ -431,10 +389,10 @@ footer p+p{margin-top:6px}
 
     <!-- Class code gate -->
     <div class="password-gate" id="password-gate">
-      <h3>クラスコードを入力してね</h3>
-      <p>先生から教えてもらったクラスコードを入れてください</p>
+      <h3>管理パスワードを入力</h3>
+      <p>作品の追加・削除は先生のみ操作できます</p>
       <div class="password-input-row">
-        <input type="password" id="login-password" placeholder="クラスコード" />
+        <input type="password" id="login-password" placeholder="管理パスワード" autocomplete="current-password" />
         <button onclick="doLogin()">入る</button>
       </div>
       <p class="password-error" id="password-error"></p>
@@ -449,7 +407,7 @@ footer p+p{margin-top:6px}
           <img class="thumb-preview" id="thumb-preview" src="" alt="プレビュー">
           <div id="thumb-placeholder">
             <div class="thumb-upload-icon">🖼️</div>
-            <div class="thumb-upload-text"><b>クリックして選択</b>、またはドラッグ＆ドロップ<br>JPG・PNG・GIF（5MBまで）<br>なしでも投稿できます</div>
+            <div class="thumb-upload-text"><b>クリックして選択</b>、またはドラッグ＆ドロップ<br>JPG・PNG・GIF・WebP（3MBまで）<br>なしでも投稿できます</div>
           </div>
           <input type="file" id="thumb-file" accept="image/*">
         </div>
@@ -524,9 +482,7 @@ footer p+p{margin-top:6px}
   <div class="tlogin-box">
     <button class="tlogin-close" onclick="closeTeacherLoginModal()" aria-label="閉じる">✕</button>
     <h2>🔑 先生ログイン</h2>
-    <label>メールアドレス</label>
-    <input type="email" id="tm-email" placeholder="teacher@example.com" autocomplete="email">
-    <label>パスワード</label>
+    <label>管理パスワード</label>
     <input type="password" id="tm-pw" placeholder="パスワード" autocomplete="current-password">
     <p class="tlogin-error" id="tm-error"></p>
     <button class="tlogin-submit" onclick="doTeacherLoginModal()">ログイン</button>
@@ -542,18 +498,7 @@ footer p+p{margin-top:6px}
 </footer>
 
 <script>
-// ========================================================
-// 設定 — ここを自分のSupabaseプロジェクトの値に変更してください
-// ========================================================
-const SUPABASE_URL = 'https://lzujqehpldabbrgimmjv.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6dWpxZWhwbGRhYmJyZ2ltbWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY5NTk2MDYsImV4cCI6MjEwMjUzNTYwNn0.EIDoKk4TY6dAeL1GDAPUqRQx7qfb0twMBu1mfdYIg94';
-const STORAGE_BUCKET = 'portfolio-images';
-const TABLE_NAME = 'portfolio_works';
-const CLASS_CODE = 'mojiko2026'; // ← 生徒に教えるクラスコード（自由に変更可）
-// ========================================================
-
-const { createClient } = supabase;
-const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const PORTFOLIO_DATA_URL = '/portfolio-data.json';
 
 const CATEGORY_EMOJI = {
   '物語':'📖','ゲーム':'🎮','絵':'🎨','クイズ':'❓','レポート':'📊','その他':'⭐'
@@ -562,7 +507,7 @@ const CATEGORY_EMOJI = {
 // -------- State --------
 let allWorks = [];
 let currentCat = 'all';
-let currentUser = null;
+let adminPassword = sessionStorage.getItem('portfolioAdminPassword') || '';
 let isTeacher = false;
 let currentDetailId = null;
 let exIndex = 0;
@@ -573,12 +518,10 @@ const EX_DURATION = 6000;
 async function loadWorks() {
   const grid = document.getElementById('works-grid');
   try {
-    const { data, error } = await db
-      .from(TABLE_NAME)
-      .select('*')
-      .order('created_at', { ascending: false });
-    if (error) throw error;
-    allWorks = data || [];
+    const response = await fetch(`${PORTFOLIO_DATA_URL}?v=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) throw new Error('作品データを取得できませんでした');
+    const data = await response.json();
+    allWorks = Array.isArray(data) ? data : [];
     updateStats();
     renderGrid();
   } catch(e) {
@@ -586,7 +529,7 @@ async function loadWorks() {
       <div class="empty-state">
         <div class="empty-icon">😅</div>
         <h3>読み込みに失敗しました</h3>
-        <p>Supabaseの設定を確認してください: ${escHtml(e.message)}</p>
+        <p>時間をおいてページを更新してください。</p>
       </div>`;
   }
 }
@@ -717,9 +660,10 @@ document.getElementById('detail-modal').addEventListener('click', e => {
 document.getElementById('admin-fab-btn').onclick = () => {
   document.getElementById('upload-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  if (!currentUser) {
-    document.getElementById('login-email').focus();
-  }
+  if (adminPassword) {
+    document.getElementById('password-gate').style.display = 'none';
+    document.getElementById('upload-form').style.display = 'flex';
+  } else document.getElementById('login-password').focus();
 };
 document.getElementById('upload-close').onclick = closeUpload;
 document.getElementById('upload-overlay').addEventListener('click', e => {
@@ -737,17 +681,18 @@ document.getElementById('tm-pw').addEventListener('keydown', e => {
   if (e.key === 'Enter') doTeacherLoginModal();
 });
 
-function doLogin() {
-  const code = document.getElementById('login-password').value;
+async function doLogin() {
+  const password = document.getElementById('login-password').value;
   const errEl = document.getElementById('password-error');
   errEl.style.display = 'none';
-
-  if (code === CLASS_CODE) {
-    currentUser = true;
+  try {
+    await portfolioApi('GET', null, password);
+    adminPassword = password;
+    sessionStorage.setItem('portfolioAdminPassword', password);
     document.getElementById('password-gate').style.display = 'none';
     document.getElementById('upload-form').style.display = 'flex';
-  } else {
-    errEl.textContent = 'クラスコードが違います。先生に確認してね！';
+  } catch (error) {
+    errEl.textContent = error.message;
     errEl.style.display = 'block';
   }
 }
@@ -755,7 +700,7 @@ function doLogin() {
 function openTeacherLoginModal() {
   document.getElementById('tlogin-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  document.getElementById('tm-email').focus();
+  document.getElementById('tm-pw').focus();
 }
 
 function closeTeacherLoginModal() {
@@ -768,21 +713,23 @@ document.getElementById('tlogin-overlay').addEventListener('click', e => {
 });
 
 async function doTeacherLoginModal() {
-  const email = document.getElementById('tm-email').value.trim();
   const pw = document.getElementById('tm-pw').value;
   const errEl = document.getElementById('tm-error');
   errEl.style.display = 'none';
-  if (!email || !pw) {
-    errEl.textContent = 'メールアドレスとパスワードを入力してください';
+  if (!pw) {
+    errEl.textContent = '管理パスワードを入力してください';
     errEl.style.display = 'block';
     return;
   }
-  const { error } = await db.auth.signInWithPassword({ email, password: pw });
-  if (error) {
-    errEl.textContent = 'ログインに失敗しました。メールアドレスとパスワードを確認してください。';
+  try {
+    await portfolioApi('GET', null, pw);
+  } catch (error) {
+    errEl.textContent = error.message;
     errEl.style.display = 'block';
     return;
   }
+  adminPassword = pw;
+  sessionStorage.setItem('portfolioAdminPassword', pw);
   isTeacher = true;
   document.getElementById('teacher-login-nav-btn').style.display = 'none';
   document.getElementById('teacher-mode-indicator').style.display = 'flex';
@@ -791,7 +738,8 @@ async function doTeacherLoginModal() {
 }
 
 async function doTeacherLogout() {
-  await db.auth.signOut();
+  adminPassword = '';
+  sessionStorage.removeItem('portfolioAdminPassword');
   isTeacher = false;
   document.getElementById('teacher-login-nav-btn').style.display = '';
   document.getElementById('teacher-mode-indicator').style.display = 'none';
@@ -800,10 +748,31 @@ async function doTeacherLogout() {
 
 async function deleteWork(id) {
   if (!confirm('この作品を削除しますか？\n削除すると元に戻せません。')) return;
-  const { error } = await db.from(TABLE_NAME).delete().eq('id', id);
-  if (error) { alert('削除できませんでした: ' + escHtml(error.message)); return; }
-  closeDetail();
-  await loadWorks();
+  try {
+    await portfolioApi('DELETE', { id });
+    allWorks = allWorks.filter((work) => work.id !== id);
+    closeDetail();
+    updateStats();
+    renderGrid();
+  } catch (error) {
+    alert('削除できませんでした: ' + error.message);
+  }
+}
+
+async function portfolioApi(method, body, password = adminPassword) {
+  const response = await fetch('/api/portfolio', {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Portfolio-Password': password
+    },
+    ...(body ? { body: JSON.stringify(body) } : {})
+  });
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || '操作に失敗しました');
+  }
+  return response.status === 204 ? null : response.json();
 }
 
 // -------- Thumbnail preview --------
@@ -827,6 +796,11 @@ thumbDrop.addEventListener('drop', e => {
 
 function previewThumb(file) {
   if (!file) return;
+  if (file.size > 3 * 1024 * 1024) {
+    alert('画像は3MB以下にしてください');
+    thumbFile.value = '';
+    return;
+  }
   const reader = new FileReader();
   reader.onload = e => {
     thumbPreview.src = e.target.result;
@@ -848,45 +822,32 @@ async function handleUpload(e) {
   successEl.classList.remove('visible');
 
   try {
-    let imageUrl = null;
-
-    // Upload image
     const file = thumbFile.files[0];
+    let image = null;
     if (file) {
+      if (file.size > 3 * 1024 * 1024) throw new Error('画像は3MB以下にしてください');
+      if (!['image/jpeg', 'image/png', 'image/gif', 'image/webp'].includes(file.type)) throw new Error('JPG・PNG・GIF・WebPを選択してください');
       const progress = document.getElementById('img-progress');
       const bar = document.getElementById('img-progress-bar');
       progress.classList.add('visible');
-
-      const ext = file.name.split('.').pop();
-      const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-
       bar.style.width = '30%';
-      const { data: storageData, error: storageError } = await db.storage
-        .from(STORAGE_BUCKET)
-        .upload(filename, file, { cacheControl: '3600', upsert: false });
-
-      if (storageError) throw storageError;
-      bar.style.width = '80%';
-
-      const { data: urlData } = db.storage
-        .from(STORAGE_BUCKET)
-        .getPublicUrl(storageData.path);
-      imageUrl = urlData.publicUrl;
-      bar.style.width = '100%';
+      image = await fileToDataUrl(file);
+      bar.style.width = '70%';
     }
-
-    // Save to DB
-    const { error: dbError } = await db.from(TABLE_NAME).insert({
+    const result = await portfolioApi('POST', {
       title: document.getElementById('f-title').value.trim(),
       student_name: document.getElementById('f-student').value.trim(),
       grade: document.getElementById('f-grade').value,
       category: document.getElementById('f-category').value,
       description: document.getElementById('f-desc').value.trim() || null,
-      image_url: imageUrl,
+      image,
       work_url: document.getElementById('f-url').value.trim() || null,
-      suzuri_url: document.getElementById('f-suzuri').value.trim() || null,
+      suzuri_url: document.getElementById('f-suzuri').value.trim() || null
     });
-    if (dbError) throw dbError;
+    document.getElementById('img-progress-bar').style.width = '100%';
+    allWorks.unshift(result.work);
+    updateStats();
+    renderGrid();
 
     // Success
     successEl.classList.add('visible');
@@ -897,15 +858,21 @@ async function handleUpload(e) {
     document.getElementById('img-progress').classList.remove('visible');
     document.getElementById('img-progress-bar').style.width = '0';
 
-    // Reload works
-    await loadWorks();
-
   } catch(err) {
     alert('エラーが発生しました: ' + err.message);
   } finally {
     btn.disabled = false;
     btn.innerHTML = '<span>🚀 作品を公開する</span>';
   }
+}
+
+function fileToDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(new Error('画像を読み込めませんでした'));
+    reader.readAsDataURL(file);
+  });
 }
 
 // -------- Game --------
@@ -1031,7 +998,22 @@ function formatDate(iso) {
 }
 
 // -------- Init --------
+async function restoreTeacherSession() {
+  if (!adminPassword) return;
+  try {
+    await portfolioApi('GET');
+    isTeacher = true;
+    document.getElementById('teacher-login-nav-btn').style.display = 'none';
+    document.getElementById('teacher-mode-indicator').style.display = 'flex';
+    renderGrid();
+  } catch {
+    adminPassword = '';
+    sessionStorage.removeItem('portfolioAdminPassword');
+  }
+}
+
 loadWorks().then(() => {
+  restoreTeacherSession();
   if (new URLSearchParams(location.search).get('exhibition') === '1') startExhibition();
 });
 </script>
