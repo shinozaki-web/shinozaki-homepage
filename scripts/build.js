@@ -25,6 +25,7 @@ async function mirrorPublicSite() {
     'ai-training.html',
     'coworking.html',
     'classroom.html',
+    'links.html',
     'portfolio.html',
     'portfolio-data.json',
     'meo-post.html',
