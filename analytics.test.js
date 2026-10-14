@@ -129,6 +129,58 @@ test('旧プロジェクト属性のクリックをproject_clickへ統合する'
   assert.equal(events[0][2].project_id, 'coworking');
 });
 
+function clickEl(dataset, href = 'https://www.moji-lamcompany.com/story/contact?from=coworking') {
+  const el = {
+    id: '', href,
+    dataset, textContent: 'ボタン',
+    classList: { contains: () => false },
+    getAttribute: () => null,
+    matches: () => false,
+    closest: (selector) => selector === 'a,button,[data-event],[data-insight-open]' ? el : null,
+    hasAttribute: () => false
+  };
+  return el;
+}
+
+test('コワーキングの相談・詳細ボタンのクリックをcta_clickとして1回ずつ送信する', () => {
+  const ids = {
+    click_coworking_private_room_contact: 'coworking_private_room_contact',
+    click_coworking_office_contact: 'coworking_office_contact',
+    click_coworking_workshop_contact: 'coworking_workshop_contact',
+    click_coworking_supporter_contact: 'coworking_supporter_contact',
+    click_coworking_member_detail: 'coworking_member_detail'
+  };
+  Object.keys(ids).forEach((eventName) => {
+    const { window, listeners } = load();
+    listeners.click({ target: clickEl({ event: eventName }) });
+    const events = window.dataLayer.filter((item) => item[1] === 'cta_click');
+    assert.equal(events.length, 1, eventName);
+    assert.equal(events[0][2].cta_id, ids[eventName], eventName);
+  });
+});
+
+test('未登録のdata-eventでもcta_clickを1回だけ送信し、click_接頭辞を除いたIDにする', () => {
+  const { window, listeners } = load();
+  listeners.click({ target: clickEl({ event: 'click_future_button' }) });
+  const events = window.dataLayer.filter((item) => item[1] === 'cta_click');
+  assert.equal(events.length, 1);
+  assert.equal(events[0][2].cta_id, 'future_button');
+});
+
+test('登録済みのdata-eventはフォールバックと二重送信しない', () => {
+  const { window, listeners } = load();
+  listeners.click({ target: clickEl({ event: 'click_coworking_contact' }) });
+  const events = window.dataLayer.filter((item) => item[1] === 'cta_click');
+  assert.equal(events.length, 1);
+  assert.equal(events[0][2].cta_id, 'coworking_contact');
+});
+
+test('開発ホストではdata-eventのクリックを送信しない', () => {
+  const { window, listeners } = load('localhost');
+  listeners.click({ target: clickEl({ event: 'click_coworking_office_contact' }) });
+  assert.equal((window.dataLayer || []).filter((item) => item[1] === 'cta_click').length, 0);
+});
+
 test('project_id属性のクリックをproject_clickとして送信する', () => {
   const { window, listeners } = load();
   const el = {

@@ -111,7 +111,12 @@
     click_instagram: ['social_click', { social_platform: 'instagram', account_id: 'mojiko_sakaemachinomirai' }],
     click_youtube: ['social_click', { social_platform: 'youtube', account_id: 'bongo_moji' }],
     click_coworking_facebook: ['social_click', { social_platform: 'facebook', account_id: 'shinozaki_tomohisa' }],
-    click_coworking_instagram: ['social_click', { social_platform: 'instagram', account_id: 'mojiko_sakaemachinomirai' }]
+    click_coworking_instagram: ['social_click', { social_platform: 'instagram', account_id: 'mojiko_sakaemachinomirai' }],
+    click_coworking_private_room_contact: ['cta_click', { cta_id: 'coworking_private_room_contact' }],
+    click_coworking_office_contact: ['cta_click', { cta_id: 'coworking_office_contact' }],
+    click_coworking_workshop_contact: ['cta_click', { cta_id: 'coworking_workshop_contact' }],
+    click_coworking_supporter_contact: ['cta_click', { cta_id: 'coworking_supporter_contact' }],
+    click_coworking_member_detail: ['cta_click', { cta_id: 'coworking_member_detail' }]
   };
 
   function clickLocation(el) {
@@ -159,6 +164,13 @@
         cta_location: ctaLocation === 'nav' ? 'navigation' : ctaLocation,
         cta_text: (el.textContent || '').trim().slice(0, 100),
         destination: destination(el),
+        destination_url: url
+      });
+    } else if (el.dataset.event) {
+      // 未登録のdata-eventも取りこぼさない（新しいボタンを追加しても計測される）
+      track('cta_click', {
+        cta_id: String(el.dataset.event).replace(/^click_/, ''),
+        click_location: location,
         destination_url: url
       });
     }
